@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@import './red-palette.scss';
+
+@import './green-palette.scss';
+
+$red-text: mat-palette($red-palette);
+$dark-base:#555;
+$green-base: #66BB6A;
+$red-base: #E57373;
+

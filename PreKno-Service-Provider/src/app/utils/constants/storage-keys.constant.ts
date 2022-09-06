@@ -1,0 +1,2 @@
+export const AUTH_TOKEN = 'AUTHENTICATED_APP_AUTH_TOKEN';
+export const ME = 'AUTHENTICATED_APP_ME';

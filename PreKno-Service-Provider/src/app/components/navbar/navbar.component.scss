@@ -1,0 +1,51 @@
+$navbar-height: 120px;
+$sidenav-width: 120px;
+
+.example-spacer {
+    flex: 1 auto;
+}
+
+.navbar {
+    padding: 0 50px 0 25px;
+    height: $navbar-height;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.menu-button {
+    margin-top: 62px;
+}
+
+.content {
+    top: $navbar-height;
+}
+
+.sidenav-container {
+    position: absolute;
+    top: $navbar-height;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    mat-sidenav {
+        width: $sidenav-width;
+    }
+}
+
+.active-link {
+    color: #81c784;
+}
+
+.title {
+    font-family: "Droid", sans-serif;
+}
+
+.logo {
+    height: 170px;
+}
+
+.logout-button {
+    position: absolute;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    bottom: 0px;
+    width: 100%;
+}

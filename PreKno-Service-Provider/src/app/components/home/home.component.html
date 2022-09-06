@@ -1,0 +1,79 @@
+<header>
+    <div>
+        <img class="header-img" src="../../../assets/image/header.png" />
+    </div>
+</header>
+
+<!-- <div class="flex-row">
+    <h1 style="margin-left: 14%; margin-top: 20px">
+        <i>Search Clients By Name</i>
+    </h1>
+    <h1 style="margin-left: 32%; margin-top: 20px">
+        <i>Search Clients By Location</i>
+    </h1>
+</div> -->
+
+<div class="flex-row search-box margin-top-30" [formGroup]="searchForm">
+    <div class="search-name">
+        <mat-form-field class="form-field" color="primary" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName" />
+        </mat-form-field>
+
+        <mat-form-field class="form-field" color="primary" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="firstName" />
+        </mat-form-field>
+    </div>
+
+    <div class="search-location">
+        <mat-form-field class="form-field" color="primary" appearance="outline">
+            <mat-label>City</mat-label>
+            <input type="text" matInput formControlName="firstName" />
+        </mat-form-field>
+
+        <mat-form-field class="form-field" color="primary" appearance="outline">
+            <mat-label>State</mat-label>
+            <input type="text" matInput formControlName="firstName" />
+        </mat-form-field>
+    </div>
+</div>
+<button
+    class="search-button"
+    mat-raised-button
+    color="primary"
+    (click)="popDummy()"
+>
+    Search
+</button>
+
+<div class="flex-row results-container">
+    <div *ngFor="let client of clients">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+
+                <mat-card-title>{{ client.firstName }} {{ client.lastName }}</mat-card-title>
+
+                <mat-card-subtitle>{{client.city}}, {{client.state}}</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div style="margin-left: 20px;" *ngIf="client.reviewCount == 0">No Reviews</div>
+
+                <div class="star-container" style="margin: 0 auto">
+                    <div *ngFor="let x of counter(client.ratingAverage)" >
+                        <div>
+                            <mat-icon color="accent" aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button color="primary" mat-raised-button>View User</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+

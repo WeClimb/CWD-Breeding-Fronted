@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: inherit;
+}
+
+tr:hover {
+    background-color: gray;
+}

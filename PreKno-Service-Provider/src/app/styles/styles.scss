@@ -1,0 +1,501 @@
+@import './variables.scss';
+
+body {
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+* {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.align-self-baseline {
+    align-self: baseline;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-content-center {
+    align-content: center;
+}
+
+.vertical-align-top {
+    vertical-align: top;
+}
+
+.display-none {
+    display: none;
+}
+
+.vertical-align-bottom {
+    vertical-align: bottom;
+}
+
+// Flex
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-3 {
+    flex: 3;
+}
+
+.flex-4 {
+    flex: 4;
+}
+
+.flex-5 {
+    flex: 5;
+}
+
+// Margins
+.margin-5 {
+    margin: 5px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+.margin-20 {
+    margin: 20px;
+}
+
+.margin-30 {
+    margin: 30px;
+}
+
+.margin-40 {
+    margin: 40px;
+}
+
+.margin-tb-5 {
+    margin: 5px 0;
+}
+
+.margin-tb-10 {
+    margin: 10px 0;
+}
+
+.margin-tb-20 {
+    margin: 20px 0;
+}
+
+.margin-tb-30 {
+    margin: 30px 0;
+}
+
+.margin-tb-40 {
+    margin: 40px 0;
+}
+
+.margin-lr-5 {
+    margin: 0 5px;
+}
+
+.margin-lr-10 {
+    margin: 0 10px;
+}
+
+.margin-lr-20 {
+    margin: 0 20px;
+}
+
+.margin-lr-30 {
+    margin: 0 30px;
+}
+
+.margin-lr-40 {
+    margin: 0 40px;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
+.margin-top-40 {
+    margin-top: 40px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.margin-bottom-40 {
+    margin-bottom: 40px;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
+.margin-left-20 {
+    margin-left: 20px;
+}
+
+.margin-left-30 {
+    margin-left: 30px;
+}
+
+.margin-left-40 {
+    margin-left: 40px;
+}
+
+.margin-right-5 {
+    margin-right: 5px;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.margin-right-20 {
+    margin-right: 20px;
+}
+
+.margin-right-30 {
+    margin-right: 30px;
+}
+
+.margin-right-40 {
+    margin-right: 40px;
+}
+
+// Paddings
+.padding-5 {
+    padding: 5px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+
+.padding-20 {
+    padding: 20px;
+}
+
+.padding-30 {
+    padding: 30px;
+}
+
+.padding-40 {
+    padding: 40px;
+}
+
+.padding-tb-5 {
+    padding: 5px 0;
+}
+
+.padding-tb-10 {
+    padding: 10px 0;
+}
+
+.padding-tb-20 {
+    padding: 20px 0;
+}
+
+.padding-tb-30 {
+    padding: 30px 0;
+}
+
+.padding-tb-40 {
+    padding: 40px 0;
+}
+
+.padding-lr-5 {
+    padding: 0 5px;
+}
+
+.padding-lr-10 {
+    padding: 0 10px;
+}
+
+.padding-lr-20 {
+    padding: 0 20px;
+}
+
+.padding-lr-30 {
+    padding: 0 30px;
+}
+
+.padding-lr-40 {
+    padding: 0 40px;
+}
+
+.padding-top-10 {
+    padding-top: 10px;
+}
+
+.padding-top-20 {
+    padding-top: 20px;
+}
+
+.padding-top-30 {
+    padding-top: 30px;
+}
+
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+.padding-bottom-5 {
+    padding-bottom: 5px;
+}
+
+.padding-bottom-10 {
+    padding-bottom: 10px;
+}
+
+.padding-bottom-20 {
+    padding-bottom: 20px;
+}
+
+.padding-bottom-30 {
+    padding-bottom: 30px;
+}
+
+.padding-bottom-40 {
+    padding-bottom: 40px;
+}
+
+.padding-left-10 {
+    padding-left: 10px;
+}
+
+.padding-left-20 {
+    padding-left: 20px;
+}
+
+.padding-left-30 {
+    padding-left: 30px;
+}
+
+.padding-left-40 {
+    padding-left: 40px;
+}
+
+.padding-right-10 {
+    padding-right: 10px;
+}
+
+.padding-right-20 {
+    padding-right: 20px;
+}
+
+.padding-right-30 {
+    padding-right: 30px;
+}
+
+.padding-right-40 {
+    padding-right: 40px;
+}
+
+// Fonts
+.xx-small-text {
+    font-size: xx-small;
+}
+
+.x-small-text {
+    font-size: x-small;
+}
+
+.small-text {
+    font-size: small;
+}
+
+.medium-text {
+    font-size: medium;
+}
+
+.large-text {
+    font-size: large;
+}
+
+.x-large-text {
+    font-size: x-large;
+}
+
+.xx-large-text {
+    font-size: xx-large;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.bold-text-400 {
+    font-weight: 400;
+}
+
+// Etc
+.height-100 {
+    height: 100%;
+}
+
+.max-height-100 {
+    max-height: 100%;
+}
+
+.min-height {
+    height: min-content;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.max-width-100 {
+    max-width: 100%;
+}
+
+.min-width {
+    width: min-content;
+}
+
+.progress-bar {
+    height: 5px;
+    width: 100%;
+}
+
+.border {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.underlined {
+    border-bottom: 1px solid lightgray;
+}
+
+.overflow-container {
+    overflow-y: auto;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.center {
+    float: right;
+    margin-left: auto;
+}
+
+.opacity-1 {
+    opacity: 0.1;
+}
+
+.opacity-2 {
+    opacity: 0.2;
+}
+
+.opacity-3 {
+    opacity: 0.3;
+}
+
+.opacity-4 {
+    opacity: 0.4;
+}
+
+.opacity-5 {
+    opacity: 0.5;
+}
+
+.opacity-6 {
+    opacity: 0.6;
+}
+
+.opacity-7 {
+    opacity: 0.7;
+}
+
+.opacity-8 {
+    opacity: 0.8;
+}
+
+.opacity-9 {
+    opacity: 0.9;
+}
+
+.red-text {
+    color: mat-color($red-text);
+}
+
+.overflow-container {
+    overflow-y: auto;
+}
+
+.margin-auto {
+    margin: auto;
+}
+
+.float-right {
+    float: right;
+    margin-left: auto;
+}
+
+.sticky {
+    position: sticky;
+}
+
+.max-width-filter {
+    max-width: 300px;
+}
+
+.form-shadow {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
