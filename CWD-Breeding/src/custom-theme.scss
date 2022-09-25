@@ -14,19 +14,19 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$PreKno-Service-Provider-primary: mat.define-palette(mat.$blue-grey-palette);
-$PreKno-Service-Provider-accent: mat.define-palette(mat.$brown-palette, A200, A100, A400);
+$CWDBreeding-primary: mat.define-palette(mat.$brown-palette);
+$CWDBreeding-accent: mat.define-palette(mat.$orange-palette);
 
 // The warn palette is optional (defaults to red).
-$PreKno-Service-Provider-warn: mat.define-palette(mat.$red-palette);
+$CWDBreeding-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $PreKno-Service-Provider-theme: mat.define-light-theme((
   color: (
-    primary: $PreKno-Service-Provider-primary,
-    accent: $PreKno-Service-Provider-accent,
-    warn: $PreKno-Service-Provider-warn,
+    primary: $CWDBreeding-primary,
+    accent: $CWDBreeding-accent,
+    warn: $CWDBreeding-warn,
   )
 ));
 

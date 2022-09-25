@@ -8,14 +8,14 @@ export class StorageService {
     constructor() { }
 
     removeItem(key: string): void {
-        window.localStorage.removeItem(key);
+        window.sessionStorage.removeItem(key);
     }
 
     setItem(key: string, value: string): void {
-        window.localStorage.setItem(key, value);
+        window.sessionStorage.setItem(key, value);
     }
 
     getItem(key: string): string | null {
-        return window.localStorage.getItem(key);
+        return window.sessionStorage.getItem(key);
     }
 }

@@ -10,10 +10,9 @@ export class LoginService {
         private http: HttpClient,
     ) { }
 
-    path = '/ServiceProvider/login';
+    path = '/Ranch/login';
 
     login(baseAuth: string): Observable<any> {
-      console.log(`${environment.api}${this.path}`);
         return this.http.post(
             `${environment.api}${this.path}`,
             {},

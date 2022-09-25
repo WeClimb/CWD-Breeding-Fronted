@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
     onSubmit(): void {
         this.loading = true;
         this.isLoginFailed = false;
+        this.errorMessage = '';
 
         const username = this.loginForm.controls['emailAddress'].value;
         const password = this.loginForm.controls['password'].value;
@@ -47,21 +49,23 @@ export class LoginComponent implements OnInit {
 
         localStorage.removeItem(AUTH_TOKEN);
         localStorage.removeItem(ME);
-
-        this.loginService
+        let observable = this.loginService
             .login(basic)
-            .subscribe(
-                async (response: any) => {
-                    console.log(response);
+            .subscribe({
+                next: (response) => {
                     this.storageService.setItem(AUTH_TOKEN, response);
                     this.loading = false;
                     this.router.navigate([this.return + '/home']);
-                },
-                error => {
-                    this.errorMessage = error.message;
+                 },
+                 error: (error) => {
+                    this.errorMessage = "Authentication Failed";
                     this.loading = false;
                     this.isLoginFailed = true;
-                },
-            );
+                 },
+                 complete: () => {
+                    this.loading = false;
+                    observable.unsubscribe();
+                 }
+            });
     }
 }

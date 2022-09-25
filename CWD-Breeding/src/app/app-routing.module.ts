@@ -1,3 +1,4 @@
+import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'change-password/:id',
     component: ChangePasswordComponent,
+  },
+  {
+    path: 'confirm-registration',
+    component: ConfirmationPageComponent,
   },
   {
     path: '**',

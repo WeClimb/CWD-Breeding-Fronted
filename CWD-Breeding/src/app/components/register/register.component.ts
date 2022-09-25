@@ -1,6 +1,5 @@
+import { RanchService } from './../../services/ranch.service';
 import { TokenStorageService } from './../../services/token_storage.service';
-import { ServiceProviderService } from './../../services/service-provider.service';
-import { LETTERS_ONLY_REGEX } from './../../utils/regex/letters-only-regex.constants';
 import { STATES } from './../../utils/constants/states.constants';
 import { EMAIL_REGEX } from './../../utils/regex/email-regex.constant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,25 +15,22 @@ export class RegisterComponent implements OnInit {
     loading: boolean = false;
 
     registrationForm = new FormGroup({
-        firstName: new FormControl('', Validators.required),
-        lastName: new FormControl('', Validators.required),
-        email: new FormControl('', [
-            Validators.required,
-            Validators.email,
-            Validators.pattern(EMAIL_REGEX),
-        ]),
-        city: new FormControl('', [
-            Validators.required,
-        ]),
-        state: new FormControl('', [
-            Validators.required
-        ]),
+        ownerFirstName: new FormControl('', Validators.required),
+        ownerLastName: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(EMAIL_REGEX),]),
+        city: new FormControl('', [Validators.required,]),
+        state: new FormControl('', [Validators.required]),
+        address: new FormControl('', [Validators.required]),
+        zipcode: new FormControl('', [Validators.required, Validators.maxLength(5)]),
+        phoneNumber: new FormControl('', [Validators.required]),
+        name: new FormControl('', [Validators.required]),
+        website: new FormControl(''),
     });
 
     states: string[] = STATES;
 
     constructor(
-        private serviceProviderService: ServiceProviderService,
+        private ranchService: RanchService,
         private tokenStorageService: TokenStorageService,
         private router: Router
     ) {}
@@ -52,7 +48,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmit(): void {
         this.loading = true;
-        this.serviceProviderService
+        this.ranchService
             .post([], this.registrationForm.getRawValue())
             .subscribe({
                 next: () => {
@@ -62,7 +58,7 @@ export class RegisterComponent implements OnInit {
                     this.loading = false;
                 },
                 complete: () => {
-                    this.router.navigate(['registration-confirm']);
+                    this.router.navigate(['confirm-registration']);
                 }
             });
     }

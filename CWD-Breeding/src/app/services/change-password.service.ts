@@ -7,5 +7,5 @@ import { AbstractAuthService } from './abstract-auth.service';
 	providedIn: 'root'
 })
 export class ChangePasswordService extends AbstractAuthService {
-	path = '/ServiceProvider/ChangePassword'
+	path = '/Ranch/ChangePassword'
 }

@@ -44,6 +44,7 @@ import { DigitOnlyDirective } from './utils/directives/digit-only.directive';
 import { PhoneMaskDirective } from './utils/directives/phone-mask.directive';
 import { DecimalPlacesDirective } from './utils/directives/decimal-places.directive';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
 
 
 
@@ -58,6 +59,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     DigitOnlyDirective,
     DecimalPlacesDirective,
     ChangePasswordComponent,
+    ConfirmationPageComponent,
   ],
   imports: [
     AppRoutingModule,
