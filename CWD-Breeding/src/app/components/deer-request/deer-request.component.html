@@ -47,7 +47,7 @@
         </mat-form-field>
       </form>
 
-      <div class="pedigree-container">
+      <div class="next-button">
         <button mat-raised-button color="accent" matStepperNext>Next</button>
       </div>
       <div style="text-align: center; margin-top: 20px;" >
@@ -181,12 +181,14 @@
         </div>
       </mat-step>
 
+      
+    <mat-step label="Upload Media of your Deer">
+              <h1>hi</h1>
+      </mat-step>
+
     <mat-step [stepControl]="confirmForm" label="Confirm Information is Correct">
       <form [formGroup]="confirmForm">
-
-
             <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
-
 
             <div class="pedigree-container">
                 <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>

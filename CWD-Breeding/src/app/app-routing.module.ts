@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth_guard_service.service';
 import { RegisterComponent } from './components/register/register.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { DeerProfileComponent } from './components/deer-profile/deer-profile.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'change-password/:id',
     component: ChangePasswordComponent,
+  },
+  {
+    path: 'deer-profile/:id',
+    component: DeerProfileComponent,
   },
   {
     path: 'confirm-registration',

@@ -13,7 +13,7 @@
     width: 200px;
 }
 .example-stepper {
-    width: 80%;
+    width: 95%;
     margin: 0 auto;
     margin-top: 30px;
     border-radius: 10px;
@@ -60,7 +60,9 @@
     width: 150px;
   }
 
-
+  .next-button {
+    text-align: center;
+  } 
 
   .container {
     justify-content: center;
