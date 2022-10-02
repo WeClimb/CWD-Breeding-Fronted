@@ -45,7 +45,8 @@ import { PhoneMaskDirective } from './utils/directives/phone-mask.directive';
 import { DecimalPlacesDirective } from './utils/directives/decimal-places.directive';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
-
+import { DeerRequestComponent } from './components/deer-request/deer-request.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { ConfirmationPageComponent } from './components/confirmation-page/confir
     DecimalPlacesDirective,
     ChangePasswordComponent,
     ConfirmationPageComponent,
+    DeerRequestComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -95,6 +97,7 @@ import { ConfirmationPageComponent } from './components/confirmation-page/confir
     MatSliderModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatStepperModule
   ],
   providers: [
     authInterceptorProviders,

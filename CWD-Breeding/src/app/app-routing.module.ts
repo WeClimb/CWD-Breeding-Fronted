@@ -1,3 +1,4 @@
+import { DeerRequestComponent } from './components/deer-request/deer-request.component';
 import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'request-deer-listing',
+    component: DeerRequestComponent,
     canActivate: [AuthGuardService],
   },
   {

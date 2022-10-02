@@ -1,0 +1,137 @@
+
+@import '../../styles/styles.scss';
+
+* {
+    background-color: #f1f1f1;
+}
+.form-field {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.pedigree-form-field {
+    width: 200px;
+}
+.example-stepper {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 16px 1px grey;
+  }
+
+  .warning {
+    color: red;
+  }
+
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .mat-divider {
+    border: 1px solid orange;
+    margin-bottom: 10px;
+    margin-top: -10px;
+  }
+
+  .stack-pedigree {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .level-2-sire {
+    margin-right: 5px;
+  }
+
+  .level-2-dam {
+    margin-left: 5px;
+}
+
+  .level-three-pedigree-left {
+    margin-right: 20px;
+  }
+
+  .level-three-pedigree-right {
+    margin-left: 20px;
+  }
+
+  .pedigree-form-field {
+    width: 150px;
+  }
+
+
+
+  .container {
+    justify-content: center;
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 100px 100px 100px 100px;
+  }
+
+  .level-one-container {
+    grid-column: 1;
+    grid-row: 2 / 4;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .level-two-container {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    grid-row-gap: 20px;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .level-three-top-container {
+    grid-column: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    justify-self: center;
+    align-self: center;
+    padding-bottom: 30px;
+
+  }
+
+  .level-three-bottom-container {
+    grid-column: 3;
+    grid-row-start:3;
+    grid-row-end: 5;
+    justify-self: center;
+    align-self: center;
+    padding-top: 30px;
+  }
+
+
+  @media screen and (max-width: 500px) {
+
+}
+
+@media screen and (max-width: 700px) {
+    .example-stepper {
+        width: 100%;
+        margin-top: 0px;
+      }
+
+      .container {
+        grid-template-columns: 150px 150px 150px;
+      }
+
+      .pedigree-form-field {
+        width: 100px;
+      }
+
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        grid-template-columns: 110px 110px 110px;
+      }
+
+      .pedigree-form-field {
+        width: 100px;
+      }
+}

@@ -21,11 +21,11 @@
         </div>
 
         <div class="form-group" *ngIf="!loading">
-            <button mat-raised-button color="primary" type="submit" class="btn btn-primary span-form" [disabled]="loading || !loginForm.valid">
+            <button mat-raised-button color="accent" type="submit" class="btn btn-primary span-form" [disabled]="loading || !loginForm.valid">
                 Login
             </button>
 
-            <a mat-stroked-button color="primary" routerLink="/forgot-password" routerLinkActive="forgot-password" class="btn btn-link span-form">Forgot Password</a>
+            <a mat-stroked-button color="secondary" routerLink="/forgot-password" routerLinkActive="forgot-password" class="btn btn-link span-form">Forgot Password</a>
         </div>
 
         <mat-spinner *ngIf="loading" mode="indeterminate" class="margin-auto"></mat-spinner>
@@ -38,7 +38,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-content flex-1 border padding-30">
       <h2 class="center-text">Want to List Your Deer?</h2>
 
-      <a mat-raised-button color="primary" routerLink="/register" routerLinkActive="register" class="btn btn-link span-form">Register Here</a>
+      <a mat-raised-button color="accent" routerLink="/register" routerLinkActive="register" class="btn btn-link span-form">Register Here</a>
     </form>
     <div class="flex-1"></div>
 </div>
