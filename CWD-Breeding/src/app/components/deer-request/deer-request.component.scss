@@ -1,5 +1,5 @@
 
-@import '../../styles/styles.scss';
+
 
 * {
     background-color: #f1f1f1;
@@ -28,16 +28,36 @@
     margin-top: 16px;
   }
 
-  .mat-divider {
-    border: 1px solid orange;
-    margin-bottom: 10px;
-    margin-top: -10px;
-  }
-
   .stack-pedigree {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+  }
+
+  .file-upload-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .upload-all-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .uploaded-files-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .mat-divider-upload {
+    margin: 0px;
+  }
+
+  .upload-div {
+    margin: 0 auto;
   }
 
   .level-2-sire {
@@ -62,7 +82,7 @@
 
   .next-button {
     text-align: center;
-  } 
+  }
 
   .container {
     justify-content: center;

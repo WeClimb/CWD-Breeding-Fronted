@@ -181,10 +181,75 @@
         </div>
       </mat-step>
 
-      
+
     <mat-step label="Upload Media of your Deer">
-              <h1>hi</h1>
-      </mat-step>
+        <div class="file-upload-container">
+            <div class="upload-div">
+                <h3>Choose a Profile Image for Deer</h3>
+                <mat-divider style="margin-bottom: 10px;"></mat-divider>
+                <div *ngIf="!loading">
+                    <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'ProfileImage')" />
+                </div>
+
+                <div *ngIf="profileImage != undefined" class="uploaded-files-container">
+                    <h5>Uploaded Profile Picture</h5>
+                    <mat-divider></mat-divider>
+                    <p>{{profileImage.name}}</p>
+                </div>
+            </div>
+
+            <mat-divider class="mat-divider-upload"></mat-divider>
+
+            <div class="upload-div">
+                <h3>Upload up to 3 photos</h3>
+                <mat-divider style="margin-bottom: 10px;"></mat-divider>
+                <div *ngIf="!loading">
+                    <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'Photo')" />
+                </div>
+
+                <div *ngIf="extraPhotos.length != 0" class="uploaded-files-container">
+                    <h5>Uploaded Profile Picture</h5>
+                    <mat-divider></mat-divider>
+                    <p *ngFor="let photo of extraPhotos">{{photo.name}}</p>
+                </div>
+            </div>
+
+            <mat-divider class="mat-divider-upload"></mat-divider>
+
+            <div class="upload-div">
+                <h3>Upload optional video of deer</h3>
+                <mat-divider style="margin-bottom: 10px;"></mat-divider>
+                <div *ngIf="!loading">
+                    <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'Video')" />
+                </div>
+
+                <div *ngIf="video != undefined" class="uploaded-files-container">
+                    <h5>Uploaded Profile Picture</h5>
+                    <mat-divider></mat-divider>
+                    <p>{{video.name}}</p>
+                </div>
+            </div>
+
+            <mat-divider class="mat-divider-upload"></mat-divider>
+
+            <div *ngIf="loading">
+                <mat-spinner class="spinner" [diameter]="50"></mat-spinner>
+            </div>
+
+            <div *ngIf="errorMessage != undefined">
+                <p class="error">{{errorMessage}}</p>
+            </div>
+        </div>
+
+        <div class="pedigree-container next-button">
+            <button mat-raised-button color="accent" class="upload-all-btn" (click)="uploadFiles()">Upload All Files</button>
+        </div>
+
+        <div class="pedigree-container next-button">
+            <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
+            <button mat-raised-button color="accent" matStepperNext>Next</button>
+        </div>
+    </mat-step>
 
     <mat-step [stepControl]="confirmForm" label="Confirm Information is Correct">
       <form [formGroup]="confirmForm">

@@ -11,6 +11,16 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./deer-request.component.scss']
 })
 export class DeerRequestComponent implements OnInit {
+    nonAcceptedFileType: boolean = true;
+	uploadServerError: boolean = true;
+    selectedFile!: File;
+	loading: boolean = false;
+	errorMessage: string | undefined;
+	updatedPhoto: boolean = false;
+
+    profileImage: File | undefined;
+    extraPhotos: File[] = [];
+    video: File | undefined;
 
     registrationForm = new FormGroup({
         name: new FormControl('', Validators.required),
@@ -57,4 +67,70 @@ export class DeerRequestComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  selectFile(event: any, mediaType: string): void {
+    this.nonAcceptedFileType = false;
+    this.uploadServerError = false;
+    var file = event.target.files[0];;
+    let isAllowedFileExt: boolean = false;
+    const ext = file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length).toLocaleLowerCase() || undefined;
+
+    switch (ext) {
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+            isAllowedFileExt = true;
+            break;
+        default:
+            alert('Non-Accepted File Type');
+    }
+
+    if (isAllowedFileExt) {
+        this.selectedFile = event.target.files[0];
+        switch(mediaType) {
+            case 'ProfileImage': {
+                this.profileImage = this.selectedFile;
+               break;
+            }
+            case 'Photo': {
+                if(this.extraPhotos.length < 3) {
+                    this.extraPhotos.push(this.selectedFile);
+                } else {
+                    this.extraPhotos[0] = this.selectedFile;
+                }
+               break;
+            }
+            case 'Video': {
+                this.video = this.selectedFile;
+                break;
+             }
+            default:
+             break;
+        }
+    } else {
+        this.nonAcceptedFileType = true;
+    }
 }
+
+//TODO: Upload Files actually
+uploadFiles(): void {
+    if(this.profileImage != undefined) {
+        console.log('Uploaded Profile Image')
+    }
+
+    if(this.extraPhotos.length != 0){
+        this.extraPhotos.forEach(photoFile => {
+            console.log('You Uploaded an extra photo')
+        });
+    }
+
+    if(this.video != undefined) {
+        console.log('You Uploaded an Video')
+    }
+    // this.loading = true;
+    // this.serviceProviderService.uploadFile(this.selectedFile, this.userService.getUser().id).subscribe(() => {
+    //     this.updatedPhoto = true;
+    //     this.loading = false;
+    // }, () => this.errorMessage = 'Failed to Update Photo');
+    }
+}
+
