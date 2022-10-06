@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StorageService } from "src/app/services/storage.service";
+import { TokenStorageService } from "src/app/services/token_storage.service";
 import { AUTH_TOKEN, ME } from "src/app/utils/constants/storage-keys.constant";
 
 @Component({
@@ -21,6 +22,7 @@ export class NavbarComponent {
     constructor(
         private activatedRoute : ActivatedRoute,
         private storageService: StorageService,
+        private tokenStorage: TokenStorageService,
         private router: Router,
         public dialog: MatDialog,
     ) {}

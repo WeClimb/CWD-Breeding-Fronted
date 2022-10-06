@@ -1,0 +1,39 @@
+@import '../../styles/styles.scss';
+
+.container {
+    justify-content: center;
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 40% 30% 30%;
+    grid-template-rows: 300px 300px 500px;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .profile-img{
+    border: 1px solid red;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .data {
+    border: 1px solid red;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row: 1;
+  }
+
+  .media {
+    border: 1px solid red;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: 2 / 3;
+  }
+
+  .pedigree {
+    border: 1px solid red;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row: 3 / 3;
+  }

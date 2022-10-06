@@ -8,6 +8,10 @@ import { AuthGuardService } from './services/auth_guard_service.service';
 import { RegisterComponent } from './components/register/register.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { DeerProfileComponent } from './components/deer-profile/deer-profile.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { PendingReviewsComponent } from './components/pending-reviews/pending-reviews.component';
+import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile-review/admin-deer-prodile-review.component';
 
 const routes: Routes = [
   {
@@ -17,11 +21,20 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AuthGuardService],
   },
   {
     path: 'request-deer-listing',
     component: DeerRequestComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'pending-reviews',
+    component: PendingReviewsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'Deer-Profile-Review/:id',
+    component: AdminDeerProdileReviewComponent,
     canActivate: [AuthGuardService],
   },
   {
@@ -39,6 +52,14 @@ const routes: Routes = [
   {
     path: 'confirm-registration',
     component: ConfirmationPageComponent,
+  },
+  {
+    path: 'admin-login',
+    component: AdminLoginComponent,
+  },
+  {
+    path: 'admin-home',
+    component: AdminHomeComponent,
   },
   {
     path: '**',

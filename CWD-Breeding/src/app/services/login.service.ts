@@ -11,10 +11,27 @@ export class LoginService {
     ) { }
 
     path = '/Ranch/login';
+    userPath = '/User/login';
+
 
     login(baseAuth: string): Observable<any> {
         return this.http.post(
             `${environment.api}${this.path}`,
+            {},
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': `Basic ${baseAuth}`,
+                }),
+                responseType: 'text',
+            },
+        );
+    }
+
+    userLogin(baseAuth: string): Observable<any> {
+        return this.http.post(
+            `${environment.api}${this.userPath}`,
             {},
             {
                 headers: new HttpHeaders({

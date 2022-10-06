@@ -4,6 +4,10 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import { Deer } from 'src/models/deer.model';
+import { DeerService } from 'src/app/services/deer.service';
+import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/services/token_storage.service';
 
 @Component({
   selector: 'app-deer-request',
@@ -31,6 +35,7 @@ export class DeerRequestComponent implements OnInit {
         sciScore: new FormControl('', [Validators.required]),
         semenAvailable: new FormControl(true, Validators.required),
         semenCost: new FormControl('', [Validators.required]),
+        ranchId: new FormControl('', [Validators.required]),
     });
 
     pedigreeForm = new FormGroup({
@@ -58,13 +63,19 @@ export class DeerRequestComponent implements OnInit {
 
       stepperOrientation: Observable<StepperOrientation>;
 
-      constructor(breakpointObserver: BreakpointObserver) {
+      constructor(
+        breakpointObserver: BreakpointObserver,
+        public deerService: DeerService,
+        private router: Router,
+        private tokenStorage: TokenStorageService,
+        ) {
         this.stepperOrientation = breakpointObserver
           .observe('(min-width: 800px)')
           .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
       }
 
   ngOnInit(): void {
+    this.registrationForm.controls['ranchId'].setValue(this.tokenStorage.getUser().id); 
   }
 
   selectFile(event: any, mediaType: string): void {
@@ -109,6 +120,15 @@ export class DeerRequestComponent implements OnInit {
     } else {
         this.nonAcceptedFileType = true;
     }
+}
+
+submitAddDeer(): void {
+    let deer: Deer = this.registrationForm.getRawValue();
+    deer.deerFamily = this.pedigreeForm.getRawValue();
+    
+    this.deerService.post(['Request-Listing'], deer).subscribe(response => {
+        complete: this.router.navigate(['home']);
+    });
 }
 
 //TODO: Upload Files actually

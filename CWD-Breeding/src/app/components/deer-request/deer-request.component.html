@@ -31,6 +31,12 @@
             <mat-error *ngIf="registrationForm.controls['codon'].hasError('required')">Codon is required.</mat-error>
         </mat-form-field>
 
+        <mat-form-field class="flex-1 form-field" appearance="outline">
+            <mat-label>GEBU</mat-label>
+            <input type="text" matInput formControlName="gebu" required>
+            <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBU is required.</mat-error>
+        </mat-form-field>
+
         <mat-form-field class="form-field flex-1" appearance="outline">
             <mat-label>SCI Score</mat-label>
             <input type="text" matInput formControlName="sciScore" required>
@@ -256,16 +262,8 @@
             <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
 
             <div class="pedigree-container">
-                <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
-                <button mat-raised-button color="accent" matStepperNext>Next</button>
+                <button mat-raised-button color="accent" (click)="submitAddDeer()">Sumbit Deer Form</button>
               </div>
       </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Thank You</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-      </div>
     </mat-step>
   </mat-stepper>

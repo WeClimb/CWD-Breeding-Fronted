@@ -47,6 +47,10 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
 import { DeerRequestComponent } from './components/deer-request/deer-request.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { AdminHomeComponent } from './components/admin-home/admin-home.component';
+import { PendingReviewsComponent } from './components/pending-reviews/pending-reviews.component';
+import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile-review/admin-deer-prodile-review.component';
 
 
 @NgModule({
@@ -62,6 +66,10 @@ import {MatStepperModule} from '@angular/material/stepper';
     ChangePasswordComponent,
     ConfirmationPageComponent,
     DeerRequestComponent,
+    AdminLoginComponent,
+    AdminHomeComponent,
+    PendingReviewsComponent,
+    AdminDeerProdileReviewComponent
   ],
   imports: [
     AppRoutingModule,

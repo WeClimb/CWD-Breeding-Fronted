@@ -1,10 +1,10 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AUTH_TOKEN, ME } from 'src/app/utils/constants/storage-keys.constant';
+import { TokenStorageService } from 'src/app/services/token_storage.service';
 
 @Component({
   selector: 'login',
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private loginService: LoginService,
         private storageService: StorageService,
+        private tokenStorage: TokenStorageService
     ) { }
 
     ngOnInit(): void {
@@ -47,15 +48,19 @@ export class LoginComponent implements OnInit {
         const password = this.loginForm.controls['password'].value;
         const basic = btoa(`${username}:${password}`);
 
-        localStorage.removeItem(AUTH_TOKEN);
-        localStorage.removeItem(ME);
+    sessionStorage.removeItem(AUTH_TOKEN);
+    sessionStorage.removeItem(ME);
+
         let observable = this.loginService
             .login(basic)
             .subscribe({
                 next: (response) => {
-                    this.storageService.setItem(AUTH_TOKEN, response);
-                    this.loading = false;
-                    this.router.navigate([this.return + '/home']);
+                    response = JSON.parse(response);
+                this.loading = false;
+                this.isLoginFailed = false;
+                this.tokenStorage.saveToken(response.token);
+                this.tokenStorage.saveUser(response);
+                this.router.navigate([this.return + '/home']);
                  },
                  error: (error) => {
                     this.errorMessage = "Authentication Failed";

@@ -1,0 +1,12 @@
+<div class="container">
+  <mat-card *ngFor="let deer of pendingDeer" class="admin-panel-card">
+      <mat-card-title>Deer: {{deer.name}}</mat-card-title>
+      <mat-card-content>
+        <p>Ranch: {{deer.ranch?.name}}</p>
+      </mat-card-content>
+      <mat-divider inset></mat-divider>
+      <mat-card-actions>
+        <button color="accent" mat-raised-button (click)="navToDeerRequest(deer.id)">Review</button>
+      </mat-card-actions>
+  </mat-card>
+</div>
