@@ -1,10 +1,26 @@
 <div class="container">
-  <div class="profile-img">
-
+  <div class="profile-img-container">
+    <img class="profile-img" src="../../../assets/image/deerSample.png" alt="Photo of a Shiba Inu">
   </div>
 
   <div class="data">
+    <h1 style="margin-top: 23px;">Deer Name: {{deer.name}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
 
+    <h1 style="margin-top: 10px;">NADR#: {{deer.nadr}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">DOB: {{deer.dob | date:'mediumDate'}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">GEBU: {{deer.gebu}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">Codon: {{deer.codon}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">Sci Score: {{deer.sciScore}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
   </div>
 
   <div class="media">

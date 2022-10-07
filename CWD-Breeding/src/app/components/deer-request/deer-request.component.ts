@@ -34,7 +34,7 @@ export class DeerRequestComponent implements OnInit {
         codon: new FormControl('', [Validators.required]),
         sciScore: new FormControl('', [Validators.required]),
         semenAvailable: new FormControl(true, Validators.required),
-        semenCost: new FormControl('', [Validators.required]),
+        semenCost: new FormControl(0, [Validators.required]),
         ranchId: new FormControl('', [Validators.required]),
     });
 
@@ -75,7 +75,7 @@ export class DeerRequestComponent implements OnInit {
       }
 
   ngOnInit(): void {
-    this.registrationForm.controls['ranchId'].setValue(this.tokenStorage.getUser().id); 
+    this.registrationForm.controls['ranchId'].setValue(this.tokenStorage.getUser().id);
   }
 
   selectFile(event: any, mediaType: string): void {
@@ -124,8 +124,9 @@ export class DeerRequestComponent implements OnInit {
 
 submitAddDeer(): void {
     let deer: Deer = this.registrationForm.getRawValue();
+    deer.semenCost = deer.semenCost.toString();
     deer.deerFamily = this.pedigreeForm.getRawValue();
-    
+
     this.deerService.post(['Request-Listing'], deer).subscribe(response => {
         complete: this.router.navigate(['home']);
     });

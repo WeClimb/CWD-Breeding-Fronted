@@ -39,7 +39,7 @@
 
         <mat-form-field class="form-field flex-1" appearance="outline">
             <mat-label>SCI Score</mat-label>
-            <input type="text" matInput formControlName="sciScore" required>
+            <input matInput formControlName="sciScore" required type="number" [roundingValue]="3" appDecimalPlaces>
             <mat-error *ngIf="registrationForm.controls['sciScore'].hasError('required')">SCI Score is required.</mat-error>
         </mat-form-field>
 
@@ -48,7 +48,7 @@
 
         <mat-form-field *ngIf="registrationForm.controls['semenAvailable'].value" class="flex-1 form-field" appearance="outline">
             <mat-label>Semen Cost</mat-label>
-            <input type="text" matInput formControlName="semenCost" required>
+            <input matInput formControlName="semenCost" required type="number" [roundingValue]="2" appDecimalPlaces>
             <mat-error *ngIf="registrationForm.controls['semenCost'].hasError('required')">Address is required.</mat-error>
         </mat-form-field>
       </form>

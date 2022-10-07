@@ -1,10 +1,4 @@
-    <!-- Masthead -->
     <header class="masthead text-white text-center"></header>
-
-    <div class="bg-text">
-        <h1>CWD Breeding</h1>
-        <p>THIS IS A PLACE HOLDER HEADER</p>
-    </div>
 
     <button mat-raised-button color="primary" type="submit" class="btn btn-primary span-form" (click)="navigateToAddDeer()">
         Add Listed Deer
@@ -12,3 +6,26 @@
     <button mat-raised-button color="primary" type="submit" class="btn btn-primary span-form">
         Login
     </button>
+
+    <div class="card-container" *ngFor="let deer of deer">
+    <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{deer.name}}</mat-card-title>
+          <mat-card-subtitle>{{deer.ranch?.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider inset></mat-divider>
+        <img class="card-img" mat-card-image src="../../../assets/image/deerSample.png" alt="Photo of a Shiba Inu">
+        <mat-divider style="margin-bottom: 5px;" inset></mat-divider>
+        <mat-card-content class="card-content">
+            <div>NADR: {{deer.nadr}}</div>
+            <div>GEBU: {{deer.gebu}}</div>
+            <div>Codon: {{deer.codon}}</div>
+            <div *ngIf="deer.semenAvailable">
+                Semen Cost: ${{deer.semenCost}}
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="card-btn">
+          <button color="accent" mat-raised-button (click)="navigateToDeerProfile(deer)" >View Profile</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>

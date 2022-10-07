@@ -1,3 +1,5 @@
+import { MatchComponent } from './components/match/match.component';
+import { DeerProfileComponent } from './components/deer-profile/deer-profile.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -69,7 +71,9 @@ import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile
     AdminLoginComponent,
     AdminHomeComponent,
     PendingReviewsComponent,
-    AdminDeerProdileReviewComponent
+    AdminDeerProdileReviewComponent,
+    DeerProfileComponent,
+    MatchComponent
   ],
   imports: [
     AppRoutingModule,
@@ -105,7 +109,7 @@ import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile
     MatSliderModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatStepperModule
+    MatStepperModule,
   ],
   providers: [
     authInterceptorProviders,
