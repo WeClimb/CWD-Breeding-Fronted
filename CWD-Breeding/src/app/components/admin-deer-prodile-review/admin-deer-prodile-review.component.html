@@ -1,17 +1,68 @@
-<div class="container">
-  <div class="profile-img">
+<div class="admin-btn-container">
+  <button class="admin-btn" mat-raised-button color="accent" (click)="approve()">Approve</button>
+  <button class="admin-btn" mat-raised-button color="primary" (click)="openEditDeerDialog()">Edit</button>
+  <button class="admin-btn" mat-raised-button color="warn" >Deny</button>
+</div>
 
+<mat-divider class="btn-divider"></mat-divider>
+
+<div class="container">
+  <div class="profile-img-container">
+    <img class="profile-img" src="../../../assets/image/deerSample.png" alt="Photo of a Shiba Inu">
   </div>
 
   <div class="data">
+    <h1 style="margin-top: 23px;">Deer Name: {{deer.name}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
 
+    <h1 style="margin-top: 10px;">NADR#: {{deer.nadr}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">DOB: {{deer.dob | date:'mediumDate'}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">GEBU: {{deer.gebu}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">Codon: {{deer.codon}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <h1 style="margin-top: 10px;">Sci Score: {{deer.sciScore}}</h1>
+    <mat-divider inset class="info-divider"></mat-divider>
+
+    <div *ngIf="deer.semenAvailable">
+      <h1 style="margin-top: 10px;">Semen Cost: ${{deer.semenCost}}</h1>
+      <mat-divider inset class="info-divider"></mat-divider>
+    </div>
   </div>
 
-  <div class="media">
+  <div class="ranch">
+    <h1 style="margin-top: 10px;">{{deer.ranch.name}}</h1>
+    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
 
+    <h1 style="margin-top: 10px;">{{deer.ranch.ownerFirstName}} {{deer.ranch.ownerlastName}}</h1>
+    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+
+    <h1 style="margin-top: 10px;">{{deer.ranch.address}}<br>{{deer.ranch.city}}, {{deer.ranch.state}} {{deer.ranch.zipcode}}</h1>
+    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+
+    <h1 style="margin-top: 10px;">{{deer.ranch.phoneNumber}}</h1>
+    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+
+    <h1 style="margin-top: 10px;">{{deer.ranch.email}}</h1>
+    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
   </div>
 
-  <div class="pedigree">
+  <div class="video-container">
+    <div class="video">
+      <h1>THIS IS A VIDEO</h1>
+    </div>
+  </div>
 
+  <div class="pedigree-container">
+    <div class="video">
+      <h1>THIS IS A PEDIGREE</h1>
+    </div>
   </div>
 </div>
+

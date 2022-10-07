@@ -53,6 +53,7 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { PendingReviewsComponent } from './components/pending-reviews/pending-reviews.component';
 import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile-review/admin-deer-prodile-review.component';
+import { DeerEditDialogComponent } from './components/admin-deer-prodile-review/Dialogs/deer-edit-dialog/deer-edit-dialog.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile
     PendingReviewsComponent,
     AdminDeerProdileReviewComponent,
     DeerProfileComponent,
-    MatchComponent
+    MatchComponent,
+    DeerEditDialogComponent
   ],
   imports: [
     AppRoutingModule,

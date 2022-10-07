@@ -2,7 +2,7 @@ interface IRanch {
     id: string;
     name: string;
     ownerFirstName: string;
-    ownerLastName: string;
+    ownerlastName: string;
     website: string
     email: string;
     address: string;
@@ -20,7 +20,7 @@ interface IRanch {
     id: string;
     name: string;
     ownerFirstName: string;
-    ownerLastName: string;
+    ownerlastName: string;
     website: string
     email: string;
     address: string;
@@ -47,7 +47,7 @@ interface IRanch {
         this.status = object && object.status || null;
         this.state = object && object.state || null;
         this.city = object && object.city || null;
-        this.ownerLastName = object && object.ownerLastName || null;
+        this.ownerlastName = object && object.ownerlastName || null;
         this.zipcode = object && object.zipcode || null;
         this.phoneNumber = object && object.phoneNumber || null;
         this.website = object && object.website || null;
