@@ -128,16 +128,24 @@ submitAddDeer(): void {
     deer.deerFamily = this.pedigreeForm.getRawValue();
 
     this.deerService.post(['Request-Listing'], deer).subscribe(response => {
-        complete: this.router.navigate(['home']);
+        complete:   console.log(response);
+                    this.uploadFiles(response);
+                    this.router.navigate(['home']);
     });
 }
 
 //TODO: Upload Files actually
-uploadFiles(): void {
+uploadFiles(id: string): void {
+    id = '5786b7a6-7247-444b-8741-dc6db128233a';
+    console.log(id);
     if(this.profileImage != undefined) {
-        console.log('Uploaded Profile Image')
+        this.loading = true;
+        this.deerService.uploadFile(this.selectedFile, id).subscribe(() => {
+        complete:   this.updatedPhoto = true;
+                    this.loading = false;
+        error: this.errorMessage = 'Failed to Update Photo';
+    });
     }
-
     if(this.extraPhotos.length != 0){
         this.extraPhotos.forEach(photoFile => {
             console.log('You Uploaded an extra photo')
