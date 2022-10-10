@@ -1,4 +1,4 @@
-    <header class="masthead text-white text-center"></header>
+    <!-- <header class="masthead text-white text-center"></header> -->
 
     <button mat-raised-button color="primary" type="submit" class="btn btn-primary span-form" (click)="navigateToAddDeer()">
         Add Listed Deer
@@ -6,8 +6,8 @@
     <button mat-raised-button color="primary" type="submit" class="btn btn-primary span-form">
         Login
     </button>
-
-    <div class="card-container" *ngFor="let deer of deer">
+<div class="card-container">
+    <div *ngFor="let deer of deer">
     <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>{{deer.name}}</mat-card-title>
@@ -29,3 +29,4 @@
         </mat-card-actions>
       </mat-card>
     </div>
+  </div>
