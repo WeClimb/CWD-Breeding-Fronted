@@ -32,8 +32,8 @@
         </mat-form-field>
 
         <mat-form-field class="flex-1 form-field" appearance="outline">
-            <mat-label>GEBU</mat-label>
-            <input type="text" matInput formControlName="gebu" required>
+            <mat-label>GEBV</mat-label>
+            <input type="number" [roundingValue]="3" appDecimalPlaces matInput formControlName="gebu" required>
             <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBU is required.</mat-error>
         </mat-form-field>
 

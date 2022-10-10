@@ -14,6 +14,15 @@ import { Deer } from 'src/models/deer.model';
 export class HomeComponent implements OnInit {
     deer: Deer[] = [];
 
+    filterForm = new FormGroup({
+        name: new FormControl(''),
+        ranchName: new FormControl(''),
+        age: new FormControl(),
+        gebv: new FormControl(''),
+        codon: new FormControl(''),
+        sciScore: new FormControl(),
+    });
+
     constructor(
         private router: Router,
         private tokenStorage: TokenStorageService,
@@ -26,8 +35,21 @@ export class HomeComponent implements OnInit {
 
     getListedDeer() : void {
         let map = new Map();
-        map.set('isApproved', true)
-        this.deerService.getAll(['all'],map).subscribe(response => {
+        map.set('isApproved', true);
+        map.set('deerName', this.filterForm.controls['name'].value);
+        map.set('ranchName', this.filterForm.controls['ranchName'].value);
+        map.set('gebv', this.filterForm.controls['gebv'].value);
+        map.set('codon', this.filterForm.controls['codon'].value);
+
+        if(this.filterForm.controls['sciScore'].value != null){
+            map.set('sciScore', this.filterForm.controls['sciScore'].value);
+        }
+
+        if(this.filterForm.controls['age'].value != null){
+            map.set('age', this.filterForm.controls['age'].value);
+        }
+
+        this.deerService.getAll(['All-Filtered'],map).subscribe(response => {
             complete: this.deer = response;
     });
     }

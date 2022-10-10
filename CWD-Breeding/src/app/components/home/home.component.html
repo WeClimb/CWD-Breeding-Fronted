@@ -1,11 +1,68 @@
     <!-- <header class="masthead text-white text-center"></header> -->
+<div class="action-container">
+    <div class="filtering-container">
+      <h1 style="margin: 20px;">Filter</h1>
+      <form [formGroup]="filterForm">
 
-    <button mat-raised-button color="primary" type="submit" class="btn btn-primary span-form" (click)="navigateToAddDeer()">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Deer Name</mat-label>
+          <input type="text" matInput formControlName="name" required >
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Ranch Name</mat-label>
+          <input type="text" matInput formControlName="ranchName" required >
+        </mat-form-field>
+
+        <mat-form-field class="form-field " appearance="outline">
+          <mat-label>Codon</mat-label>
+          <input type="text" matInput formControlName="codon" required >
+        </mat-form-field>
+
+        <mat-form-field class="form-field " appearance="outline">
+          <mat-label>GEBV</mat-label>
+          <input [roundingValue]="3" appDecimalPlaces type="text"  matInput formControlName="gebv" required >
+        </mat-form-field>
+
+        <mat-form-field class="form-field " appearance="outline">
+          <mat-label>Age</mat-label>
+          <input type="number" [roundingValue]="0" appDecimalPlaces matInput formControlName="age" required >
+        </mat-form-field>
+
+        <mat-form-field class="form-field " appearance="outline">
+          <mat-label>Score</mat-label>
+          <input type="number" [roundingValue]="0" appDecimalPlaces matInput formControlName="sciScore" required >
+        </mat-form-field>
+
+
+        <button mat-raised-button color="accent" class="search-btn" (click)="getListedDeer()">
+          Search Deer
+        </button>
+      </form>     
+    </div>
+
+  <div class="add-deer-container">
+    <div class="register">
+      <h1>Register an account</h1>
+
+      <button mat-raised-button color="accent" type="submit" (click)="navigateToAddDeer()">
+        Go to Registration
+      </button>
+    </div>
+
+    <div class="add-deer">
+      <h1>Add a listed deer</h1>
+
+      <button mat-raised-button color="accent" type="submit" (click)="navigateToAddDeer()">
         Add Listed Deer
-    </button>
-    <button mat-raised-button color="primary" type="submit" class="btn btn-primary span-form">
-        Login
-    </button>
+      </button>
+    </div>
+  </div>
+
+  
+</div>
+   
+
 <div class="card-container">
     <div *ngFor="let deer of deer">
     <mat-card class="example-card">
