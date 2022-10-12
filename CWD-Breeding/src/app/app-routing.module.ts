@@ -60,10 +60,11 @@ const routes: Routes = [
   {
     path: 'admin-home',
     component: AdminHomeComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: '**',
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
 ];

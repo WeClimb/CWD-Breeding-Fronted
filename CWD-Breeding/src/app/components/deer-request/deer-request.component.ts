@@ -26,6 +26,8 @@ export class DeerRequestComponent implements OnInit {
     extraPhotos: File[] = [];
     video: File | undefined;
 
+    deerId: string = '';
+
     registrationForm = new FormGroup({
         name: new FormControl('', Validators.required),
         nadr: new FormControl('', Validators.required),
@@ -36,6 +38,7 @@ export class DeerRequestComponent implements OnInit {
         semenAvailable: new FormControl(true, Validators.required),
         semenCost: new FormControl(0, [Validators.required]),
         ranchId: new FormControl('', [Validators.required]),
+        videoLink: new FormControl(''),
     });
 
     pedigreeForm = new FormGroup({
@@ -129,18 +132,17 @@ submitAddDeer(): void {
 
     this.deerService.post(['Request-Listing'], deer).subscribe(response => {
         complete:   console.log(response);
-                    this.uploadFiles(response);
+        this.deerId = response.id;
+                    this.uploadFiles();
                     this.router.navigate(['home']);
     });
+
 }
 
-//TODO: Upload Files actually
-uploadFiles(id: string): void {
-    id = '5786b7a6-7247-444b-8741-dc6db128233a';
-    console.log(id);
+uploadFiles(): void {
     if(this.profileImage != undefined) {
         this.loading = true;
-        this.deerService.uploadFile(this.selectedFile, id).subscribe(() => {
+        this.deerService.uploadFile(this.selectedFile, this.deerId).subscribe(() => {
         complete:   this.updatedPhoto = true;
                     this.loading = false;
         error: this.errorMessage = 'Failed to Update Photo';

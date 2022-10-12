@@ -42,8 +42,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "15kb",
+                  "maximumError": "20kb"
                 }
               ],
               "fileReplacements": [
@@ -73,6 +73,9 @@
             },
             "development": {
               "browserTarget": "PreKno-Service-Provider:build:development"
+            },
+            "local": {
+              "browserTarget": "PreKno-Service-Provider:build:local"
             }
           },
           "defaultConfiguration": "development"

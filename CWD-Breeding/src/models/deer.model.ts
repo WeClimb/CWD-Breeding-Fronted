@@ -19,6 +19,9 @@ interface IDeer {
     updateDate: Date;
     status: string;
     ranch: Ranch;
+    videoLink: string; 
+    denialReason: string   
+    profileImage: string;
   }
 
   export class Deer{
@@ -39,6 +42,9 @@ interface IDeer {
     updateDate: Date;
     status: string;
     ranch: Ranch;
+    videoLink: string;
+    denialReason: string;
+    profileImage: string;
 
     constructor();
     constructor(object: IDeer);
@@ -60,5 +66,10 @@ interface IDeer {
         this.ranchId = object && object.ranchId || null;
         this.ranch = object && object.ranch || null;
         this.deerFamily = object && object.deerFamily || null;
+        this.videoLink = object && object.videoLink || null;
+        this.denialReason = object && object.denialReason || null;
+        this.profileImage = object && object.profileImage || null;
+
+
     }
   }

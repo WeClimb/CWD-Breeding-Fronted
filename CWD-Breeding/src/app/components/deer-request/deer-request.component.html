@@ -37,6 +37,11 @@
             <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBU is required.</mat-error>
         </mat-form-field>
 
+        <mat-form-field class="flex-1 form-field" appearance="outline">
+            <mat-label>YouTube Video Link</mat-label>
+            <input type="text" matInput formControlName="videoLink">
+        </mat-form-field>
+
         <mat-form-field class="form-field flex-1" appearance="outline">
             <mat-label>SCI Score</mat-label>
             <input matInput formControlName="sciScore" required type="number" [roundingValue]="3" appDecimalPlaces>
@@ -202,11 +207,13 @@
                     <mat-divider></mat-divider>
                     <p>{{profileImage.name}}</p>
                 </div>
+                <p style="color: red; margin-top: 10px; margin-bottom: 10px;">*Must Choose a Profile Image</p>
+
             </div>
 
             <mat-divider class="mat-divider-upload"></mat-divider>
 
-            <div class="upload-div">
+            <!-- <div class="upload-div">
                 <h3>Upload up to 3 photos</h3>
                 <mat-divider style="margin-bottom: 10px;"></mat-divider>
                 <div *ngIf="!loading">
@@ -218,23 +225,7 @@
                     <mat-divider></mat-divider>
                     <p *ngFor="let photo of extraPhotos">{{photo.name}}</p>
                 </div>
-            </div>
-
-            <mat-divider class="mat-divider-upload"></mat-divider>
-
-            <div class="upload-div">
-                <h3>Upload optional video of deer</h3>
-                <mat-divider style="margin-bottom: 10px;"></mat-divider>
-                <div *ngIf="!loading">
-                    <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'Video')" />
-                </div>
-
-                <div *ngIf="video != undefined" class="uploaded-files-container">
-                    <h5>Uploaded Profile Picture</h5>
-                    <mat-divider></mat-divider>
-                    <p>{{video.name}}</p>
-                </div>
-            </div>
+            </div> -->
 
             <mat-divider class="mat-divider-upload"></mat-divider>
 
@@ -248,22 +239,16 @@
         </div>
 
         <div class="pedigree-container next-button">
-            <button mat-raised-button color="accent" class="upload-all-btn">Upload All Files</button>
-        </div>
-
-        <div class="pedigree-container next-button">
             <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
-            <button mat-raised-button color="accent" matStepperNext>Next</button>
+            <button mat-raised-button color="accent" [disabled]="profileImage == undefined" matStepperNext>Next</button>
         </div>
     </mat-step>
 
     <mat-step [stepControl]="confirmForm" label="Confirm Information is Correct">
-      <form [formGroup]="confirmForm">
+      <form class="review-stepper"[formGroup]="confirmForm">
+            <h1>Please Review all forms</h1>
             <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
-
-            <div class="pedigree-container">
-                <button mat-raised-button color="accent" (click)="submitAddDeer()">Sumbit Deer Form</button>
-              </div>
+            <button mat-raised-button style="margin-left: 10px;" color="accent" (click)="submitAddDeer()" [disabled]="!this.confirmForm.controls['dataCorrect'].value">Sumbit</button>
       </form>
     </mat-step>
   </mat-stepper>

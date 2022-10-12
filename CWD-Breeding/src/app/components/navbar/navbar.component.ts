@@ -11,7 +11,6 @@ import { AUTH_TOKEN, ME } from "src/app/utils/constants/storage-keys.constant";
     styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-
     opened = false;
 
     routes = new Map([
@@ -38,6 +37,18 @@ export class NavbarComponent {
         //     return false;
         // }
         return true;
+    }
+
+    get isAdmin(): boolean {
+        let user = this.tokenStorage.getUser();
+        if(user == null) {
+            return false;
+        }
+        if(user.loginType.toLocaleLowerCase() == 'admin'){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     get showSidenav(): boolean {

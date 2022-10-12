@@ -43,6 +43,7 @@ h1 {
  height: 50%;
  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
  border-radius: 5px;
+ min-height: 150px;
 }
 
 .add-deer {
@@ -51,6 +52,8 @@ h1 {
   height: 50%;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 5px;
+  min-height: 150px;
+
 }
 
 .add-deer-container {
@@ -105,17 +108,7 @@ html {
     justify-content: center;
   }
 
-  header.masthead {
-    position: relative;
-    background: url(../../../assets/image/HeaderImage-ScoutingWhitetailDeer-2022-2880x904-2-scaled.jpg);
-    background-size: cover;
-    height: 250px;
-    padding-top: 12rem;
-    padding-bottom: 8rem;
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
 
-  }
 
   .example-card {
     max-width: 400px;

@@ -9,7 +9,10 @@
                 (click)="toggleSidenav()">
                 <mat-icon>menu</mat-icon>
             </button>
-            <a routerLink="/home">
+            <a *ngIf="!isAdmin" routerLink="/home">
+                <img src="../../../assets/image/CWDbreeding-Logo-Orange.png" class="logo" />
+            </a>
+            <a *ngIf="isAdmin" routerLink="/admin-home">
                 <img src="../../../assets/image/CWDbreeding-Logo-Orange.png" class="logo" />
             </a>
 
@@ -35,6 +38,7 @@
 
         <mat-sidenav-content>
             <router-outlet></router-outlet>
+            <app-footer></app-footer>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </span>

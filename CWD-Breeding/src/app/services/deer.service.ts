@@ -17,7 +17,11 @@ export class DeerService extends AbstractService {
       }
 
       get baseUrl(): string {
-        return environment.api;
+        if(window.location.href.toLowerCase().includes('qacwdbreeding.z13.web.core.windows.net')){
+            return 'https://cwdbreedingapiqa.azurewebsites.net';
+        } else {
+            return 'https://localhost:7145';
+        }
     }
 
     uploadFile(profileImage: File, deerId: string): Observable<any> {

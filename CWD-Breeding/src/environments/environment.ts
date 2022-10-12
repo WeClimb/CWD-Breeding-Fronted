@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    api: 'https://localhost:7145',
-};
+ // api: 'https://localhost:7145',
+ api: 'https://cwdbreedingapiqa.azurewebsites.net',};
 
 /*
  * For easier debugging in development mode, you can import the following file

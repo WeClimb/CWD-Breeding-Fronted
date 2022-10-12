@@ -1,53 +1,60 @@
     <!-- <header class="masthead text-white text-center"></header> -->
 <div class="action-container">
     <div class="filtering-container">
-      <h1 style="margin: 20px;">Filter</h1>
+      <h1 style="margin: 20px;">Search</h1>
       <form [formGroup]="filterForm">
 
         <mat-form-field class="form-field" appearance="outline">
           <mat-label>Deer Name</mat-label>
-          <input type="text" matInput formControlName="name" required >
+          <input type="text" matInput formControlName="name" >
         </mat-form-field>
 
         <mat-form-field class="form-field" appearance="outline">
           <mat-label>Ranch Name</mat-label>
-          <input type="text" matInput formControlName="ranchName" required >
+          <input type="text" matInput formControlName="ranchName" >
         </mat-form-field>
 
         <mat-form-field class="form-field " appearance="outline">
           <mat-label>Codon</mat-label>
-          <input type="text" matInput formControlName="codon" required >
+          <input type="text" matInput formControlName="codon"  >
         </mat-form-field>
 
         <mat-form-field class="form-field " appearance="outline">
           <mat-label>GEBV</mat-label>
-          <input [roundingValue]="3" appDecimalPlaces type="text"  matInput formControlName="gebv" required >
+          <input [roundingValue]="3" appDecimalPlaces type="text"  matInput formControlName="gebv"  >
         </mat-form-field>
 
         <mat-form-field class="form-field " appearance="outline">
           <mat-label>Age</mat-label>
-          <input type="number" [roundingValue]="0" appDecimalPlaces matInput formControlName="age" required >
+          <input type="number" [roundingValue]="0" appDecimalPlaces matInput formControlName="age"  >
         </mat-form-field>
 
         <mat-form-field class="form-field " appearance="outline">
           <mat-label>Score</mat-label>
-          <input type="number" [roundingValue]="0" appDecimalPlaces matInput formControlName="sciScore" required >
+          <input type="number" [roundingValue]="0" appDecimalPlaces matInput formControlName="sciScore"  >
         </mat-form-field>
 
 
         <button mat-raised-button color="accent" class="search-btn" (click)="getListedDeer()">
           Search Deer
         </button>
+        <button mat-raised-button color="accent" class="search-btn" (click)="clearFilterForm()">
+          Clear Filter
+        </button>
       </form>     
     </div>
 
   <div class="add-deer-container">
-    <div class="register">
+    <div *ngIf="!loggedIn" class="register">
       <h1>Register an account</h1>
 
       <button mat-raised-button color="accent" type="submit" (click)="navigateToAddDeer()">
         Go to Registration
       </button>
+    </div>
+
+    <div *ngIf="loggedIn" class="register">
+      <h1>Welcome {{userName}}</h1>
     </div>
 
     <div class="add-deer">
@@ -64,6 +71,7 @@
    
 
 <div class="card-container">
+    <div *ngIf="deer.length == 0">No Matching Deer</div>
     <div *ngFor="let deer of deer">
     <mat-card class="example-card">
         <mat-card-header>
@@ -71,7 +79,7 @@
           <mat-card-subtitle>{{deer.ranch?.name}}</mat-card-subtitle>
         </mat-card-header>
         <mat-divider inset></mat-divider>
-        <img class="card-img" mat-card-image src="../../../assets/image/deerSample.png" alt="Photo of a Shiba Inu">
+        <img class="card-img" mat-card-image [src]="deer.profileImage" alt="Photo of a Shiba Inu">
         <mat-divider style="margin-bottom: 5px;" inset></mat-divider>
         <mat-card-content class="card-content">
             <div>NADR: {{deer.nadr}}</div>

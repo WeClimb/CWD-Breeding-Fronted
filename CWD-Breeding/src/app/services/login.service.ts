@@ -13,10 +13,18 @@ export class LoginService {
     path = '/Ranch/login';
     userPath = '/User/login';
 
+    get baseUrl(): string {
+        if(window.location.href.toLowerCase().includes('qacwdbreeding.z13.web.core.windows.net')){
+            return 'https://cwdbreedingapiqa.azurewebsites.net';
+        } else {
+            return 'https://localhost:7145';
+        }
+    }
+
 
     login(baseAuth: string): Observable<any> {
         return this.http.post(
-            `${environment.api}${this.path}`,
+            `${this.baseUrl}${this.path}`,
             {},
             {
                 headers: new HttpHeaders({
@@ -31,7 +39,7 @@ export class LoginService {
 
     userLogin(baseAuth: string): Observable<any> {
         return this.http.post(
-            `${environment.api}${this.userPath}`,
+            `${this.baseUrl}${this.userPath}`,
             {},
             {
                 headers: new HttpHeaders({

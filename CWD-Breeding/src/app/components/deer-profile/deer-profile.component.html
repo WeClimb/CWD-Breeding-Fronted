@@ -1,59 +1,63 @@
 <div class="container">
   <div class="profile-img-container">
-    <img class="profile-img" src="../../../assets/image/deerSample.png" alt="Photo of a Shiba Inu">
+    <img class="profile-img" [src]="profileImage" alt="Profile Image">
   </div>
 
   <div class="data">
-    <h1 style="margin-top: 23px;">Deer Name: {{deer.name}}</h1>
-    <mat-divider inset class="info-divider"></mat-divider>
+    <h1>Deer Name: {{deer?.name}}</h1>
 
-    <h1 style="margin-top: 10px;">NADR#: {{deer.nadr}}</h1>
-    <mat-divider inset class="info-divider"></mat-divider>
+    <h1>NADR#: {{deer?.nadr}}</h1>
 
-    <h1 style="margin-top: 10px;">DOB: {{deer.dob | date:'mediumDate'}}</h1>
-    <mat-divider inset class="info-divider"></mat-divider>
+    <h1>DOB: {{deer?.dob | date:'mediumDate'}} (Age: {{deer?.age}})</h1>
 
-    <h1 style="margin-top: 10px;">GEBV: {{deer.gebu}}</h1>
-    <mat-divider inset class="info-divider"></mat-divider>
+    <h1>GEBV: {{deer?.gebu}}</h1>
 
-    <h1 style="margin-top: 10px;">Codon: {{deer.codon}}</h1>
-    <mat-divider inset class="info-divider"></mat-divider>
+    <h1>Codon: {{deer?.codon}}</h1>
 
-    <h1 style="margin-top: 10px;">Sci Score: {{deer.sciScore}}</h1>
-    <mat-divider inset class="info-divider"></mat-divider>
+    <h1>Sci Score: {{deer?.sciScore}}</h1>
 
-    <div *ngIf="deer.semenAvailable">
-      <h1 style="margin-top: 10px;">Semen Cost: ${{deer.semenCost}}</h1>
-      <mat-divider inset class="info-divider"></mat-divider>
+    <div *ngIf="deer?.semenAvailable">
+      <h1>Semen Cost: ${{deer?.semenCost}}</h1>
     </div>
   </div>
 
   <div class="ranch">
-    <h1 style="margin-top: 10px;">{{deer.ranch.name}}</h1>
-    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+    <h1>Ranch: {{deer?.ranch?.name}}</h1>
 
-    <h1 style="margin-top: 10px;">{{deer.ranch.ownerFirstName}} {{deer.ranch.ownerlastName}}</h1>
-    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+    <h1>{{deer?.ranch?.ownerFirstName}} {{deer?.ranch?.ownerlastName}}</h1>
 
-    <h1 style="margin-top: 10px;">{{deer.ranch.address}}<br>{{deer.ranch.city}}, {{deer.ranch.state}} {{deer.ranch.zipcode}}</h1>
-    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+    <h1>{{deer?.ranch?.address}}<br>{{deer?.ranch?.city}}, {{deer?.ranch?.state}} {{deer?.ranch?.zipcode}}</h1>
 
-    <h1 style="margin-top: 10px;">{{deer.ranch.phoneNumber}}</h1>
-    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+    <h1>{{deer?.ranch?.phoneNumber}}</h1>
 
-    <h1 style="margin-top: 10px;">{{deer.ranch.email}}</h1>
-    <mat-divider inset class="info-divider" style="margin-right: 15%;"></mat-divider>
+    <h1>{{deer?.ranch?.email}}</h1>
   </div>
 
-  <div class="video-container">
+  <div *ngIf="validVideo" class="video-container">
     <div class="video">
-      <h1>THIS IS A VIDEO</h1>
+      <iframe  [src]="videoLink" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreenallowfullscreen></iframe>
     </div>
   </div>
 
   <div class="pedigree-container">
-    <div class="video">
-      <h1>THIS IS A PEDIGREE</h1>
-    </div>
+    <h1 style="font-size: 20pt;">{{deer?.name}}'s Pedigree</h1>
+    <div class="lev-one-sire pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelOneSire}}</p></div>
+    <div class="lev-one-dam pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelOneDam}}</p></div>
+
+    <div class="lev-two-sireA pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelTwoSireA}}</p></div>
+    <div class="lev-two-damA pedigree-input"><legend class="legend">Dam</legend><p  class="name">{{deer?.deerFamily?.levelTwoDamA}}</p></div>
+    <div class="lev-two-sireB pedigree-input"><legend class="legend">Sire</legend><p  class="name">{{deer?.deerFamily?.levelTwoSireB}}</p></div>
+    <div class="lev-two-damB pedigree-input"><legend class="legend">Dam</legend><p  class="name">{{deer?.deerFamily?.levelTwoDamB}}</p></div>
+
+    <div class="lev-three-sireA pedigree-input"><legend class="legend">Sire</legend><p  class="name">{{deer?.deerFamily?.levelThreeSireA}}</p></div>
+    <div class="lev-three-damA pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamA}}</p></div>
+    <div class="lev-three-sireB pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireB}}</p></div>
+    <div class="lev-three-damB pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamB}}</p></div>
+    <div class="lev-three-sireC pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireC}}</p></div>
+    <div class="lev-three-damC pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamC}}</p></div>
+    <div class="lev-three-sireD pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireD}}</p></div>
+    <div class="lev-three-damD pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamD}}</p></div>
+
+
   </div>
 </div>
