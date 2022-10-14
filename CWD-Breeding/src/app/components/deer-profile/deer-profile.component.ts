@@ -34,7 +34,10 @@ export class DeerProfileComponent implements OnInit {
     }
 
     getEmbededVideo(): void {
-        this.deer = this.videoLink.replace('/watch?v=', '/embed/')
+        // https://youtu.be/JROdAMfCxuA
+        // https://www.youtube.com/watch?v=8Xfz09IJTYY
+        this.videoLink.replace('youtu.be/', 'www.youtube.com/watch?v=');
+        this.videoLink.replace('/watch?v=', '/embed/');
         this.videoLink = this.santizer.bypassSecurityTrustResourceUrl(this.videoLink);
     }
 
@@ -49,12 +52,13 @@ export class DeerProfileComponent implements OnInit {
         let map = new Map();
         this.deerService.get([this.id], map).subscribe(response => {
             complete: this.deer = response;
-                        console.log(this.deer.deerFamily.levelOneDam)
+                      this.deer.age = Math.floor(this.deer.age)
                         if(this.deer.videoLink != null && this.deer.videoLink != undefined && this.deer.videoLink != ''){
                             this.videoLink = this.deer.videoLink.replace('/watch?v=', '/embed/')
                             this.videoLink = this.santizer.bypassSecurityTrustResourceUrl(this.videoLink);
                             this.validVideo = true;
                         }
+                        
         });
-    }
+      }
 }

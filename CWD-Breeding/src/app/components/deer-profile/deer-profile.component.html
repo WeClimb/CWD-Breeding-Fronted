@@ -1,6 +1,7 @@
+
 <div class="container">
   <div class="profile-img-container">
-    <img class="profile-img" [src]="profileImage" alt="Profile Image">
+    <img class="profile-img" [src]="deer.profileImage" alt="Profile Image">
   </div>
 
   <div class="data">
@@ -8,7 +9,7 @@
 
     <h1>NADR#: {{deer?.nadr}}</h1>
 
-    <h1>DOB: {{deer?.dob | date:'mediumDate'}} (Age: {{deer?.age}})</h1>
+    <h1>Age: {{deer?.age}}</h1>
 
     <h1>GEBV: {{deer?.gebu}}</h1>
 
@@ -31,6 +32,9 @@
     <h1>{{deer?.ranch?.phoneNumber}}</h1>
 
     <h1>{{deer?.ranch?.email}}</h1>
+
+    <h1>{{deer?.ranch?.website}}</h1>
+
   </div>
 
   <div *ngIf="validVideo" class="video-container">
@@ -40,23 +44,23 @@
   </div>
 
   <div class="pedigree-container">
-    <h1 style="font-size: 20pt;">{{deer?.name}}'s Pedigree</h1>
-    <div class="lev-one-sire pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelOneSire}}</p></div>
-    <div class="lev-one-dam pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelOneDam}}</p></div>
+    <h1 class="pedigree-title" style="font-size: 20pt;">{{deer?.name}}</h1>
+    <div class="lev-one-sire"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelOneSire}}</p></div>
+    <div class="lev-one-dam"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelOneDam}}</p></div>
 
-    <div class="lev-two-sireA pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelTwoSireA}}</p></div>
-    <div class="lev-two-damA pedigree-input"><legend class="legend">Dam</legend><p  class="name">{{deer?.deerFamily?.levelTwoDamA}}</p></div>
-    <div class="lev-two-sireB pedigree-input"><legend class="legend">Sire</legend><p  class="name">{{deer?.deerFamily?.levelTwoSireB}}</p></div>
-    <div class="lev-two-damB pedigree-input"><legend class="legend">Dam</legend><p  class="name">{{deer?.deerFamily?.levelTwoDamB}}</p></div>
+    <div class="lev-two-sireA"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelTwoSireA}}</p></div>
+    <div class="lev-two-damA"><legend class="legend">Dam</legend><p  class="name">{{deer?.deerFamily?.levelTwoDamA}}</p></div>
+    <div class="lev-two-sireB"><legend class="legend">Sire</legend><p  class="name">{{deer?.deerFamily?.levelTwoSireB}}</p></div>
+    <div class="lev-two-damB"><legend class="legend">Dam</legend><p  class="name">{{deer?.deerFamily?.levelTwoDamB}}</p></div>
 
-    <div class="lev-three-sireA pedigree-input"><legend class="legend">Sire</legend><p  class="name">{{deer?.deerFamily?.levelThreeSireA}}</p></div>
-    <div class="lev-three-damA pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamA}}</p></div>
-    <div class="lev-three-sireB pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireB}}</p></div>
-    <div class="lev-three-damB pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamB}}</p></div>
-    <div class="lev-three-sireC pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireC}}</p></div>
-    <div class="lev-three-damC pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamC}}</p></div>
-    <div class="lev-three-sireD pedigree-input"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireD}}</p></div>
-    <div class="lev-three-damD pedigree-input"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamD}}</p></div>
+    <div class="lev-three-sireA"><legend class="legend">Sire</legend><p  class="name">{{deer?.deerFamily?.levelThreeSireA}}</p></div>
+    <div class="lev-three-damA"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamA}}</p></div>
+    <div class="lev-three-sireB"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireB}}</p></div>
+    <div class="lev-three-damB"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamB}}</p></div>
+    <div class="lev-three-sireC"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireC}}</p></div>
+    <div class="lev-three-damC"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamC}}</p></div>
+    <div class="lev-three-sireD"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireD}}</p></div>
+    <div class="lev-three-damD"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamD}}</p></div>
 
 
   </div>

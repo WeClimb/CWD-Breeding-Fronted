@@ -27,10 +27,15 @@
   </mat-form-field>
 
   <mat-form-field class="flex-1 form-field" appearance="outline">
-      <mat-label>GEBU</mat-label>
+      <mat-label>GEBV</mat-label>
       <input type="text" matInput formControlName="gebu" required>
-      <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBU is required.</mat-error>
+      <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBV is required.</mat-error>
   </mat-form-field>
+
+  <mat-form-field class="flex-1 form-field" appearance="outline">
+    <mat-label>Video Link</mat-label>
+    <input type="text" matInput formControlName="videoLink" required>
+</mat-form-field>
 
   <mat-form-field class="form-field flex-1" appearance="outline">
       <mat-label>SCI Score</mat-label>

@@ -23,7 +23,6 @@ export class DeerEditDialogComponent implements OnInit {
     semenAvailable: new FormControl(true, Validators.required),
     semenCost: new FormControl(0, [Validators.required]),
     ranchId: new FormControl('', [Validators.required]),
-
     profileImage: new FormControl(''),
     videoLink: new FormControl(''),
     denialReason: new FormControl(''),

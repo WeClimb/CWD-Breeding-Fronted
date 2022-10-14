@@ -49,6 +49,7 @@ getDeer() {
   let map = new Map();
   this.deerService.get([this.id], map).subscribe(response => {
       complete: this.deer = response;
+                this.deer.age = Math.floor(this.deer.age)
                   if(this.deer.videoLink != null && this.deer.videoLink != undefined && this.deer.videoLink != ''){
                       this.videoLink = this.deer.videoLink.replace('/watch?v=', '/embed/')
                       this.videoLink = this.santizer.bypassSecurityTrustResourceUrl(this.videoLink);
@@ -87,6 +88,8 @@ openDenialInput(): void {
 
 openEditDeerDialog(): void {
   const dialogRef = this.dialog.open(DeerEditDialogComponent, {
+    height: '100%',
+    width: '400px',
     data: {
       deer: this.deer,
     },

@@ -88,9 +88,10 @@ html {
   }
 
   .card-img {
-    width:auto;
+    width:400px;
     height:300px;
     max-width: 390px;
+    overflow: hidden;
     margin: 0 auto;
     margin-bottom: 20px;
     margin-top: 10px;

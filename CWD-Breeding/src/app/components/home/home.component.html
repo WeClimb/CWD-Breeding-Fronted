@@ -85,9 +85,6 @@
             <div>NADR: {{deer.nadr}}</div>
             <div>GEBU: {{deer.gebu}}</div>
             <div>Codon: {{deer.codon}}</div>
-            <div *ngIf="deer.semenAvailable">
-                Semen Cost: ${{deer.semenCost}}
-            </div>
         </mat-card-content>
         <mat-card-actions class="card-btn">
           <button color="accent" mat-raised-button (click)="navigateToDeerProfile(deer)" >View Profile</button>

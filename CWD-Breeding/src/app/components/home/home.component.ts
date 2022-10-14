@@ -91,7 +91,17 @@ export class HomeComponent implements OnInit {
     }
 
     clearFilterForm(): void {
-        this.filterForm.reset();
+        this.deer = [];
+
+        this.filterForm.controls['name'].setValue('');
+        this.filterForm.controls['ranchName'].setValue('');
+        this.filterForm.controls['codon'].setValue('');
+
+        this.filterForm.controls['age'].setValue(0);
+        this.filterForm.controls['gebv'].setValue(0);
+        this.filterForm.controls['sciScore'].setValue(0);
+
+        this.getListedDeer();
     }
 }
 

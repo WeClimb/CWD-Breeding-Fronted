@@ -27,7 +27,7 @@
 
     <h1>NADR#: {{deer?.nadr}}</h1>
 
-    <h1>DOB: {{deer?.dob | date:'mediumDate'}} (Age: {{deer?.age}})</h1>
+    <h1>Age: {{deer?.age}}</h1>
 
     <h1>GEBV: {{deer?.gebu}}</h1>
 
@@ -50,6 +50,9 @@
     <h1>{{deer?.ranch?.phoneNumber}}</h1>
 
     <h1>{{deer?.ranch?.email}}</h1>
+
+    <h1>{{deer?.ranch?.website}}</h1>
+
   </div>
 
   <div *ngIf="validVideo" class="video-container">
@@ -59,7 +62,7 @@
   </div>
 
   <div class="pedigree-container">
-    <h1 style="font-size: 20pt;">{{deer?.name}}'s Pedigree</h1>
+    <h1 class="pedigree-title" style="font-size: 20pt;">{{deer?.name}}</h1>
     <div class="lev-one-sire"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelOneSire}}</p></div>
     <div class="lev-one-dam"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelOneDam}}</p></div>
 
