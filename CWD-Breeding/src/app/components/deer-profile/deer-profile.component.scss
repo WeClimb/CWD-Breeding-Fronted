@@ -1,6 +1,3 @@
-@import '../../styles/styles.scss';
-
-
 h1 {
   font-family: 'montese', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   letter-spacing: 3px;
@@ -13,8 +10,8 @@ h1 {
     display: -ms-grid;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 40% 25% 25%;
-    grid-template-rows: 380px auto 400px;
+    grid-template-columns: 50% 25% 25%;
+    grid-template-rows: 380px auto 200px 400px;
     width: 80%;
     margin: 0 auto;
     margin-top: 2vh;
@@ -36,6 +33,7 @@ h1 {
   .profile-img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     overflow: hidden;
     border-radius: 20px;
     border: solid 3px #fff;
@@ -47,27 +45,41 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc;
     grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row: 1;
-    text-align: center;
-    margin-left: 20px;
-  }
-
-  .ranch   {
-    border-radius: 20px;
-    border: solid 3px #fff;
-    box-shadow: 0 0 3px 2px #ccc;    
-    grid-column-start: 3;
     grid-column-end: 4;
     grid-row: 1;
     text-align: center;
     margin-left: 20px;
+    overflow-wrap: break-word;
+  }
+
+  .ranch   {
+    overflow-wrap: break-word;
+    border-radius: 20px;
+    border: solid 3px #fff;
+    box-shadow: 0 0 3px 2px #ccc;    
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row: 3;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .contact   {
+    overflow-wrap: break-word;
+    border-radius: 20px;
+    border: solid 3px #fff;
+    box-shadow: 0 0 3px 2px #ccc;    
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row: 3;
+    text-align: center;
+    margin-top: 20px;
   }
 
   .video-container {  
     grid-column-start: 1;
     grid-column-end: 4;
-    grid-row: 3 / 3;
+    grid-row: 4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,7 +117,7 @@ h1 {
     grid-row: 6;
     text-align: center;
     border-radius: 10px;
-    border: solid 3px #fff;
+    border: solid 2px orange;
     box-shadow: 0 0 3px 2px #ccc;
     
   }
@@ -291,6 +303,11 @@ h1 {
     margin: 0 auto;
     margin-top: 2vh;
   }
+
+  .data {
+   margin-left: 0px;
+  }
+
 
   .video-container {  
     margin-top: 30px;

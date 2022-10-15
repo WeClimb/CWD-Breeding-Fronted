@@ -13,10 +13,10 @@ import { AUTH_TOKEN, ME } from "src/app/utils/constants/storage-keys.constant";
 export class NavbarComponent {
     opened = false;
 
-    routes = new Map([
-        ['home', 'Home'],
-        ['login', 'Login']
-    ]);
+    // routes = new Map([
+    //     ['home', 'Home'],
+    //     ['login', 'Login']
+    // ]);
 
     constructor(
         private activatedRoute : ActivatedRoute,
@@ -30,21 +30,21 @@ export class NavbarComponent {
         return 'light-theme';
     }
 
-    get isLoggedIn(): boolean {
-        // if (this.storageService.getItem(AUTH_TOKEN) != null && !this.router.url.includes('login')) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
-        return true;
-    }
-
     get isAdmin(): boolean {
         let user = this.tokenStorage.getUser();
         if(user == null) {
             return false;
         }
         if(user.loginType.toLocaleLowerCase() == 'admin'){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    get isLoggedIn(): boolean {
+        var user = this.tokenStorage.getUser();
+        if(user != null) {
             return true;
         } else {
             return false;
@@ -67,6 +67,7 @@ export class NavbarComponent {
     logout(): void {
         this.storageService.removeItem(AUTH_TOKEN);
         this.storageService.removeItem(ME);
+        this.opened = false;
         this.router.navigate(['login']);
     }
 }

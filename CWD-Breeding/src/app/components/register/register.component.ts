@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
     loading: boolean = false;
 
+    error = false;
+    errorMessage = '';
     registrationForm = new FormGroup({
         ownerFirstName: new FormControl('', Validators.required),
         ownerlastName: new FormControl('', Validators.required),
@@ -50,16 +52,13 @@ export class RegisterComponent implements OnInit {
         this.loading = true;
         this.ranchService
             .post([], this.registrationForm.getRawValue())
-            .subscribe({
-                next: () => {
-                    this.loading = false
-                },
-                error: () => {
-                    this.loading = false;
-                },
-                complete: () => {
+            .subscribe(response => {
+                error:  this.error = true;
+                        this.errorMessage = 'Failed to add ranch, check data and if account all ready exists and try again';
+                
+                complete: 
                     this.router.navigate(['confirm-registration']);
-                }
+                
             });
     }
 }

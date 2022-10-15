@@ -1,7 +1,9 @@
-
-<div class="container">
+<div class="container"id="scrollId">
   <div class="profile-img-container">
-    <img class="profile-img" [src]="deer.profileImage" alt="Profile Image">
+      <button mat-icon-button color="accent" style="width: 15px; margin-right: 5px;" (click)="changeImageBackward()"><mat-icon>arrow_back_ios</mat-icon></button>    
+      <img class="profile-img" *ngIf="!loadingImages" [src]="profileImage" alt="Profile Image">
+      <div class="profile-img spinner" *ngIf="loadingImages">  <mat-spinner color="accent" style="margin: 0 auto; margin-top: 25%" mode="indeterminate"></mat-spinner></div>
+      <button mat-icon-button color="accent" style="width: 15px;" (click)="changeImageForward()"><mat-icon>arrow_forward_ios</mat-icon></button>    
   </div>
 
   <div class="data">
@@ -25,9 +27,12 @@
   <div class="ranch">
     <h1>Ranch: {{deer?.ranch?.name}}</h1>
 
-    <h1>{{deer?.ranch?.ownerFirstName}} {{deer?.ranch?.ownerlastName}}</h1>
-
     <h1>{{deer?.ranch?.address}}<br>{{deer?.ranch?.city}}, {{deer?.ranch?.state}} {{deer?.ranch?.zipcode}}</h1>
+
+  </div>
+
+  <div class="contact">
+    <h1>{{deer?.ranch?.ownerFirstName}} {{deer?.ranch?.ownerlastName}}</h1>
 
     <h1>{{deer?.ranch?.phoneNumber}}</h1>
 

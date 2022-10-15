@@ -67,5 +67,6 @@
         <mat-error *ngIf="registrationForm.controls['zipcode'].hasError('required')">Zip Code is required.</mat-error>
     </mat-form-field>
 
-    <button class="flex-1 submit-button" mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+    <button class="flex-1 submit-button" mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+    <p style="color: red;" *ngIf="error">{{errorMessage}}</p>
 </div>

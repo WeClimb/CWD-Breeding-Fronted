@@ -3,11 +3,12 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import { Deer } from 'src/models/deer.model';
 import { DeerService } from 'src/app/services/deer.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token_storage.service';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-deer-request',
@@ -22,6 +23,10 @@ export class DeerRequestComponent implements OnInit {
 	errorMessage: string | undefined;
 	updatedPhoto: boolean = false;
 
+    gebvValidLength: boolean = true;
+
+    maxDate!: Date;
+
     profileImage: File | undefined;
     extraPhotos: File[] = [];
     video: File | undefined;
@@ -29,12 +34,12 @@ export class DeerRequestComponent implements OnInit {
     deerId: string = '';
 
     registrationForm = new FormGroup({
-        name: new FormControl('', Validators.required),
-        nadr: new FormControl('', Validators.required),
+        name: new FormControl('', [Validators.required, Validators.minLength(1)]),
+        nadr: new FormControl('', [Validators.required, Validators.minLength(1)]),
         dob: new FormControl('', Validators.required),
-        gebu: new FormControl('', [Validators.required,]),
-        codon: new FormControl('', [Validators.required]),
-        sciScore: new FormControl('', [Validators.required]),
+        gebu: new FormControl('', [Validators.required]),
+        codon: new FormControl('', [Validators.required, Validators.minLength(1), Validators.pattern('[A-Z]+')]),
+        sciScore: new FormControl('', [Validators.required, Validators.minLength(1)]),
         semenAvailable: new FormControl(true, Validators.required),
         semenCost: new FormControl(0, [Validators.required]),
         ranchId: new FormControl('', [Validators.required]),
@@ -72,6 +77,8 @@ export class DeerRequestComponent implements OnInit {
         private router: Router,
         private tokenStorage: TokenStorageService,
         ) {
+        const currentDate = new Date();
+        this.maxDate = currentDate;
         this.stepperOrientation = breakpointObserver
           .observe('(min-width: 800px)')
           .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
@@ -79,6 +86,36 @@ export class DeerRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationForm.controls['ranchId'].setValue(this.tokenStorage.getUser().id);
+    
+    this.registrationForm.controls['gebu'].valueChanges.pipe(debounceTime(400),distinctUntilChanged()).subscribe(() => this.checkGebvLength());
+  }
+
+  checkGebvLength(): void {
+    if(this.registrationForm.controls['gebu'].value != null ||  this.registrationForm.controls['gebu'].value != undefined){
+        this.gebvValidLength = false;
+        let currentValue: string = this.registrationForm.controls['gebu'].value.toString();
+
+        if(currentValue.includes('-')){
+            if(currentValue.length > 9){
+                this.registrationForm.controls['gebu'].setValue(Number(currentValue.substring(0,9)));
+                this.gebvValidLength = true;
+            } else if (currentValue.length == 9){
+                this.gebvValidLength = true;
+            } else {
+                this.gebvValidLength = false;
+            }
+        } else {
+            if(currentValue.length > 8){
+                this.registrationForm.controls['gebu'].setValue(Number(currentValue.substring(0,8)));
+                this.gebvValidLength = true;
+            } else if (currentValue.length == 8){
+                this.gebvValidLength = true;
+            } else {
+                this.gebvValidLength = false;
+
+            }
+        }
+    }
   }
 
   selectFile(event: any, mediaType: string): void {
@@ -102,14 +139,17 @@ export class DeerRequestComponent implements OnInit {
         this.selectedFile = event.target.files[0];
         switch(mediaType) {
             case 'ProfileImage': {
+                console.log('profile');
                 this.profileImage = this.selectedFile;
                break;
             }
             case 'Photo': {
+                console.log('img');
                 if(this.extraPhotos.length < 3) {
                     this.extraPhotos.push(this.selectedFile);
                 } else {
-                    this.extraPhotos[0] = this.selectedFile;
+                    this.extraPhotos.shift();
+                    this.extraPhotos.push(this.selectedFile);
                 }
                break;
             }
@@ -126,15 +166,15 @@ export class DeerRequestComponent implements OnInit {
 }
 
 submitAddDeer(): void {
+    this.loading = true;
     let deer: Deer = this.registrationForm.getRawValue();
     deer.semenCost = deer.semenCost.toString();
     deer.deerFamily = this.pedigreeForm.getRawValue();
 
     this.deerService.post(['Request-Listing'], deer).subscribe(response => {
-        complete:   console.log(response);
-        this.deerId = response.id;
-                    this.uploadFiles();
-                    this.router.navigate(['home']);
+        next:   this.deerId = response.id;
+                this.uploadFiles();
+        complete: this.router.navigate(['home']);
     });
 
 }
@@ -142,26 +182,29 @@ submitAddDeer(): void {
 uploadFiles(): void {
     if(this.profileImage != undefined) {
         this.loading = true;
-        this.deerService.uploadFile(this.selectedFile, this.deerId).subscribe(() => {
-        complete:   this.updatedPhoto = true;
-                    this.loading = false;
-        error: this.errorMessage = 'Failed to Update Photo';
-    });
-    }
-    if(this.extraPhotos.length != 0){
-        this.extraPhotos.forEach(photoFile => {
-            console.log('You Uploaded an extra photo')
+        this.deerService.uploadFile(this.profileImage, this.deerId).subscribe(() => {
+            complete:   this.updatedPhoto = true;
+                        this.uploadExtraImages();
+                        this.loading = false;
+            error: this.errorMessage = 'Failed to Update Photo';
         });
-    }
-
-    if(this.video != undefined) {
-        console.log('You Uploaded an Video')
     }
     // this.loading = true;
     // this.serviceProviderService.uploadFile(this.selectedFile, this.userService.getUser().id).subscribe(() => {
     //     this.updatedPhoto = true;
     //     this.loading = false;
     // }, () => this.errorMessage = 'Failed to Update Photo');
+    }
+
+    uploadExtraImages(): void {
+        this.extraPhotos.forEach(element => {
+            this.loading = true;
+            this.deerService.uploadExtraMedia(element, this.deerId).subscribe(() => {
+                    complete:   this.updatedPhoto = true;
+                                this.loading = false;
+                    error: this.errorMessage = 'Failed to Update Photo';
+            });
+        });
     }
 }
 

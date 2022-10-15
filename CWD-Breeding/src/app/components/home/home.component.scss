@@ -92,6 +92,7 @@ html {
     height:300px;
     max-width: 390px;
     overflow: hidden;
+    object-fit: cover;
     margin: 0 auto;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -151,6 +152,28 @@ html {
 }
 
 }
+
+
+@media (max-width:470px) {
+.card-container{
+  width: 80%;
+}
+
+.card-img {
+ width: 300px; 
+}
+
+.example-card {
+  width: 300px;
+}
+
+.search-btn {
+  margin-right: 35%;
+}
+
+}
+
+
 
 
 

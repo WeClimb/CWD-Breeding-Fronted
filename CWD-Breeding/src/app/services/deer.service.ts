@@ -39,4 +39,20 @@ export class DeerService extends AbstractService {
             options,
         );
       }
+
+      uploadExtraMedia(image: File, deerId: string): Observable<any> {
+        const formData = new FormData();
+        formData.append('image', image, image.name);
+
+        const options = {headers: new HttpHeaders({
+            enctype: 'multipart/form-data',
+            Accept: 'application/json'
+        })};
+
+        return this.http.post<string>(
+            `${this.baseUrl}${this.path}/${deerId}/Extra-Image`,
+            formData,
+            options,
+        );
+      }
 }

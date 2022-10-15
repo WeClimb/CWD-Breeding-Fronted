@@ -18,7 +18,7 @@
 
         <mat-form-field appearance="outline" class="form-field flex-1">
             <mat-label>Date of Birth</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dob" required>
+            <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate"  required>
             <mat-error *ngIf="registrationForm.controls['dob'].hasError('required')">DOB is required.</mat-error>
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -27,24 +27,31 @@
 
         <mat-form-field class="flex-1 form-field" appearance="outline">
             <mat-label>Codon</mat-label>
-            <input type="text" matInput formControlName="codon" required>
+            <input type="text" matInput formControlName="codon" [minLength]="2" [maxlength]="2" required oninput="this.value = this.value.toUpperCase()">
             <mat-error *ngIf="registrationForm.controls['codon'].hasError('required')">Codon is required.</mat-error>
+            <mat-error *ngIf="registrationForm.controls['codon'].hasError('minLength')">Codon must be 2 chacters.</mat-error>
+            <mat-error *ngIf="registrationForm.controls['codon'].hasError('maxLength')">Codon must be 2 characters.</mat-error>
+            <mat-error *ngIf="registrationForm.controls['codon'].hasError('pattern')">Letters only Example: GS</mat-error>
         </mat-form-field>
 
         <mat-form-field class="flex-1 form-field" appearance="outline">
             <mat-label>GEBV</mat-label>
-            <input type="number" [roundingValue]="3" appDecimalPlaces matInput formControlName="gebu" required>
-            <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBU is required.</mat-error>
+            <input type="number" [min]="-.999999" [max]=".999999" matInput formControlName="gebu" required>
+            <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBV is required.</mat-error>
+            <mat-error *ngIf="registrationForm.controls['gebu'].hasError('max')">GEBV must be between -.999999 and .999999.</mat-error>
         </mat-form-field>
 
+        <p class="error" *ngIf="!gebvValidLength">GEBV must have 6 decimal places</p>
+
         <mat-form-field class="flex-1 form-field" appearance="outline">
-            <mat-label>YouTube Video Link</mat-label>
+            <mat-label>Buck Video</mat-label>     
+            <mat-hint>YouTube Link Only</mat-hint>
             <input type="text" matInput formControlName="videoLink">
         </mat-form-field>
 
         <mat-form-field class="form-field flex-1" appearance="outline">
             <mat-label>SCI Score</mat-label>
-            <input matInput formControlName="sciScore" required type="number" [roundingValue]="3" appDecimalPlaces>
+            <input matInput formControlName="sciScore" required type="number" [roundingValue]="0" appDecimalPlaces>
             <mat-error *ngIf="registrationForm.controls['sciScore'].hasError('required')">SCI Score is required.</mat-error>
         </mat-form-field>
 
@@ -59,7 +66,7 @@
       </form>
 
       <div class="next-button">
-        <button mat-raised-button color="accent" matStepperNext>Next</button>
+        <button mat-raised-button [disabled]="!registrationForm.valid || !gebvValidLength" color="accent" matStepperNext>Next</button>
       </div>
       <div style="text-align: center; margin-top: 20px;" >
         <p class="warning">Please fill in all fields<br>to proceed to next step of form</p>
@@ -69,6 +76,7 @@
 
     <mat-step [stepControl]="pedigreeForm" label="Please Fill out Sire Pedigree">
       <form [formGroup]="pedigreeForm">
+        <h1 *ngIf="this.registrationForm.controls['name'].value" style="text-align: center;">Enter Sire record for {{this.registrationForm.controls['name'].value}}</h1>
 
         <div class="container">
 
@@ -132,7 +140,7 @@
     <mat-step [stepControl]="pedigreeForm" label="Please Fill out Dam Pedigree">
 
         <form [formGroup]="pedigreeForm">
-
+            <h1 *ngIf="this.registrationForm.controls['name'].value" style="text-align: center;">Enter Dam record for {{this.registrationForm.controls['name'].value}}</h1>
             <div class="container">
 
                 <div class="level-one-container">
@@ -213,7 +221,7 @@
 
             <mat-divider class="mat-divider-upload"></mat-divider>
 
-            <!-- <div class="upload-div">
+            <div class="upload-div">
                 <h3>Upload up to 3 photos</h3>
                 <mat-divider style="margin-bottom: 10px;"></mat-divider>
                 <div *ngIf="!loading">
@@ -225,7 +233,7 @@
                     <mat-divider></mat-divider>
                     <p *ngFor="let photo of extraPhotos">{{photo.name}}</p>
                 </div>
-            </div> -->
+            </div>
 
             <mat-divider class="mat-divider-upload"></mat-divider>
 
@@ -245,10 +253,11 @@
     </mat-step>
 
     <mat-step [stepControl]="confirmForm" label="Confirm Information is Correct">
-      <form class="review-stepper"[formGroup]="confirmForm">
+      <form *ngIf="!loading" class="review-stepper"[formGroup]="confirmForm">
             <h1>Please Review all forms</h1>
             <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
             <button mat-raised-button style="margin-left: 10px;" color="accent" (click)="submitAddDeer()" [disabled]="!this.confirmForm.controls['dataCorrect'].value">Sumbit</button>
       </form>
+      <mat-spinner *ngIf="loading" mode="indeterminate" class="margin-auto"></mat-spinner>
     </mat-step>
   </mat-stepper>

@@ -1,5 +1,11 @@
 
-
+h1 {
+  font-family: 'montese', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  letter-spacing: 2px;
+  color: black;
+  font-size: 18pt;
+  text-decoration: underline;
+}
 
 * {
     background-color: #f1f1f1;
@@ -131,6 +137,11 @@
     margin-left: 35%;
   }
 
+  .error{
+    font-size: 10pt;
+    color: red;
+    text-align: center;
+  }
 
   @media screen and (max-width: 500px) {
 

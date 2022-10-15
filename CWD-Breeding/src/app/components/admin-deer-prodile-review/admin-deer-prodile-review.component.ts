@@ -16,9 +16,15 @@ export class AdminDeerProdileReviewComponent implements OnInit {
   id!: string;
   deer!: Deer;
 
+  currentImageIndex: number = 0;
+  maxIndex: number = 0;
+
   loadingDeny: boolean = false;
 
   profileImage!: any;
+  images: any[] = [];
+
+  loadingImages: boolean = false;
   
   videoLink!: any;
   validVideo: boolean = false;
@@ -38,11 +44,20 @@ export class AdminDeerProdileReviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setToTop();
     this.route.params.subscribe(x => {
       this.id = x['id'];
     });
 
     this.getDeer();
+    this.getProfileImage();
+}
+
+setToTop() {
+  const element = document.querySelector('#scrollId');
+  if(element != null){
+    element.scrollIntoView();
+  }
 }
 
 getDeer() {
@@ -58,10 +73,43 @@ getDeer() {
                   
   });
 }
+
+changeImageForward(): void {
+  if(this.currentImageIndex < this.maxIndex){
+    this.currentImageIndex++;
+    this.profileImage = this.images[this.currentImageIndex];
+  } else {
+    this.currentImageIndex = 0;
+    this.profileImage = this.images[this.currentImageIndex];
+  }
+}
+
+changeImageBackward(): void {
+  if(this.currentImageIndex == 0){
+    this.currentImageIndex = this.maxIndex;
+    this.profileImage = this.images[this.currentImageIndex];
+  } else {
+    this.currentImageIndex--;
+    this.profileImage = this.images[this.currentImageIndex];
+  }
+}
+
 getProfileImage(): void {
   let map = new Map();
   this.deerService.get([this.id, 'ProfileImage'], map).subscribe(response => {
-      complete: this.profileImage = response.data.imageData;
+      complete: this.images[0] = response.data.imageData;
+                this.profileImage = this.images[0];
+                this.getImages();
+  });
+}
+
+getImages(): void {
+  let map = new Map();
+  this.deerService.get([this.id, 'Images'], map).subscribe(response => {
+      complete: response.data.forEach((element:any) => {
+                this.maxIndex++;
+                this.images.push(element.imageData);
+      });
   });
 }
 

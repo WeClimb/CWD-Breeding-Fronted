@@ -81,9 +81,14 @@ export class HomeComponent implements OnInit {
     }
 
     isLoggedIn(): boolean {
-        let user = this.tokenStorage.getUser() 
+        let user = this.tokenStorage.getUser();
+
         if(user != null) {
-            this.userName = user.ownerFirstName + " " + user.ownerlastName;
+            if(user.ownerFirstName == undefined || user.ownerlastName == undefined){
+                this.userName = "to CWDBreeding.com"
+            } else {
+                this.userName = user.ownerFirstName + " " + user.ownerlastName;
+            }
             return true;
         } else {
             return false;
