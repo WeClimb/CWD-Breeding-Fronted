@@ -13,6 +13,8 @@ import { AdminHomeComponent } from './components/admin-home/admin-home.component
 import { PendingReviewsComponent } from './components/pending-reviews/pending-reviews.component';
 import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile-review/admin-deer-prodile-review.component';
 import { DeerSubmissionConfirmationComponent } from './components/deer-submission-confirmation/deer-submission-confirmation.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
 
 const routes: Routes = [
   {
@@ -57,6 +59,14 @@ const routes: Routes = [
   {
     path: 'admin-login',
     component: AdminLoginComponent,
+  },
+  {
+    path: 'confirm-forgot-password',
+    component: ForgotPasswordConfirmComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
   {
     path: 'deer-request-confirmation',

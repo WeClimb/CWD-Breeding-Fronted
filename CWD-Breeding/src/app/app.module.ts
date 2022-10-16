@@ -56,6 +56,8 @@ import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile
 import { DeerEditDialogComponent } from './components/admin-deer-prodile-review/Dialogs/deer-edit-dialog/deer-edit-dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DeerSubmissionConfirmationComponent } from './components/deer-submission-confirmation/deer-submission-confirmation.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { DeerSubmissionConfirmationComponent } from './components/deer-submissio
     MatchComponent,
     DeerEditDialogComponent,
     FooterComponent,
-    DeerSubmissionConfirmationComponent
+    DeerSubmissionConfirmationComponent,
+    ForgotPasswordComponent,
+    ForgotPasswordConfirmComponent
   ],
   imports: [
     AppRoutingModule,
