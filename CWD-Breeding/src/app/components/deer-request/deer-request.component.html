@@ -256,7 +256,7 @@
       <form *ngIf="!loading" class="review-stepper"[formGroup]="confirmForm">
             <h1>Please Review all forms</h1>
             <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
-            <button mat-raised-button style="margin-left: 10px;" color="accent" (click)="submitAddDeer()" [disabled]="!this.confirmForm.controls['dataCorrect'].value">Sumbit</button>
+            <button mat-raised-button style="margin-left: 10px;" color="accent" (click)="submitAddDeer()" [disabled]="!this.confirmForm.controls['dataCorrect'].value">Submit</button>
       </form>
       <mat-spinner *ngIf="loading" mode="indeterminate" class="margin-auto"></mat-spinner>
     </mat-step>

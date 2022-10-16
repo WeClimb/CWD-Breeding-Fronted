@@ -1,3 +1,4 @@
+<div id="scrollId"><mat-divider></mat-divider></div>
 <div class="admin-btn-container">
   <button class="admin-btn" mat-raised-button color="accent" (click)="approve()">Approve</button>
   <button class="admin-btn" mat-raised-button color="primary" (click)="openEditDeerDialog()">Edit</button>
@@ -17,7 +18,7 @@
 
 <mat-divider class="btn-divider"></mat-divider>
 
-<div class="container"id="scrollId">
+<div class="container">
   <div class="profile-img-container">
       <button mat-icon-button color="accent" style="width: 15px; margin-right: 5px;" (click)="changeImageBackward()"><mat-icon>arrow_back_ios</mat-icon></button>    
       <img class="profile-img" *ngIf="!loadingImages" [src]="profileImage" alt="Profile Image">

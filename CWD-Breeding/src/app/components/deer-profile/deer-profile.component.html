@@ -1,4 +1,5 @@
-<div class="container"id="scrollId">
+<div id="scrollId"><mat-divider></mat-divider></div>
+<div class="container">
   <div class="profile-img-container">
       <button mat-icon-button color="accent" style="width: 15px; margin-right: 5px;" (click)="changeImageBackward()"><mat-icon>arrow_back_ios</mat-icon></button>    
       <img class="profile-img" *ngIf="!loadingImages" [src]="profileImage" alt="Profile Image">
@@ -42,12 +43,6 @@
 
   </div>
 
-  <div *ngIf="validVideo" class="video-container">
-    <div class="video">
-      <iframe  [src]="videoLink" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreenallowfullscreen></iframe>
-    </div>
-  </div>
-
   <div class="pedigree-container">
     <h1 class="pedigree-title" style="font-size: 20pt;">{{deer?.name}}</h1>
     <div class="lev-one-sire"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelOneSire}}</p></div>
@@ -66,7 +61,13 @@
     <div class="lev-three-damC"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamC}}</p></div>
     <div class="lev-three-sireD"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireD}}</p></div>
     <div class="lev-three-damD"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamD}}</p></div>
-
-
   </div>
+
+  
+  <div *ngIf="validVideo" class="video-container">
+    <div class="video">
+      <iframe  [src]="videoLink" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreenallowfullscreen></iframe>
+    </div>
+  </div>
+  
 </div>

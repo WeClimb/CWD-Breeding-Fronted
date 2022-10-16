@@ -174,7 +174,6 @@ submitAddDeer(): void {
     this.deerService.post(['Request-Listing'], deer).subscribe(response => {
         next:   this.deerId = response.id;
                 this.uploadFiles();
-        complete: this.router.navigate(['home']);
     });
 
 }
@@ -184,8 +183,11 @@ uploadFiles(): void {
         this.loading = true;
         this.deerService.uploadFile(this.profileImage, this.deerId).subscribe(() => {
             complete:   this.updatedPhoto = true;
-                        this.uploadExtraImages();
-                        this.loading = false;
+                        if(this.extraPhotos.length > 0){
+                            this.uploadExtraImages();
+                        } else {
+                            this.router.navigate(['deer-request-confirmation']);
+                        }
             error: this.errorMessage = 'Failed to Update Photo';
         });
     }
@@ -197,11 +199,18 @@ uploadFiles(): void {
     }
 
     uploadExtraImages(): void {
+        let extraPhotosCount = this.extraPhotos.length;
+        let uploadCount = 0;
+
         this.extraPhotos.forEach(element => {
             this.loading = true;
-            this.deerService.uploadExtraMedia(element, this.deerId).subscribe(() => {
-                    complete:   this.updatedPhoto = true;
-                                this.loading = false;
+            this.deerService.uploadExtraMedia(element, this.deerId).subscribe((response) => {
+                    next:   uploadCount++;
+                            this.updatedPhoto = true;
+                    complete: if(uploadCount == extraPhotosCount){
+                        this.loading = false;
+                        this.router.navigate(['deer-request-confirmation']);
+                    }
                     error: this.errorMessage = 'Failed to Update Photo';
             });
         });

@@ -116,7 +116,7 @@ getImages(): void {
 
 approve(): void {
   this.deer.isApproved = true;
-  this.deerService.put([this.id], (this.deer)).subscribe(() => {
+  this.deerService.put(["Approve"], (this.deer)).subscribe(() => {
     complete: this.router.navigate(['admin-home']);
   });
 }

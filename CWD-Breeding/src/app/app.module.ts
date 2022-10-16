@@ -55,6 +55,7 @@ import { PendingReviewsComponent } from './components/pending-reviews/pending-re
 import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile-review/admin-deer-prodile-review.component';
 import { DeerEditDialogComponent } from './components/admin-deer-prodile-review/Dialogs/deer-edit-dialog/deer-edit-dialog.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { DeerSubmissionConfirmationComponent } from './components/deer-submission-confirmation/deer-submission-confirmation.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { FooterComponent } from './components/footer/footer.component';
     DeerProfileComponent,
     MatchComponent,
     DeerEditDialogComponent,
-    FooterComponent
+    FooterComponent,
+    DeerSubmissionConfirmationComponent
   ],
   imports: [
     AppRoutingModule,
