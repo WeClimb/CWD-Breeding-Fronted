@@ -20,6 +20,7 @@ export class AdminDeerProdileReviewComponent implements OnInit {
   maxIndex: number = 0;
 
   loadingDeny: boolean = false;
+  loadingApproval: boolean = false;
 
   profileImage!: any;
   images: any[] = [];
@@ -115,6 +116,7 @@ getImages(): void {
 
 
 approve(): void {
+  this.loadingApproval = true;
   this.deer.isApproved = true;
   this.deerService.put(["Approve"], (this.deer)).subscribe(() => {
     complete: this.router.navigate(['admin-home']);
