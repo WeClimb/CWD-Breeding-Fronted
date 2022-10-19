@@ -16,7 +16,10 @@ export class LoginService {
     get baseUrl(): string {
         if(window.location.href.toLowerCase().includes('qacwdbreeding.z13.web.core.windows.net')){
             return 'https://cwdbreedingapiqa.azurewebsites.net';
-        } else {
+        } else if(window.location.href.toLowerCase().includes('cwdbreeding.z13.web.core.windows.net')){
+            return 'https://cwdbreeding.azurewebsites.net'
+        }
+        else {
             return 'https://localhost:7145';
         }
     }

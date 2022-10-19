@@ -238,7 +238,7 @@
             <mat-divider class="mat-divider-upload"></mat-divider>
 
             <div *ngIf="loading">
-                <mat-spinner class="spinner" [diameter]="50"></mat-spinner>
+                <mat-spinner color="accent" class="spinner" [diameter]="50"></mat-spinner>
             </div>
 
             <div *ngIf="errorMessage != undefined">
@@ -258,6 +258,6 @@
             <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
             <button mat-raised-button style="margin-left: 10px;" color="accent" (click)="submitAddDeer()" [disabled]="!this.confirmForm.controls['dataCorrect'].value">Submit</button>
       </form>
-      <mat-spinner *ngIf="loading" mode="indeterminate" class="margin-auto"></mat-spinner>
+      <mat-spinner color="accent" *ngIf="loading" mode="indeterminate" class="margin-auto"></mat-spinner>
     </mat-step>
   </mat-stepper>

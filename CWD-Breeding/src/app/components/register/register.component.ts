@@ -17,15 +17,15 @@ export class RegisterComponent implements OnInit {
     error = false;
     errorMessage = '';
     registrationForm = new FormGroup({
-        ownerFirstName: new FormControl('', Validators.required),
-        ownerlastName: new FormControl('', Validators.required),
+        ownerFirstName: new FormControl('', [Validators.required, Validators.minLength(1)]),
+        ownerlastName: new FormControl('', [Validators.required, Validators.minLength(1)]),
         email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(EMAIL_REGEX),]),
-        city: new FormControl('', [Validators.required,]),
+        city: new FormControl('', [Validators.required, Validators.minLength(1)]),
         state: new FormControl('', [Validators.required]),
-        address: new FormControl('', [Validators.required]),
+        address: new FormControl('',[Validators.required, Validators.minLength(1)] ),
         zipcode: new FormControl('', [Validators.required, Validators.maxLength(5)]),
         phoneNumber: new FormControl('', [Validators.required]),
-        name: new FormControl('', [Validators.required]),
+        name: new FormControl('', [Validators.required, Validators.minLength(1)]),
         website: new FormControl(''),
     });
 

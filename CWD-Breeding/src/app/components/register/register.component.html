@@ -67,6 +67,7 @@
         <mat-error *ngIf="registrationForm.controls['zipcode'].hasError('required')">Zip Code is required.</mat-error>
     </mat-form-field>
 
-    <button class="flex-1 submit-button" mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+    <button *ngIf="!loading" [disabled]="!registrationForm.valid" class="flex-1 submit-button" mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+    <mat-spinner *ngIf="loading" style="margin: 0 auto;" mode="indeterminate" color="accent"></mat-spinner>
     <p style="color: red;" *ngIf="error">{{errorMessage}}</p>
 </div>

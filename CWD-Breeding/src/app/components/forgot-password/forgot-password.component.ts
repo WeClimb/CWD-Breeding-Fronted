@@ -35,7 +35,8 @@ export class ForgotPasswordComponent implements OnInit {
         .subscribe(response => {      
             complete: 
                 this.router.navigate(['confirm-forgot-password']);
-            
+            error: 
+              this.router.navigate(['confirm-forgot-password']);
         });
 }
 }

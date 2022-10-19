@@ -1,10 +1,10 @@
 <div id="scrollId"><mat-divider></mat-divider></div>
 <div class="admin-btn-container">
   <button *ngIf="!loadingApproval"  class="admin-btn" mat-raised-button color="accent" (click)="approve()">Approve</button>
-  <mat-spinner *ngIf="loadingApproval" mode="indeterminate"></mat-spinner>
+  <mat-spinner *ngIf="loadingApproval" mode="indeterminate" color="accent"></mat-spinner>
   <button class="admin-btn" mat-raised-button color="primary" (click)="openEditDeerDialog()">Edit</button>
   <button *ngIf="!loadingDeny" class="admin-btn" mat-raised-button color="warn" (click)="openDenialInput()">Deny</button>
-  <mat-spinner *ngIf="loadingDeny" mode="indeterminate"></mat-spinner>
+  <mat-spinner *ngIf="loadingDeny" mode="indeterminate" color="accent"></mat-spinner>
 </div>
 
 <form [formGroup]="denialForm" *ngIf="denying" class="admin-btn-container">
