@@ -1,7 +1,7 @@
-    <!-- <header class="masthead text-white text-center"></header> -->
+<div class="background">
 <div class="action-container">
     <div class="filtering-container">
-      <h1 style="margin: 20px;">Search</h1>
+      <h1 style="margin: 20px; color: orange;">Search</h1>
       <form [formGroup]="filterForm">
 
         <mat-form-field class="form-field" appearance="outline">
@@ -75,7 +75,7 @@
     <div *ngFor="let deer of deer">
     <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>{{deer.name}}</mat-card-title>
+          <mat-card-title style="color: orange;">{{deer.name}}</mat-card-title>
           <mat-card-subtitle>{{deer.ranch?.name}}</mat-card-subtitle>
         </mat-card-header>
         <mat-divider inset></mat-divider>
@@ -92,3 +92,4 @@
       </mat-card>
     </div>
   </div>
+</div>
