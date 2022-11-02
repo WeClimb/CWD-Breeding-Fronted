@@ -1,263 +1,223 @@
-  <mat-stepper
-    class="example-stepper"
-    color="accent"
-    [orientation]="(stepperOrientation | async)!">
-    <mat-step [stepControl]="registrationForm" label="Please Fill Out Form...">
-      <form [formGroup]="registrationForm" class="flex-column">
-        <mat-form-field class="form-field flex-1" appearance="outline">
-            <mat-label>Deer Name</mat-label>
-            <input type="text" matInput formControlName="name" required >
-            <mat-error *ngIf="registrationForm.controls['name'].hasError('required')">Deer name is required.</mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="form-field flex-1" appearance="outline">
-            <mat-label>NADR</mat-label>
-            <input type="text" matInput formControlName="nadr" required >
-            <mat-error *ngIf="registrationForm.controls['nadr'].hasError('required')">NADR is required.</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="form-field flex-1">
-            <mat-label>Date of Birth</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate"  required>
-            <mat-error *ngIf="registrationForm.controls['dob'].hasError('required')">DOB is required.</mat-error>
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-
-        <mat-form-field class="flex-1 form-field" appearance="outline">
-            <mat-label>Codon</mat-label>
-            <input type="text" matInput formControlName="codon" [minLength]="2" [maxlength]="2" required oninput="this.value = this.value.toUpperCase()">
-            <mat-error *ngIf="registrationForm.controls['codon'].hasError('required')">Codon is required.</mat-error>
-            <mat-error *ngIf="registrationForm.controls['codon'].hasError('minLength')">Codon must be 2 chacters.</mat-error>
-            <mat-error *ngIf="registrationForm.controls['codon'].hasError('maxLength')">Codon must be 2 characters.</mat-error>
-            <mat-error *ngIf="registrationForm.controls['codon'].hasError('pattern')">Letters only Example: GS</mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="flex-1 form-field" appearance="outline">
-            <mat-label>GEBV</mat-label>
-            <input type="number" [min]="-.999999" [max]=".999999" matInput formControlName="gebu" required>
-            <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBV is required.</mat-error>
-            <mat-error *ngIf="registrationForm.controls['gebu'].hasError('max')">GEBV must be between -.999999 and .999999.</mat-error>
-        </mat-form-field>
-
-        <p class="error" *ngIf="!gebvValidLength">GEBV must have 6 decimal places</p>
-
-        <mat-form-field class="flex-1 form-field" appearance="outline">
-            <mat-label>Buck Video</mat-label>     
-            <mat-hint>YouTube Link Only</mat-hint>
-            <input type="text" matInput formControlName="videoLink">
-        </mat-form-field>
-
-        <mat-form-field class="form-field flex-1" appearance="outline">
-            <mat-label>SCI Score</mat-label>
-            <input matInput formControlName="sciScore" required type="number" [roundingValue]="0" appDecimalPlaces>
-            <mat-error *ngIf="registrationForm.controls['sciScore'].hasError('required')">SCI Score is required.</mat-error>
-        </mat-form-field>
-
-        <mat-checkbox class="form-field" formControlName="semenAvailable">Semen Available?</mat-checkbox>
-
-
-        <mat-form-field *ngIf="registrationForm.controls['semenAvailable'].value" class="flex-1 form-field" appearance="outline">
-            <mat-label>Semen Cost</mat-label>
-            <input matInput formControlName="semenCost" required type="number" [roundingValue]="2" appDecimalPlaces>
-            <mat-error *ngIf="registrationForm.controls['semenCost'].hasError('required')">Address is required.</mat-error>
-        </mat-form-field>
-      </form>
-
-      <div class="next-button">
-        <button mat-raised-button [disabled]="!registrationForm.valid || !gebvValidLength" color="accent" matStepperNext>Next</button>
-      </div>
-      <div style="text-align: center; margin-top: 20px;" >
-        <p class="warning">Please fill in all fields<br>to proceed to next step of form</p>
-      </div>
-
-    </mat-step>
-
-    <mat-step [stepControl]="pedigreeForm" label="Please Fill out Sire Pedigree">
-      <form [formGroup]="pedigreeForm">
-        <h1 *ngIf="this.registrationForm.controls['name'].value" style="text-align: center;">Enter Sire record for {{this.registrationForm.controls['name'].value}}</h1>
-
-        <div class="container">
-
-            <div class="level-one-container">
-                <mat-form-field appearance="outline" class="pedigree-form-field"  >
-                    <mat-label>Sire</mat-label>
-                    <input type="text" matInput formControlName="levelOneSire">
-                </mat-form-field>
-            </div>
-
-            <div class="level-two-container">
-                <div class="stack-pedigree">
-                    <mat-form-field  class="level-2-sire pedigree-form-field"   appearance="outline" >
-                        <mat-label>Sire</mat-label>
-                        <input type="text" matInput formControlName="levelTwoSireA">
-                    </mat-form-field>
-
-                    <mat-form-field class="level-2-dam pedigree-form-field"  appearance="outline">
-                        <mat-label>Dam</mat-label>
-                        <input type="text" matInput formControlName="levelTwoDamA">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="level-three-top-container">
-                <div class="stack-pedigree">
-                    <mat-form-field appearance="outline" class="pedigree-form-field" >
-                        <mat-label>Sire</mat-label>
-                        <input type="text" matInput formControlName="levelThreeSireA" >
-                    </mat-form-field>
-
-                    <mat-form-field  appearance="outline" class="pedigree-form-field">
-                        <mat-label>Dam</mat-label>
-                        <input type="text" matInput formControlName="levelThreeDamA" >
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="level-three-bottom-container">
-                <div class="stack-pedigree">
-                    <mat-form-field appearance="outline" class="pedigree-form-field" >
-                        <mat-label>Sire</mat-label>
-                        <input type="text" matInput formControlName="levelThreeSireB" >
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="pedigree-form-field">
-                        <mat-label>Dam</mat-label>
-                        <input type="text" matInput formControlName="levelThreeDamB" >
-                    </mat-form-field>
-                </div>
-            </div>
+  <div class="background">
+    <div class="spacer"></div>
+      <mat-stepper
+        class="example-stepper"
+        color="accent"
+        [orientation]="(stepperOrientation | async)!">
+        <mat-step [stepControl]="registrationForm" label="Please Fill Out Form...">
+          <form [formGroup]="registrationForm" class="flex-column">
+            <mat-form-field class="form-field flex-1" appearance="outline">
+                <mat-label>Deer Name</mat-label>
+                <input type="text" matInput formControlName="name" required >
+                <mat-error *ngIf="registrationForm.controls['name'].hasError('required')">Deer name is required.</mat-error>
+            </mat-form-field>
+            <mat-form-field class="form-field flex-1" appearance="outline">
+                <mat-label>NADR</mat-label>
+                <input type="text" matInput formControlName="nadr" required >
+                <mat-error *ngIf="registrationForm.controls['nadr'].hasError('required')">NADR is required.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field flex-1">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dob" [max]="maxDate"  required>
+                <mat-error *ngIf="registrationForm.controls['dob'].hasError('required')">DOB is required.</mat-error>
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            <mat-form-field class="flex-1 form-field" appearance="outline">
+                <mat-label>Codon</mat-label>
+                <input type="text" matInput formControlName="codon" [minLength]="2" [maxlength]="2" required oninput="this.value = this.value.toUpperCase()">
+                <mat-error *ngIf="registrationForm.controls['codon'].hasError('required')">Codon is required.</mat-error>
+                <mat-error *ngIf="registrationForm.controls['codon'].hasError('minLength')">Codon must be 2 chacters.</mat-error>
+                <mat-error *ngIf="registrationForm.controls['codon'].hasError('maxLength')">Codon must be 2 characters.</mat-error>
+                <mat-error *ngIf="registrationForm.controls['codon'].hasError('pattern')">Letters only Example: GS</mat-error>
+            </mat-form-field>
+            <mat-form-field class="flex-1 form-field" appearance="outline">
+                <mat-label>GEBV</mat-label>
+                <input type="number" [min]="-.999999" [max]=".999999" matInput formControlName="gebu" required>
+                <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBV is required.</mat-error>
+                <mat-error *ngIf="registrationForm.controls['gebu'].hasError('max')">GEBV must be between -.999999 and .999999.</mat-error>
+            </mat-form-field>
+            <p class="error" *ngIf="!gebvValidLength">GEBV must have 6 decimal places</p>
+            <mat-form-field class="flex-1 form-field" appearance="outline">
+                <mat-label>Buck Video</mat-label>
+                <mat-hint>YouTube Link Only</mat-hint>
+                <input type="text" matInput formControlName="videoLink">
+            </mat-form-field>
+            <mat-form-field class="form-field flex-1" appearance="outline">
+                <mat-label>SCI Score</mat-label>
+                <input matInput formControlName="sciScore" required type="number" [roundingValue]="0" appDecimalPlaces>
+                <mat-error *ngIf="registrationForm.controls['sciScore'].hasError('required')">SCI Score is required.</mat-error>
+            </mat-form-field>
+            <mat-checkbox class="form-field" formControlName="semenAvailable">Semen Available?</mat-checkbox>
+            <mat-form-field *ngIf="registrationForm.controls['semenAvailable'].value" class="flex-1 form-field" appearance="outline">
+                <mat-label>Semen Cost</mat-label>
+                <input matInput formControlName="semenCost" required type="number" [roundingValue]="2" appDecimalPlaces>
+                <mat-error *ngIf="registrationForm.controls['semenCost'].hasError('required')">Address is required.</mat-error>
+            </mat-form-field>
+          </form>
+          <div class="next-button">
+            <button mat-raised-button [disabled]="!registrationForm.valid || !gebvValidLength" color="accent" matStepperNext>Next</button>
           </div>
-    </form>
-        <div class="pedigree-container">
-            <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
-            <button mat-raised-button color="accent" matStepperNext>Next</button>
+          <div style="text-align: center; margin-top: 20px;" >
+            <p class="warning">Please fill in all fields<br>to proceed to next step of form</p>
           </div>
-
-    </mat-step>
-
-    <mat-step [stepControl]="pedigreeForm" label="Please Fill out Dam Pedigree">
-
-        <form [formGroup]="pedigreeForm">
-            <h1 *ngIf="this.registrationForm.controls['name'].value" style="text-align: center;">Enter Dam record for {{this.registrationForm.controls['name'].value}}</h1>
+        </mat-step>
+        <mat-step [stepControl]="pedigreeForm" label="Please Fill out Sire Pedigree">
+          <form [formGroup]="pedigreeForm">
+            <h1 *ngIf="this.registrationForm.controls['name'].value" style="text-align: center;">Enter Sire record for {{this.registrationForm.controls['name'].value}}</h1>
             <div class="container">
-
                 <div class="level-one-container">
-                    <mat-form-field  appearance="outline" class="pedigree-form-field" >
-                        <mat-label>Dam</mat-label>
-                        <input type="text" matInput formControlName="levelOneDam">
+                    <mat-form-field appearance="outline" class="pedigree-form-field"  >
+                        <mat-label>Sire</mat-label>
+                        <input type="text" matInput formControlName="levelOneSire">
                     </mat-form-field>
                 </div>
-
                 <div class="level-two-container">
                     <div class="stack-pedigree">
-                        <mat-form-field  appearance="outline" class="pedigree-form-field">
+                        <mat-form-field  class="level-2-sire pedigree-form-field"   appearance="outline" >
                             <mat-label>Sire</mat-label>
-                            <input type="text" matInput formControlName="levelTwoSireB">
+                            <input type="text" matInput formControlName="levelTwoSireA">
                         </mat-form-field>
-
-                        <mat-form-field  appearance="outline" class="pedigree-form-field">
+                        <mat-form-field class="level-2-dam pedigree-form-field"  appearance="outline">
                             <mat-label>Dam</mat-label>
-                            <input type="text" matInput formControlName="levelTwoDamB">
+                            <input type="text" matInput formControlName="levelTwoDamA">
                         </mat-form-field>
                     </div>
                 </div>
-
                 <div class="level-three-top-container">
                     <div class="stack-pedigree">
-                        <mat-form-field  appearance="outline" class="pedigree-form-field" >
+                        <mat-form-field appearance="outline" class="pedigree-form-field" >
                             <mat-label>Sire</mat-label>
-                            <input type="text" matInput formControlName="levelThreeSireC">
+                            <input type="text" matInput formControlName="levelThreeSireA" >
                         </mat-form-field>
-
-                        <mat-form-field   appearance="outline" class="pedigree-form-field">
+                        <mat-form-field  appearance="outline" class="pedigree-form-field">
                             <mat-label>Dam</mat-label>
-                            <input type="text" matInput formControlName="levelThreeDamC">
+                            <input type="text" matInput formControlName="levelThreeDamA" >
                         </mat-form-field>
                     </div>
                 </div>
-
                 <div class="level-three-bottom-container">
                     <div class="stack-pedigree">
-                        <mat-form-field  appearance="outline" class="pedigree-form-field" >
+                        <mat-form-field appearance="outline" class="pedigree-form-field" >
                             <mat-label>Sire</mat-label>
-                            <input type="text" matInput formControlName="levelThreeSireD">
+                            <input type="text" matInput formControlName="levelThreeSireB" >
                         </mat-form-field>
-
                         <mat-form-field appearance="outline" class="pedigree-form-field">
                             <mat-label>Dam</mat-label>
-                            <input type="text" matInput formControlName="levelThreeDamD">
+                            <input type="text" matInput formControlName="levelThreeDamB" >
                         </mat-form-field>
                     </div>
                 </div>
               </div>
         </form>
-
-        <div class="pedigree-container">
-            <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
-            <button mat-raised-button color="accent" matStepperNext>Next</button>
-        </div>
-      </mat-step>
-
-
-    <mat-step label="Upload Media of your Deer">
-        <div class="file-upload-container">
-            <div class="upload-div">
-                <h3>Choose a Profile Image for Deer</h3>
-                <mat-divider style="margin-bottom: 10px;"></mat-divider>
-                <div *ngIf="!loading">
-                    <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'ProfileImage')" />
-                </div>
-
-                <div *ngIf="profileImage != undefined" class="uploaded-files-container">
-                    <h5>Uploaded Profile Picture</h5>
-                    <mat-divider></mat-divider>
-                    <p>{{profileImage.name}}</p>
-                </div>
-                <p style="color: red; margin-top: 10px; margin-bottom: 10px;">*Must Choose a Profile Image</p>
-
+            <div class="pedigree-container">
+                <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
+                <button mat-raised-button color="accent" matStepperNext>Next</button>
+              </div>
+        </mat-step>
+        <mat-step [stepControl]="pedigreeForm" label="Please Fill out Dam Pedigree">
+            <form [formGroup]="pedigreeForm">
+                <h1 *ngIf="this.registrationForm.controls['name'].value" style="text-align: center;">Enter Dam record for {{this.registrationForm.controls['name'].value}}</h1>
+                <div class="container">
+                    <div class="level-one-container">
+                        <mat-form-field  appearance="outline" class="pedigree-form-field" >
+                            <mat-label>Dam</mat-label>
+                            <input type="text" matInput formControlName="levelOneDam">
+                        </mat-form-field>
+                    </div>
+                    <div class="level-two-container">
+                        <div class="stack-pedigree">
+                            <mat-form-field  appearance="outline" class="pedigree-form-field">
+                                <mat-label>Sire</mat-label>
+                                <input type="text" matInput formControlName="levelTwoSireB">
+                            </mat-form-field>
+                            <mat-form-field  appearance="outline" class="pedigree-form-field">
+                                <mat-label>Dam</mat-label>
+                                <input type="text" matInput formControlName="levelTwoDamB">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="level-three-top-container">
+                        <div class="stack-pedigree">
+                            <mat-form-field  appearance="outline" class="pedigree-form-field" >
+                                <mat-label>Sire</mat-label>
+                                <input type="text" matInput formControlName="levelThreeSireC">
+                            </mat-form-field>
+                            <mat-form-field   appearance="outline" class="pedigree-form-field">
+                                <mat-label>Dam</mat-label>
+                                <input type="text" matInput formControlName="levelThreeDamC">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="level-three-bottom-container">
+                        <div class="stack-pedigree">
+                            <mat-form-field  appearance="outline" class="pedigree-form-field" >
+                                <mat-label>Sire</mat-label>
+                                <input type="text" matInput formControlName="levelThreeSireD">
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="pedigree-form-field">
+                                <mat-label>Dam</mat-label>
+                                <input type="text" matInput formControlName="levelThreeDamD">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                  </div>
+            </form>
+            <div class="pedigree-container">
+                <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
+                <button mat-raised-button color="accent" matStepperNext>Next</button>
             </div>
-
-            <mat-divider class="mat-divider-upload"></mat-divider>
-
-            <div class="upload-div">
-                <h3>Upload up to 3 photos</h3>
-                <mat-divider style="margin-bottom: 10px;"></mat-divider>
-                <div *ngIf="!loading">
-                    <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'Photo')" />
+          </mat-step>
+        <mat-step label="Upload Media of your Deer">
+            <div class="file-upload-container">
+                <div class="upload-div">
+                    <h3>Choose a Profile Image for Deer</h3>
+                    <mat-divider style="margin-bottom: 10px;"></mat-divider>
+                    <div *ngIf="!loading">
+                        <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'ProfileImage')" />
+                    </div>
+                    <div *ngIf="profileImage != undefined" class="uploaded-files-container">
+                        <h5>Uploaded Profile Picture</h5>
+                        <mat-divider></mat-divider>
+                        <p>{{profileImage.name}}</p>
+                    </div>
+                    <p style="color: red; margin-top: 10px; margin-bottom: 10px;">*Must Choose a Profile Image</p>
                 </div>
-
-                <div *ngIf="extraPhotos.length != 0" class="uploaded-files-container">
-                    <h5>Uploaded Profile Picture</h5>
-                    <mat-divider></mat-divider>
-                    <p *ngFor="let photo of extraPhotos">{{photo.name}}</p>
+                <mat-divider class="mat-divider-upload"></mat-divider>
+                <div class="upload-div">
+                    <h3>Upload up to 3 photos</h3>
+                    <mat-divider style="margin-bottom: 10px;"></mat-divider>
+                    <div *ngIf="!loading">
+                        <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="selectFile($event, 'Photo')" />
+                    </div>
+                    <div *ngIf="extraPhotos.length != 0" class="uploaded-files-container">
+                        <h5>Uploaded Profile Picture</h5>
+                        <mat-divider></mat-divider>
+                        <p *ngFor="let photo of extraPhotos">{{photo.name}}</p>
+                    </div>
+                </div>
+                <mat-divider class="mat-divider-upload"></mat-divider>
+                <div *ngIf="loading">
+                    <mat-spinner color="accent" class="spinner" [diameter]="50"></mat-spinner>
+                </div>
+                <div *ngIf="errorMessage != undefined">
+                    <p class="error">{{errorMessage}}</p>
                 </div>
             </div>
-
-            <mat-divider class="mat-divider-upload"></mat-divider>
-
-            <div *ngIf="loading">
-                <mat-spinner color="accent" class="spinner" [diameter]="50"></mat-spinner>
+            <div class="pedigree-container next-button">
+                <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
+                <button mat-raised-button color="accent" [disabled]="profileImage == undefined" matStepperNext>Next</button>
             </div>
-
-            <div *ngIf="errorMessage != undefined">
-                <p class="error">{{errorMessage}}</p>
-            </div>
-        </div>
-
-        <div class="pedigree-container next-button">
-            <button mat-raised-button color="secondary" style="margin-right: 10px;" matStepperPrevious>Back</button>
-            <button mat-raised-button color="accent" [disabled]="profileImage == undefined" matStepperNext>Next</button>
-        </div>
-    </mat-step>
-
-    <mat-step [stepControl]="confirmForm" label="Confirm Information is Correct">
-      <form *ngIf="!loading" class="review-stepper"[formGroup]="confirmForm">
-            <h1>Please Review all forms</h1>
-            <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
-            <button mat-raised-button style="margin-left: 10px;" color="accent" (click)="submitAddDeer()" [disabled]="!this.confirmForm.controls['dataCorrect'].value">Submit</button>
-      </form>
-      <mat-spinner color="accent" *ngIf="loading" mode="indeterminate" class="margin-auto"></mat-spinner>
-    </mat-step>
-  </mat-stepper>
+        </mat-step>
+        <mat-step [stepControl]="confirmForm" label="Confirm Information is Correct">
+          <form *ngIf="!loading" class="review-stepper"[formGroup]="confirmForm">
+                <h1>Please Review all forms</h1>
+                <mat-checkbox formControlName="dataCorrect">Data Correct?</mat-checkbox>
+                <button mat-raised-button style="margin-left: 10px;" color="accent" (click)="submitAddDeer()" [disabled]="!this.confirmForm.controls['dataCorrect'].value">Submit</button>
+          </form>
+          <mat-spinner color="accent" *ngIf="loading" mode="indeterminate" class="margin-auto"></mat-spinner>
+        </mat-step>
+      </mat-stepper>
+      <div class="spacer"></div>
+  </div>

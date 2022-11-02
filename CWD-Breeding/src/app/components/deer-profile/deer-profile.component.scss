@@ -5,6 +5,19 @@ h1 {
   font-size: 12pt;
 }
 
+.white {
+  background-color: white;
+}
+
+.background {
+  background-color: #b9b9b9;
+  margin-top: 0px !important;
+}
+
+.spacer {
+  height: 20px;
+}
+
 .container {
     justify-content: center;
     display: -ms-grid;
@@ -39,6 +52,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc;
     max-height: 500px;
+    cursor: pointer;
   }
 
   .data {

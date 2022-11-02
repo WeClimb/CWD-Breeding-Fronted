@@ -6,6 +6,8 @@ $form-width: 200px;
 
 .form-content {
     max-width: $form-width;
+    background-color: #fff;
+    margin-bottom: 20px;
 }
 
 .center-text {
@@ -46,3 +48,9 @@ a {
     margin-top: 10px;
     margin-bottom: 30px;
 }
+
+.background {
+    background-color: #b9b9b9;
+    margin-top: 0px !important;
+  }
+

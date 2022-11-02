@@ -8,6 +8,16 @@ $form-width: 200px;
     max-width: $form-width;
 }
 
+.white {
+    background-color: white;
+}
+
+.background {
+    background-color: #b9b9b9;
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+
 .center-text {
     text-align: center;
 }
@@ -44,5 +54,4 @@ a {
 }
 .maring-top-10 {
     margin-top: 10px;
-    margin-bottom: 30px;
 }

@@ -9,6 +9,11 @@
   margin: 0 auto;
 }
 
+.background {
+  background-color: #b9b9b9;
+  margin-top: 0px !important;
+}
+
 .btn-divider {
   width: 90%;
   margin-left: 5%;
@@ -25,13 +30,26 @@ h1 {
   font-size: 12pt;
 }
 
+.white {
+  background-color: white;
+}
+
+.background {
+  background-color: #b9b9b9;
+  margin-top: 0px !important;
+}
+
+.spacer {
+  height: 20px;
+}
+
 .container {
     justify-content: center;
     display: -ms-grid;
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 50% 25% 25%;
-    grid-template-rows: 380px auto 200px 400px;
+    grid-template-rows: auto auto 200px 400px;
     width: 80%;
     margin: 0 auto;
     margin-top: 2vh;
@@ -58,6 +76,7 @@ h1 {
     border-radius: 20px;
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc;
+    max-height: 500px;
   }
 
   .data {
@@ -137,7 +156,7 @@ h1 {
     grid-row: 6;
     text-align: center;
     border-radius: 10px;
-    border: solid 2px orange;
+    background-color: orange;
     box-shadow: 0 0 3px 2px #ccc;
     
   }
@@ -149,6 +168,7 @@ h1 {
     border-radius: 10px;
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc;
+    border: solid 2px orange;
   }
 
   .lev-one-dam {
@@ -159,7 +179,8 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
-    
+    border: solid 2px orange;
+
   }
   
 
@@ -171,6 +192,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
 
   }
 
@@ -182,6 +204,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
 
   }
 
@@ -193,6 +216,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
 
   }
 
@@ -204,6 +228,8 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
+    border: solid 2px orange;
 
   }
 
@@ -215,7 +241,9 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc;
     overflow:hidden;
- 
+    border: solid 2px orange;
+    border: solid 2px orange;
+
   }
 
   .lev-three-sireB {
@@ -226,6 +254,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
 
   }
 
@@ -238,6 +267,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
 
   }
 
@@ -249,6 +279,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
 
   }
 
@@ -260,6 +291,7 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
 
   }
 
@@ -271,7 +303,8 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
-
+    border: solid 2px orange;
+    
   }
 
   .lev-three-damC {
@@ -282,6 +315,8 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc; 
     overflow:hidden;
+    border: solid 2px orange;
+    border: solid 2px orange;
 
   }
 
@@ -293,6 +328,8 @@ h1 {
     border: solid 3px #fff;
     box-shadow: 0 0 3px 2px #ccc;
     overflow:hidden;
+    border: solid 2px orange;
+
   }
 
   .legend{

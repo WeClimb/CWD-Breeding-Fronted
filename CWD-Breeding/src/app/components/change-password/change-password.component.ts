@@ -61,7 +61,6 @@ export class ChangePasswordComponent implements OnInit {
                 changePasswordId: changePasswordId,
                 password: this.changePasswordForm.controls['confirmPassword'].value,
             }
-            console.log(passwordReset)
 
             this.changePasswordService
                 .post([], passwordReset)

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Deer } from 'src/models/deer.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageDialogComponent } from '../dialogs/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-deer-profile',
@@ -27,7 +29,8 @@ export class DeerProfileComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private deerService: DeerService,
-        public santizer: DomSanitizer
+        public santizer: DomSanitizer,
+        public dialog: MatDialog
     ) {}
 
     ngOnInit(): void {
@@ -41,6 +44,10 @@ export class DeerProfileComponent implements OnInit {
   }
   
   setToTop() {
+    window.onload = function() {
+      document.getElementById("scrollId")!.focus();
+  };
+
     const element = document.querySelector('#scrollId');
     if(element != null){
       element.scrollIntoView();
@@ -59,6 +66,15 @@ export class DeerProfileComponent implements OnInit {
                     }
                     
     });
+  }
+
+  openImageViewer(): void {
+      this.dialog.open(ImageDialogComponent, {
+        data: {
+          image: this.profileImage,
+        },
+      });
+    
   }
   
   changeImageForward(): void {

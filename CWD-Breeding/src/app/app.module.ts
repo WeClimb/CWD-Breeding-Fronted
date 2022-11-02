@@ -1,4 +1,3 @@
-import { MatchComponent } from './components/match/match.component';
 import { DeerProfileComponent } from './components/deer-profile/deer-profile.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
@@ -58,6 +57,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DeerSubmissionConfirmationComponent } from './components/deer-submission-confirmation/deer-submission-confirmation.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
+import { ImageDialogComponent } from './components/dialogs/image-dialog/image-dialog.component';
 
 
 @NgModule({
@@ -78,12 +78,12 @@ import { ForgotPasswordConfirmComponent } from './components/forgot-password-con
     PendingReviewsComponent,
     AdminDeerProdileReviewComponent,
     DeerProfileComponent,
-    MatchComponent,
     DeerEditDialogComponent,
     FooterComponent,
     DeerSubmissionConfirmationComponent,
     ForgotPasswordComponent,
-    ForgotPasswordConfirmComponent
+    ForgotPasswordConfirmComponent,
+    ImageDialogComponent
   ],
   imports: [
     AppRoutingModule,

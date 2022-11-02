@@ -55,6 +55,9 @@ export class AdminDeerProdileReviewComponent implements OnInit {
 }
 
 setToTop() {
+  window.onload = function() {
+    document.getElementById("scrollId")!.focus();
+};
   const element = document.querySelector('#scrollId');
   if(element != null){
     element.scrollIntoView();

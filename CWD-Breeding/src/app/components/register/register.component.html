@@ -1,73 +1,78 @@
-<div class="flex-column margin-top-30 container form-shadow" [formGroup]="registrationForm">
-    <div class="flex-1">
-        <h1 class="margin-bottom-25 margin-top-10">Register Your Ranch</h1>
+<div class="background">
+    <div class="spacer"></div>
+    <div class="flex-column white margin-top-30 container form-shadow" [formGroup]="registrationForm">
+        <div class="flex-1">
+            <h1 class="margin-bottom-25 margin-top-10">Register Your Ranch</h1>
+        </div>
+    
+        <mat-form-field class="form-field flex-1" appearance="outline">
+            <mat-label>Ranch Name</mat-label>
+            <input type="text" matInput formControlName="name" required >
+            <mat-error *ngIf="registrationForm.controls['name'].hasError('required')">Ranch name is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field flex-1" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="ownerFirstName" required >
+            <mat-error *ngIf="registrationForm.controls['ownerFirstName'].hasError('required')">First name is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field flex-1" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="ownerlastName" required>
+            <mat-error *ngIf="registrationForm.controls['ownerlastName'].hasError('required')">Last name is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="flex-1 form-field" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email" required>
+            <mat-error *ngIf="registrationForm.controls['email'].hasError('required')">Email is required.</mat-error>
+            <mat-error *ngIf="registrationForm.controls['email'].hasError('pattern')">Invalid Email Format</mat-error>
+            <mat-error *ngIf="registrationForm.controls['email'].hasError('email')">Invalid Email Format</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field flex-1" appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input type="text" matInput formControlName="phoneNumber" required maxlength="14" appPhoneMask>
+            <mat-error *ngIf="registrationForm.controls['phoneNumber'].hasError('required')">Phone number is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field flex-1" appearance="outline">
+            <mat-label>Website</mat-label>
+            <input type="text" matInput formControlName="website">
+        </mat-form-field>
+    
+        <mat-form-field class="flex-1 form-field" appearance="outline">
+            <mat-label>Address</mat-label>
+            <input type="text" matInput formControlName="address" required>
+            <mat-error *ngIf="registrationForm.controls['address'].hasError('required')">Address is required.</mat-error>
+        </mat-form-field>
+    
+    
+        <mat-form-field class="flex-1 form-field" appearance="outline">
+            <mat-label>City</mat-label>
+            <input type="text" matInput formControlName="city" required>
+            <mat-error *ngIf="registrationForm.controls['city'].hasError('required')">City is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="flex-1 form-field" appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select (change)="selectState($event)" formControlName="state">
+                <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="registrationForm.controls['state'].hasError('required')">State is required.</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="flex-1 form-field" appearance="outline">
+            <mat-label>Zip Code</mat-label>
+            <input type="text" matInput formControlName="zipcode" required maxlength="5" DigitOnly>
+            <mat-error *ngIf="registrationForm.controls['zipcode'].hasError('required')">Zip Code is required.</mat-error>
+        </mat-form-field>
+    
+        <button *ngIf="!loading" [disabled]="!registrationForm.valid" class="flex-1 submit-button" mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
+        <mat-spinner *ngIf="loading" style="margin: 0 auto;" mode="indeterminate" color="accent"></mat-spinner>
+        <p style="color: red;" *ngIf="error">{{errorMessage}}</p>
     </div>
+    <div class="spacer"></div>
 
-    <mat-form-field class="form-field flex-1" appearance="outline">
-        <mat-label>Ranch Name</mat-label>
-        <input type="text" matInput formControlName="name" required >
-        <mat-error *ngIf="registrationForm.controls['name'].hasError('required')">Ranch name is required.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="form-field flex-1" appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input type="text" matInput formControlName="ownerFirstName" required >
-        <mat-error *ngIf="registrationForm.controls['ownerFirstName'].hasError('required')">First name is required.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="form-field flex-1" appearance="outline">
-        <mat-label>Last Name</mat-label>
-        <input type="text" matInput formControlName="ownerlastName" required>
-        <mat-error *ngIf="registrationForm.controls['ownerlastName'].hasError('required')">Last name is required.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="flex-1 form-field" appearance="outline">
-        <mat-label>Email</mat-label>
-        <input type="text" matInput formControlName="email" required>
-        <mat-error *ngIf="registrationForm.controls['email'].hasError('required')">Email is required.</mat-error>
-        <mat-error *ngIf="registrationForm.controls['email'].hasError('pattern')">Invalid Email Format</mat-error>
-        <mat-error *ngIf="registrationForm.controls['email'].hasError('email')">Invalid Email Format</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="form-field flex-1" appearance="outline">
-        <mat-label>Phone Number</mat-label>
-        <input type="text" matInput formControlName="phoneNumber" required maxlength="14" appPhoneMask>
-        <mat-error *ngIf="registrationForm.controls['phoneNumber'].hasError('required')">Phone number is required.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="form-field flex-1" appearance="outline">
-        <mat-label>Website</mat-label>
-        <input type="text" matInput formControlName="website">
-    </mat-form-field>
-
-    <mat-form-field class="flex-1 form-field" appearance="outline">
-        <mat-label>Address</mat-label>
-        <input type="text" matInput formControlName="address" required>
-        <mat-error *ngIf="registrationForm.controls['address'].hasError('required')">Address is required.</mat-error>
-    </mat-form-field>
-
-
-    <mat-form-field class="flex-1 form-field" appearance="outline">
-        <mat-label>City</mat-label>
-        <input type="text" matInput formControlName="city" required>
-        <mat-error *ngIf="registrationForm.controls['city'].hasError('required')">City is required.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="flex-1 form-field" appearance="outline">
-        <mat-label>State</mat-label>
-        <mat-select (change)="selectState($event)" formControlName="state">
-            <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="registrationForm.controls['state'].hasError('required')">State is required.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="flex-1 form-field" appearance="outline">
-        <mat-label>Zip Code</mat-label>
-        <input type="text" matInput formControlName="zipcode" required maxlength="5" DigitOnly>
-        <mat-error *ngIf="registrationForm.controls['zipcode'].hasError('required')">Zip Code is required.</mat-error>
-    </mat-form-field>
-
-    <button *ngIf="!loading" [disabled]="!registrationForm.valid" class="flex-1 submit-button" mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
-    <mat-spinner *ngIf="loading" style="margin: 0 auto;" mode="indeterminate" color="accent"></mat-spinner>
-    <p style="color: red;" *ngIf="error">{{errorMessage}}</p>
 </div>

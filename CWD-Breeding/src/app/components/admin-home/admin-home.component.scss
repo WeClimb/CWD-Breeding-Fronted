@@ -5,10 +5,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
-    margin-top: 3vh;
-    background-color: #9e9e9e;
+    background-color: #b9b9b9;
 }
 
 .admin-panel-card {
@@ -16,5 +15,12 @@
     border-top: 2px solid orange;
     border-radius: 5px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin: 20px;
+}
+
+.background {
+    height: 65vh;
+    background-color: #b9b9b9;
+    margin-top: 0px !important;
 }
 
