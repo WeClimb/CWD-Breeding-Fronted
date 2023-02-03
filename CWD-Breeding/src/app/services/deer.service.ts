@@ -27,7 +27,7 @@ export class DeerService extends AbstractService {
         }
     }
 
-    uploadFile(profileImage: File, deerId: string): Observable<any> {
+    uploadFile(profileImage: File, deerId: string, deerImagedAge: number): Observable<any> {
         const formData = new FormData();
         formData.append('profileImg', profileImage, profileImage.name);
 
@@ -37,13 +37,13 @@ export class DeerService extends AbstractService {
         })};
 
         return this.http.post<string>(
-            `${this.baseUrl}${this.path}/${deerId}/ProfileImage`,
+            `${this.baseUrl}${this.path}/${deerId}/ProfileImage?age=${deerImagedAge}`,
             formData,
             options,
         );
       }
 
-      uploadExtraMedia(image: File, deerId: string): Observable<any> {
+      uploadExtraMedia(image: File, deerId: string, deerImagedAge: number): Observable<any> {
         const formData = new FormData();
         formData.append('image', image, image.name);
 
@@ -53,7 +53,7 @@ export class DeerService extends AbstractService {
         })};
 
         return this.http.post<string>(
-            `${this.baseUrl}${this.path}/${deerId}/Extra-Image`,
+            `${this.baseUrl}${this.path}/${deerId}/Extra-Image?age=${deerImagedAge}`,
             formData,
             options,
         );

@@ -1,14 +1,14 @@
-import { Component } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { ActivatedRoute, Router } from "@angular/router";
-import { StorageService } from "src/app/services/storage.service";
-import { TokenStorageService } from "src/app/services/token_storage.service";
-import { AUTH_TOKEN, ME } from "src/app/utils/constants/storage-keys.constant";
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
+import { TokenStorageService } from 'src/app/services/token_storage.service';
+import { AUTH_TOKEN, ME } from 'src/app/utils/constants/storage-keys.constant';
 
 @Component({
     selector: 'navbar',
     templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.scss']
+    styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
     opened = false;
@@ -19,11 +19,11 @@ export class NavbarComponent {
     // ]);
 
     constructor(
-        private activatedRoute : ActivatedRoute,
+        private activatedRoute: ActivatedRoute,
         private storageService: StorageService,
         private tokenStorage: TokenStorageService,
         private router: Router,
-        public dialog: MatDialog,
+        public dialog: MatDialog
     ) {}
 
     get activeTheme(): string {
@@ -32,10 +32,10 @@ export class NavbarComponent {
 
     get isAdmin(): boolean {
         let user = this.tokenStorage.getUser();
-        if(user == null) {
+        if (user == null) {
             return false;
         }
-        if(user.loginType.toLocaleLowerCase() == 'admin'){
+        if (user.loginType.toLocaleLowerCase() == 'admin') {
             return true;
         } else {
             return false;
@@ -44,7 +44,7 @@ export class NavbarComponent {
 
     get isLoggedIn(): boolean {
         var user = this.tokenStorage.getUser();
-        if(user != null) {
+        if (user != null) {
             return true;
         } else {
             return false;
@@ -69,5 +69,27 @@ export class NavbarComponent {
         this.storageService.removeItem(ME);
         this.opened = false;
         this.router.navigate(['login']);
+    }
+
+    onActivate(event: any): void {
+        window.scroll(0,0);
+
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+        });
+
+        let scrollToTop = window.setInterval(() => {
+            let pos = window.pageYOffset;
+            if (pos > 0) {
+                window.scrollTo(0, pos - 20); // how far to scroll on each step
+            } else {
+                window.clearInterval(scrollToTop);
+            }
+        }, 16);
+
+        document.body.scrollTop = 0;
+        document.querySelector('body')!.scrollTo(0,0)
     }
 }

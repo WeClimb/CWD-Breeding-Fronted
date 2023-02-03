@@ -27,6 +27,23 @@ h1 {
     box-shadow: 0 10px 16px 1px grey;
   }
 
+  .extra-photo-container { 
+    flex-wrap: nowrap; 
+    border: 1px solid grey; 
+    border-radius: 5px  ;
+    padding: 15px; 
+    margin-top: 5px;
+  }
+
+  .add-deer-btn-container {
+    margin-left: 15%;
+  }
+
+
+  .mt-2 {
+    margin-top: 20px;
+  }
+
   .spacer {
     height: 20px;
   }
@@ -60,8 +77,10 @@ h1 {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
   }
+
 
   .mat-divider-upload {
     margin: 0px;
@@ -148,6 +167,50 @@ h1 {
     text-align: center;
   }
 
+  .file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .upload-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .mat-divider-upload {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .uploaded-files-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .spinner {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .error {
+    color: red;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+
   @media screen and (max-width: 500px) {
 
 }
@@ -176,4 +239,18 @@ h1 {
       .pedigree-form-field {
         width: 100px;
       }
+
+      .add-deer-btn-container {
+        margin-left: 0%;
+      }
+}
+
+@media only screen and (max-width: 600px) {
+  .file-upload-container {
+    flex-direction: column;
+  }
+
+  .upload-div {
+    width: 100%;
+  }
 }

@@ -1,4 +1,5 @@
 import { DeerFamily } from "./deer-family.model";
+import { DeerImage } from "./deer-image.model";
 import { Ranch } from "./ranch.model";
 
 interface IDeer {
@@ -22,6 +23,12 @@ interface IDeer {
     videoLink: string; 
     denialReason: string   
     profileImage: string;
+    ageOfBuckDisplayed: number;
+    description: string;
+    isPaid: boolean;
+    paidDate: Date;
+    profileImageFile: DeerImage;
+    extraImagesFiles: DeerImage[];
   }
 
   export class Deer{
@@ -45,6 +52,12 @@ interface IDeer {
     videoLink: string;
     denialReason: string;
     profileImage: string;
+    ageOfBuckDisplayed: number;
+    description: string;
+    isPaid: boolean;
+    paidDate: Date;
+    profileImageFile: DeerImage;
+    extraImagesFiles: DeerImage[];
 
     constructor();
     constructor(object: IDeer);
@@ -69,7 +82,11 @@ interface IDeer {
         this.videoLink = object && object.videoLink || null;
         this.denialReason = object && object.denialReason || null;
         this.profileImage = object && object.profileImage || null;
-
-
+        this.ageOfBuckDisplayed = object && object.ageOfBuckDisplayed || null;
+        this.description = object && object.description || "";
+        this.isPaid = object && object.isPaid || false;
+        this.paidDate = object && object.paidDate || null;
+        this.profileImageFile = object && object.profileImageFile || null;
+        this.extraImagesFiles = object && object.extraImagesFiles || [];
     }
   }

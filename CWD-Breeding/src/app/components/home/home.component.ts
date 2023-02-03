@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
     deer: Deer[] = [];
     loggedIn: boolean = false;
     userName: string = '';
+    loading: boolean = false;
 
     filterForm = new FormGroup({
         name: new FormControl(''),
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit {
     }
 
     getListedDeer() : void {
+        this.loading = true;
         let map = new Map();
         map.set('isApproved', true);
         map.set('deerName', this.filterForm.controls['name'].value);
@@ -69,6 +71,7 @@ export class HomeComponent implements OnInit {
 
         this.deerService.getAll(['All-Filtered'],map).subscribe(response => {
             complete: this.deer = response;
+            this.loading = false;
     });
     }
 

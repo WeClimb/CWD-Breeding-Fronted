@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DeerService } from 'src/app/services/deer.service';
 import { Deer } from 'src/models/deer.model';
+import { ImageDialogComponent } from '../dialogs/image-dialog/image-dialog.component';
 import { DeerEditDialogComponent } from './Dialogs/deer-edit-dialog/deer-edit-dialog.component';
 
 @Component({
@@ -23,7 +24,7 @@ export class AdminDeerProdileReviewComponent implements OnInit {
   loadingApproval: boolean = false;
 
   profileImage!: any;
-  images: any[] = [];
+  images: string[] = [];
 
   loadingImages: boolean = false;
   
@@ -31,6 +32,8 @@ export class AdminDeerProdileReviewComponent implements OnInit {
   validVideo: boolean = false;
 
   denying: boolean = false;
+
+  imageMap: Map<string, number>;
 
   denialForm = new FormGroup({
     denialReason: new FormControl(''),
@@ -42,7 +45,7 @@ export class AdminDeerProdileReviewComponent implements OnInit {
       private router: Router,
       public dialog: MatDialog,
       public santizer: DomSanitizer
-  ) { }
+  ) { this.imageMap = new Map<string, number>() }
 
   ngOnInit(): void {
     this.setToTop();
@@ -51,7 +54,6 @@ export class AdminDeerProdileReviewComponent implements OnInit {
     });
 
     this.getDeer();
-    this.getProfileImage();
 }
 
 setToTop() {
@@ -65,57 +67,75 @@ setToTop() {
 }
 
 getDeer() {
-  let map = new Map();
-  this.deerService.get([this.id], map).subscribe(response => {
-      complete: this.deer = response;
-                this.deer.age = Math.floor(this.deer.age)
-                  if(this.deer.videoLink != null && this.deer.videoLink != undefined && this.deer.videoLink != ''){
-                      this.videoLink = this.deer.videoLink.replace('/watch?v=', '/embed/')
-                      this.videoLink = this.santizer.bypassSecurityTrustResourceUrl(this.videoLink);
-                      this.validVideo = true;
-                  }
-                  
-  });
-}
+    this.loadingImages = true;
+    let map = new Map();
+    this.deerService.get([this.id], map).subscribe(response => {
+        complete: this.deer = response;
+                  this.profileImage = this.deer.profileImage;
+                  this.imageMap.set(this.profileImage,this.deer.ageOfBuckDisplayed);
+                  this.getImages();
+                  this.deer.age = Math.floor(this.deer.age)
+                    if(this.deer.videoLink != null && this.deer.videoLink != undefined && this.deer.videoLink != ''){
+                        this.videoLink = this.deer.videoLink.replace('/watch?v=', '/embed/')
+                        this.videoLink = this.santizer.bypassSecurityTrustResourceUrl(this.videoLink);
+                        this.validVideo = true;
+                    }
+                    this.loadingImages = false;
+    });
+  }
 
 changeImageForward(): void {
   if(this.currentImageIndex < this.maxIndex){
     this.currentImageIndex++;
-    this.profileImage = this.images[this.currentImageIndex];
+    this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex]; 
+    this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
   } else {
     this.currentImageIndex = 0;
-    this.profileImage = this.images[this.currentImageIndex];
+    this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex];
+    this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
   }
 }
 
 changeImageBackward(): void {
   if(this.currentImageIndex == 0){
     this.currentImageIndex = this.maxIndex;
-    this.profileImage = this.images[this.currentImageIndex];
+    this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex]; 
+    this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
   } else {
     this.currentImageIndex--;
-    this.profileImage = this.images[this.currentImageIndex];
+    this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex]; 
+    this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
   }
 }
 
-getProfileImage(): void {
-  let map = new Map();
-  this.deerService.get([this.id, 'ProfileImage'], map).subscribe(response => {
-      complete: this.images[0] = response.data.imageData;
-                this.profileImage = this.images[0];
-                this.getImages();
+// getProfileImage(): void {
+//   let map = new Map();
+//   this.deerService.get([this.id, 'ProfileImage'], map).subscribe(response => {
+//       complete: this.images[0] = response.data.imageData;
+//                 this.profileImage = this.images[0];
+//                 this.getImages();
+//   });
+// }
+
+getImages(): void {
+  this.deerService.get([this.id, 'Images'], this.imageMap).subscribe(response => {
+    console.log(response.data);
+    if (response.data !== null) {
+      for (const key in response.data) {
+        if (response.data.hasOwnProperty(key)) {
+          const element = response.data[key];
+          this.maxIndex++;
+          this.images.push(key);
+          this.imageMap.set(key, element === undefined ? 0 : element);
+        }
+      }
+    } 
   });
 }
 
-getImages(): void {
-  let map = new Map();
-  this.deerService.get([this.id, 'Images'], map).subscribe(response => {
-      complete: response.data.forEach((element:any) => {
-                this.maxIndex++;
-                this.images.push(element.imageData);
-      });
-  });
-}
+
+
+
 
 
 approve(): void {
@@ -151,6 +171,15 @@ openEditDeerDialog(): void {
   dialogRef.afterClosed().subscribe(() => {
     complete: this.getDeer();
   });
+}
+
+openImageViewer(): void {
+  this.dialog.open(ImageDialogComponent, {
+    data: {
+      image: this.profileImage,
+    },
+  });
+
 }
 
 }

@@ -16,7 +16,7 @@ export class DeerProfileComponent implements OnInit {
     deer!: Deer;
 
     profileImage!: any;
-    images: any[] = [];
+    images: string[] = [];
 
     loadingImages: boolean = false;
 
@@ -26,12 +26,15 @@ export class DeerProfileComponent implements OnInit {
     videoLink!: any;
     validVideo: boolean = false;
 
+    imageMap: Map<string, number>;
+
+
     constructor(
         private route: ActivatedRoute,
         private deerService: DeerService,
         public santizer: DomSanitizer,
         public dialog: MatDialog
-    ) {}
+    ) {this.imageMap = new Map<string, number>() }
 
     ngOnInit(): void {
       this.setToTop();
@@ -40,7 +43,6 @@ export class DeerProfileComponent implements OnInit {
       });
   
       this.getDeer();
-      this.getProfileImage();
   }
   
   setToTop() {
@@ -55,16 +57,20 @@ export class DeerProfileComponent implements OnInit {
   }
 
   getDeer() {
+    this.loadingImages = true;
     let map = new Map();
     this.deerService.get([this.id], map).subscribe(response => {
         complete: this.deer = response;
+                  this.profileImage = this.deer.profileImage;
+                  this.imageMap.set(this.profileImage,this.deer.ageOfBuckDisplayed);
+                  this.getImages();
                   this.deer.age = Math.floor(this.deer.age)
                     if(this.deer.videoLink != null && this.deer.videoLink != undefined && this.deer.videoLink != ''){
                         this.videoLink = this.deer.videoLink.replace('/watch?v=', '/embed/')
                         this.videoLink = this.santizer.bypassSecurityTrustResourceUrl(this.videoLink);
                         this.validVideo = true;
                     }
-                    
+                    this.loadingImages = false;
     });
   }
 
@@ -80,44 +86,42 @@ export class DeerProfileComponent implements OnInit {
   changeImageForward(): void {
     if(this.currentImageIndex < this.maxIndex){
       this.currentImageIndex++;
-      this.profileImage = this.images[this.currentImageIndex];
+      this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex]; 
+      this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
     } else {
       this.currentImageIndex = 0;
-      this.profileImage = this.images[this.currentImageIndex];
+      this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex];
+      this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
     }
   }
   
   changeImageBackward(): void {
     if(this.currentImageIndex == 0){
       this.currentImageIndex = this.maxIndex;
-      this.profileImage = this.images[this.currentImageIndex];
+      this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex]; 
+      this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
     } else {
       this.currentImageIndex--;
-      this.profileImage = this.images[this.currentImageIndex];
+      this.profileImage = Array.from(this.imageMap.keys())[this.currentImageIndex]; 
+      this.deer.ageOfBuckDisplayed = this.imageMap.get(this.profileImage) ?? 0;  
     }
   }
   
-  getProfileImage(): void {
-    this.loadingImages = true;
-    let map = new Map();
-    this.deerService.get([this.id, 'ProfileImage'], map).subscribe(response => {
-        complete: this.images[0] = response.data.imageData;
-                  this.profileImage = this.images[0];
-                  this.getImages();
-                  this.loadingImages = false;
-    });
-  }
-  
   getImages(): void {
-    let map = new Map();
-    this.deerService.get([this.id, 'Images'], map).subscribe(response => {
-        complete: response.data.forEach((element:any) => {
-                  this.maxIndex++;
-                  this.images.push(element.imageData);
-        });
+    this.deerService.get([this.id, 'Images'], this.imageMap).subscribe(response => {
+      console.log(response.data);
+      if (response.data !== null) {
+        for (const key in response.data) {
+          if (response.data.hasOwnProperty(key)) {
+            const element = response.data[key];
+            this.maxIndex++;
+            this.images.push(key);
+            this.imageMap.set(key, element === undefined ? 0 : element);
+          }
+        }
+      } 
     });
   }
-
   
   }
   

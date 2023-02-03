@@ -58,6 +58,8 @@ import { DeerSubmissionConfirmationComponent } from './components/deer-submissio
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
 import { ImageDialogComponent } from './components/dialogs/image-dialog/image-dialog.component';
+import { AddDeerParentComponent } from './components/add-deer-parent/add-deer-parent.component';
+import { AddAgeToImageComponent } from './components/dialogs/add-age-to-image/add-age-to-image.component';
 
 
 @NgModule({
@@ -83,7 +85,9 @@ import { ImageDialogComponent } from './components/dialogs/image-dialog/image-di
     DeerSubmissionConfirmationComponent,
     ForgotPasswordComponent,
     ForgotPasswordConfirmComponent,
-    ImageDialogComponent
+    ImageDialogComponent,
+    AddDeerParentComponent,
+    AddAgeToImageComponent
   ],
   imports: [
     AppRoutingModule,

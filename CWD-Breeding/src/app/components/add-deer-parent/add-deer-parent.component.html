@@ -1,0 +1,13 @@
+<app-deer-request
+    [registrationForm]="registrationForm"
+    [pedigreeForm]="pedigreeForm"
+    [confirmForm]="confirmForm"
+    [loading]="loading"
+    [currentDeerProfileImage]="currentDeerProfileImage"
+    [currentDeerExtraImages]="currentDeerExtraImages"
+    (submitDeerEvent)="submitAddDeer()"
+    (addProfileImageEvent)="addProfileImage($event)"
+    (addExtraImageEvent)="addExtraImage($event)"
+    (addDeerToQueueEvent)="addDeerToQueue()"
+>
+</app-deer-request>

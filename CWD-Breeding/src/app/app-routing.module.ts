@@ -15,6 +15,7 @@ import { AdminDeerProdileReviewComponent } from './components/admin-deer-prodile
 import { DeerSubmissionConfirmationComponent } from './components/deer-submission-confirmation/deer-submission-confirmation.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
+import { AddDeerParentComponent } from './components/add-deer-parent/add-deer-parent.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
   },
   {
     path: 'request-deer-listing',
-    component: DeerRequestComponent,
+    component: AddDeerParentComponent,
     canActivate: [AuthGuardService],
   },
   {
