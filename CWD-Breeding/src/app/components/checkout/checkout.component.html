@@ -1,0 +1,14 @@
+<div class="item-container" *ngFor="let item of data.receipt">
+    <div class="item" class="row">
+        <div class="item-name" class="col-6">
+            <p>{{item.deerName}}</p>
+        </div>
+        <div class="col-6">
+            <p>{{item.price}}</p>
+        </div>
+    </div>
+</div>
+<div>
+  <h3>{{totalCost}}</h3>
+  <button mat-raised-button color="accent" (click)="checkout()">Checkout</button>
+</div>

@@ -60,6 +60,7 @@ import { ForgotPasswordConfirmComponent } from './components/forgot-password-con
 import { ImageDialogComponent } from './components/dialogs/image-dialog/image-dialog.component';
 import { AddDeerParentComponent } from './components/add-deer-parent/add-deer-parent.component';
 import { AddAgeToImageComponent } from './components/dialogs/add-age-to-image/add-age-to-image.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
@@ -87,8 +88,9 @@ import { AddAgeToImageComponent } from './components/dialogs/add-age-to-image/ad
     ForgotPasswordConfirmComponent,
     ImageDialogComponent,
     AddDeerParentComponent,
-    AddAgeToImageComponent
-  ],
+    AddAgeToImageComponent,
+    CheckoutComponent
+   ],
   imports: [
     AppRoutingModule,
     BrowserModule,

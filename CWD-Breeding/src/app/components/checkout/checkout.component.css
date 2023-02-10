@@ -1,0 +1,19 @@
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .receipt-table th {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .receipt-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .total-row td {
+    font-weight: bold;
+  }

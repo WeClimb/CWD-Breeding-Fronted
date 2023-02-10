@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DeerService } from 'src/app/services/deer.service';
 import { TokenStorageService } from 'src/app/services/token_storage.service';
 import { DeerImage } from 'src/models/deer-image.model';
 import { Deer } from 'src/models/deer.model';
+import { CheckoutComponent } from '../checkout/checkout.component';
+
+interface DeerSubscriptionModel {
+    deerId?: string;
+    ranchId?: string;
+    deerName?: string;
+    cost: number;
+  }
 
 @Component({
     selector: 'app-add-deer-parent',
@@ -76,8 +85,9 @@ export class AddDeerParentComponent implements OnInit {
     addDeerList: Deer[] = [];
     currentDeerProfileImage: DeerImage[] = [];
     currentDeerExtraImages: DeerImage[] = [];
+    deerReceipt: DeerSubscriptionModel[] = [];
 
-    constructor(public deerService: DeerService, public router: Router, private tokenStorage: TokenStorageService) {}
+    constructor(public deerService: DeerService, public router: Router, private tokenStorage: TokenStorageService, public dialog: MatDialog) {}
 
     ngOnInit() {}
 
@@ -86,6 +96,18 @@ export class AddDeerParentComponent implements OnInit {
         let index = 1;
         this.addDeerList.forEach((deer: Deer) => {
             deer.semenCost = deer.semenCost.toString();
+            
+            let deerSubscription: DeerSubscriptionModel;
+            deerSubscription = {
+                deerId: deer.id,
+                ranchId: deer.ranchId,
+                deerName: deer.name,
+                cost: 125
+            };
+
+            this.deerReceipt.push(deerSubscription);
+
+            
 
             this.deerService.post(['Request-Listing'], deer).subscribe((response) => {
                     next: deer.id = response.id;
@@ -96,8 +118,17 @@ export class AddDeerParentComponent implements OnInit {
                     }
                     index++;
                 });
+
+                this.openCheckoutDialog(this.deerReceipt);
         });
     }
+
+    openCheckoutDialog(deerReceipt: DeerSubscriptionModel[]): void {
+        const dialogRef = this.dialog.open(CheckoutComponent, {
+          width: '400px',
+          data: {deerReceipt}
+        });
+      }
 
     addProfileImage(profileImage: DeerImage): void {
         if(this.currentDeerProfileImage.length == 0){
