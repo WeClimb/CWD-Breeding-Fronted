@@ -64,6 +64,10 @@ export class NavbarComponent {
         this.opened = !this.opened;
     }
 
+    goToEducationPage(): void {
+        window.location.href = 'https://cwdbreeding.com';
+    }
+
     logout(): void {
         this.storageService.removeItem(AUTH_TOKEN);
         this.storageService.removeItem(ME);

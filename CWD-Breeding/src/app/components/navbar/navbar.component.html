@@ -7,11 +7,15 @@
                 (click)="toggleSidenav()">
                 <mat-icon>menu</mat-icon>
             </button>
-            <a style="margin: 0 auto;" *ngIf="!isAdmin" routerLink="/home">
+            <a style="margin: 0 auto; margin-left: 30px;" *ngIf="!isAdmin" routerLink="/home">
                 <img src="../../../assets/image/CWDbreeding-Logo-Orange.png" class="logo" />
             </a>
-            <a style="margin: 0 auto;" *ngIf="isAdmin" routerLink="/admin-home">
+            <a style="margin: 0 auto; margin-left: 30px;" *ngIf="isAdmin" routerLink="/admin-home">
                 <img src="../../../assets/image/CWDbreeding-Logo-Orange.png" class="logo" />
+            </a>
+
+            <a style="float: right; margin-top: 40px;">
+                <button (click)="goToEducationPage()" mat-raised-button color="accent">Education Page</button>
             </a>
 
         </div>
@@ -22,6 +26,8 @@
             <mat-nav-list>
                 <a *ngIf="!isAdmin" (click)="sidenav.close()" mat-list-item routerLink="/home">Home</a>
                 <a *ngIf="isAdmin" (click)="sidenav.close()" mat-list-item routerLink="/admin-home">Home</a>
+                <a (click)="goToEducationPage()" mat-list-item>Education Page</a>
+
 
                 <a *ngIf="isLoggedIn" (click)="logout()" mat-list-item>Logout</a>
                 <a *ngIf="!isLoggedIn" (click)="sidenav.close()" mat-list-item routerLink="/login">Login</a>

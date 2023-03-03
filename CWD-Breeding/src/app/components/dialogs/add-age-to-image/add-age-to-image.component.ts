@@ -5,15 +5,14 @@ import { DeerImage } from 'src/models/deer-image.model';
 @Component({
   selector: 'app-your-dialog',
   template: `
-    <h1 mat-dialog-title>Age of Deer</h1>
+    <h3 mat-dialog-title>Age of Deer in Selected Image</h3>
     <div mat-dialog-content>
       <mat-form-field>
         <input matInput [(ngModel)]="data.deerImage.ageOfDeerImaged" placeholder="Age of Deer">
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onSave()">Save</button>
-      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button color="accent" (click)="onSave()">Save</button>
     </div>
   `,
   styles: [

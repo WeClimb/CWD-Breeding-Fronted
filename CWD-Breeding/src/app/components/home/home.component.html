@@ -35,7 +35,7 @@
         </mat-form-field>
 
 
-        <button mat-raised-button color="accent" class="search-btn" (click)="getListedDeer()">
+        <button mat-raised-button color="accent" class="search-btn" (click)="GetFilteredDeer()">
           Search Deer
         </button>
         <button mat-raised-button color="accent" class="search-btn" (click)="clearFilterForm()">
@@ -94,5 +94,9 @@
         </mat-card-actions>
       </mat-card>
     </div>
+  </div>
+
+  <div *ngIf="!hideGetMoreBtn" style="display: flex; justify-content: center; padding: 10px;">
+    <button *ngIf="!loading" mat-raised-button color="accent" (click)="getNextPage()">Load More Deer</button>
   </div>
 </div>

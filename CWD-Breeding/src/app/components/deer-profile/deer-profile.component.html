@@ -37,35 +37,37 @@
         </div>
 
         <div class="data white">
-            <h1>Deer Name: {{ deer?.name }}</h1>
+            <h1>Deer Name: <strong>{{ deer?.name }}</strong></h1>
 
-            <h1>NADR#: {{ deer?.nadr }}</h1>
+            <h1>NADR#: <strong>{{ deer?.nadr }}</strong></h1>
 
-            <h1>Date of Birth: {{ deer?.dob | date : "shortDate" }}</h1>
+            <h1>Date of Birth: <strong>{{ deer?.dob | date : "shortDate" }}</strong></h1>
 
-            <h1>Age of Deer Displayed: {{ deer?.ageOfBuckDisplayed }}</h1>
+            <h1>Age of Deer Displayed: <strong>{{ deer?.ageOfBuckDisplayed }}</strong></h1>
 
-            <h1>GEBV: {{ deer?.gebu }}</h1>
+            <h1>GEBV: <strong>{{ deer?.gebu }}</strong></h1>
 
-            <h1>Codon: {{ deer?.codon }}</h1>
+            <h1>Codon: <strong>{{ deer?.codon }}</strong></h1>
 
-            <h1>Sci Score: {{ deer?.sciScore }}</h1>
+            <h1>Sci Score: <strong>{{ deer?.sciScore }}</strong></h1>
 
             <div *ngIf="deer?.semenAvailable">
-                <h1>Semen Cost: ${{ deer?.semenCost }}</h1>
+                <h1>Semen Cost: <strong>${{ deer?.semenCost }}</strong></h1>
             </div>
         </div>
 
         <div class="ranch white">
-            <h1>Ranch: {{ deer?.ranch?.name }}</h1>
-
+            <h1><strong>Ranch Info</strong>:</h1>
             <h1>
+                {{ deer?.ranch?.name }}<br/>
                 {{ deer?.ranch?.address }}<br />{{ deer?.ranch?.city }},
                 {{ deer?.ranch?.state }} {{ deer?.ranch?.zipcode }}
             </h1>
         </div>
 
         <div class="contact white">
+            <h1><strong>Owner Info</strong>:</h1>
+
             <h1>
                 {{ deer?.ranch?.ownerFirstName }}
                 {{ deer?.ranch?.ownerlastName }}
@@ -86,7 +88,7 @@
             "
             class="description white"
         >
-            <h1>Description of Deer:</h1>
+            <h1><strong>Description of Deer</strong>:</h1>
             <h1>"{{ deer?.description }}"</h1>
         </div>
 

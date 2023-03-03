@@ -1,4 +1,3 @@
-import { Client } from './../../../models/client.model';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,6 +15,8 @@ export class HomeComponent implements OnInit {
     loggedIn: boolean = false;
     userName: string = '';
     loading: boolean = false;
+    page: number = 1;
+    hideGetMoreBtn: boolean = false;
 
     filterForm = new FormGroup({
         name: new FormControl(''),
@@ -44,6 +45,7 @@ export class HomeComponent implements OnInit {
         map.set('deerName', this.filterForm.controls['name'].value);
         map.set('ranchName', this.filterForm.controls['ranchName'].value);
         map.set('codon', this.filterForm.controls['codon'].value);
+        map.set('page', this.page);
 
         if(this.filterForm.controls['sciScore'].value != null){
             if(this.filterForm.controls['sciScore'].value == 0) {
@@ -70,13 +72,28 @@ export class HomeComponent implements OnInit {
         }
 
         this.deerService.getAll(['All-Filtered'],map).subscribe(response => {
-            complete: this.deer = response;
+            if (response.length == 0) {
+                this.hideGetMoreBtn = true;
+            }
+            complete: this.deer = [...this.deer, ...response];
             this.loading = false;
-    });
+        });
+    }
+
+    GetFilteredDeer(): void {
+        this.deer = [];
+        this.page = 1;
+        this.hideGetMoreBtn = false;
+        this.getListedDeer();
     }
 
     navigateToAddDeer(): void {
         this.router.navigate(['request-deer-listing']);
+    }
+
+    getNextPage(): void {
+        this.page++;
+        this.getListedDeer();
     }
 
     navigateToDeerProfile(deer: Deer): void {
@@ -100,6 +117,7 @@ export class HomeComponent implements OnInit {
 
     clearFilterForm(): void {
         this.deer = [];
+        this.page = 1;
 
         this.filterForm.controls['name'].setValue('');
         this.filterForm.controls['ranchName'].setValue('');

@@ -1,14 +1,19 @@
-<div class="item-container" *ngFor="let item of data.receipt">
-    <div class="item" class="row">
-        <div class="item-name" class="col-6">
-            <p>{{item.deerName}}</p>
+<h1 class="title">Checkout Review</h1>
+<div class="item-container" *ngFor="let item of data.deerReceipt">
+    <div class="row">
+        <div class="item" class="col-6">
+            <p>Deer: {{item.deerName}} -</p>
         </div>
-        <div class="col-6">
-            <p>{{item.price}}</p>
+        <div class="col-6" class="item">
+            <p>${{item.cost}}</p>
         </div>
     </div>
+
+    <mat-divider class="divider"></mat-divider>
 </div>
-<div>
-  <h3>{{totalCost}}</h3>
-  <button mat-raised-button color="accent" (click)="checkout()">Checkout</button>
+
+<div class="row">
+    <!-- <h3 *ngIf="!loading" class="item">Total: ${{data.total}}</h3> -->
+    <button *ngIf="!loading"  mat-raised-button color="accent" (click)="checkout()" class="item checkout-btn">Continue to Payment</button>
+    <mat-spinner *ngIf="loading" color="accent" ></mat-spinner>
 </div>

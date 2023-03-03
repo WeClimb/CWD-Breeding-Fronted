@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable, of, switchMap, tap } from 'rxjs';
 import { DeerService } from 'src/app/services/deer.service';
 import { TokenStorageService } from 'src/app/services/token_storage.service';
 import { DeerImage } from 'src/models/deer-image.model';
@@ -93,40 +93,49 @@ export class AddDeerParentComponent implements OnInit {
 
     submitAddDeer(): void {
         this.loading = true;
-        let index = 1;
+        let observables: Observable<any>[] = [];
+      
         this.addDeerList.forEach((deer: Deer) => {
-            deer.semenCost = deer.semenCost.toString();
-            
-            let deerSubscription: DeerSubscriptionModel;
-            deerSubscription = {
+          deer.semenCost = deer.semenCost.toString();
+      
+          const deerObservable = this.deerService.post(['Request-Listing'], deer).pipe(
+            tap(response => {
+              deer.id = response.id;
+              const deerSubscription: DeerSubscriptionModel = {
                 deerId: deer.id,
                 ranchId: deer.ranchId,
                 deerName: deer.name,
                 cost: 125
-            };
-
-            this.deerReceipt.push(deerSubscription);
-
-            
-
-            this.deerService.post(['Request-Listing'], deer).subscribe((response) => {
-                    next: deer.id = response.id;
-                    this.uploadFiles(deer.profileImageFile, deer.extraImagesFiles, deer.id);
-                    if(index == this.addDeerList.length){
-                      this.loading = false;
-                      this.router.navigate(['deer-request-confirmation']);
-                    }
-                    index++;
-                });
-
-                this.openCheckoutDialog(this.deerReceipt);
+              };
+              this.deerReceipt.push(deerSubscription);
+            }),
+            switchMap(() => {
+              return this.uploadFiles(deer.profileImageFile, deer.extraImagesFiles, deer.id);
+            })
+          );
+          observables.push(deerObservable);
         });
-    }
+      
+        forkJoin(observables).subscribe(() => {
+          this.deerService.post(['Send-Email'], this.addDeerList).subscribe(() => {
+            this.loading = false;
+            this.openCheckoutDialog(this.deerReceipt);
+          });
+        }, (error) => {
+          this.errorMessage = 'Failed to Update Photo';
+          console.error(error);
+        });
+      }
 
     openCheckoutDialog(deerReceipt: DeerSubscriptionModel[]): void {
+        let total = 0;
+        deerReceipt.forEach((item: DeerSubscriptionModel) => {
+            total = total + item.cost;
+        });
         const dialogRef = this.dialog.open(CheckoutComponent, {
           width: '400px',
-          data: {deerReceipt}
+          data: {deerReceipt, total},
+          disableClose: true,
         });
       }
 
@@ -163,31 +172,26 @@ export class AddDeerParentComponent implements OnInit {
         this.addDeerList.push(deer);
     }
 
-    uploadFiles(profileImageFile: DeerImage, extraImages: DeerImage[], deerId: string): void {
+    uploadFiles(profileImageFile: DeerImage, extraImages: DeerImage[], deerId: string): Observable<any> {
+        const fileUploadObservables: Observable<any>[] = [];
+      
         if (profileImageFile != undefined) {
-            this.loading = true;
-            this.deerService
-                .uploadFile(profileImageFile.file, deerId, profileImageFile.ageOfDeerImaged)
-                .subscribe(() => {
-                    if (extraImages.length > 0) {
-                        this.uploadExtraImages(extraImages, deerId);
-                    }
-                    error: this.errorMessage = 'Failed to Update Photo';
-                });
+          this.loading = true;
+          fileUploadObservables.push(this.deerService.uploadFile(profileImageFile.file, deerId, profileImageFile.ageOfDeerImaged));
         }
-    }
-
-    uploadExtraImages(extraImages: DeerImage[], deerId: string): void {
-
+      
         extraImages.forEach((element) => {
-            this.loading = true;
-            this.deerService
-                .uploadExtraMedia(element.file, deerId, element.ageOfDeerImaged)
-                .subscribe((response) => {
-                    error: this.errorMessage = 'Failed to Update Photo';
-                });
+          if (element != undefined) {
+            fileUploadObservables.push(this.deerService.uploadExtraMedia(element.file, deerId, element.ageOfDeerImaged));
+          }
         });
-    }
+      
+        if (fileUploadObservables.length > 0) {
+          return forkJoin(fileUploadObservables);
+        } else {
+          return of(null);
+        }
+      }
 
     private setRegistrationFormValues() {
         this.registrationForm.reset();

@@ -181,7 +181,9 @@ export class DeerRequestComponent implements OnInit {
         deerImage.mediaType = mediaType;
         
         const dialogRef = this.dialog.open(AddAgeToImageComponent, {
-          data: { deerImage: deerImage }
+          data: { deerImage: deerImage },
+          disableClose: true,
+          width: '400px',
         });
     
         dialogRef.afterClosed().subscribe(result => {
