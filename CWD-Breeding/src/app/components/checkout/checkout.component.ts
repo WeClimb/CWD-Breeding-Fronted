@@ -63,7 +63,7 @@ export class CheckoutComponent {
 
   setPromoCode() {
     this.data.deerReceipt.forEach((deer: DeerSubscriptionModel) => {
-      deer.promoCode = this.promoCode.code;
+      deer.promoCodeId = this.promoCode.code;
     });
   }
  
