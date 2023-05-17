@@ -1,19 +1,21 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { DeerSubscriptionModel } from 'src/models/deer-subscription.model';
 import { StripeService } from 'src/app/services/stripe.service';
 import { StripeSession } from 'src/models/stripe-session.model';
 import { FormControl } from '@angular/forms';
 import { PromoCode } from 'src/models/promo-code.model';
+import { DeerSubscriptionModel } from 'src/models/deer-subscription.model';
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
+
 export class CheckoutComponent {
   totalCost: number = 0;
   loading: boolean = false;
+  promoApplied: boolean = false;
 
   promoCodeControl = new FormControl();
   promoCode!: PromoCode;
@@ -49,6 +51,9 @@ export class CheckoutComponent {
         } else {
           this.promoCode = promo;
           this.applyDiscount();
+          this.setPromoCode();
+          this.promoApplied = true;
+          this.errorMessage = "Promo Code Applied";
           // Apply percentage discount from promo code
         }
       }, () => {
@@ -58,7 +63,9 @@ export class CheckoutComponent {
   }
 
   applyDiscount() {
-    this.data.deerReceipt.totalCost = this.data.deerReceipt.totalCost - (this.data.deerReceipt.totalCost * (this.promoCode.percentageOff / 100));
+    this.data.deerReceipt.forEach((deer: DeerSubscriptionModel) => {
+      deer.cost = deer.cost - (deer.cost * (this.promoCode.percentageOff / 100));
+    });
   }
 
   setPromoCode() {
@@ -66,6 +73,4 @@ export class CheckoutComponent {
       deer.promoCodeId = this.promoCode.code;
     });
   }
- 
-  
 }

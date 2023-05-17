@@ -2,12 +2,11 @@
 
 <mat-form-field appearance="outline">
     <mat-label>Promo Code</mat-label>
-    <input matInput [formControl]="promoCodeControl" name="promoCodeControl">
+    <input matInput [formControl]="promoCodeControl" [readonly]="promoApplied" name="promoCodeControl">
     <small *ngIf="errorMessage" class="error-message">{{ errorMessage }}</small>
   </mat-form-field>
   
-  <button mat-raised-button color="primary" (click)="applyPromo()">Apply Promo Code</button>
-  
+  <button mat-raised-button style="margin-left: 5px;" [disabled]="promoApplied" color="accent" (click)="applyPromo()">Apply Promo Code</button>
 
 <!-- Item Container -->
 <div class="item-container" *ngFor="let item of data.deerReceipt">

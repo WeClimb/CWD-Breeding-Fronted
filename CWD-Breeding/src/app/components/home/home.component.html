@@ -60,18 +60,15 @@
 
     <div class="add-deer">
       <h1 style="margin-top: 20px;">Add a Deer Listing</h1>
-      <h3>Promotional Price: $125.00 per listing</h3>
+      <h3>50% off listings available with promo via State or National association</h3>
 
       <button style="margin-bottom: 20px;" mat-raised-button color="accent" type="submit" (click)="navigateToAddDeer()">
         Create Deer Listing
       </button>
     </div>
   </div>
-
-  
 </div>
    
-
 <div class="card-container">
     <div *ngIf="deer.length == 0 && !loading">No Matching Deer</div>
     <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent" class="loading-bar"></mat-progress-bar>
@@ -82,7 +79,7 @@
           <mat-card-subtitle>{{deer.ranch?.name}}</mat-card-subtitle>
         </mat-card-header>
         <mat-divider inset></mat-divider>
-        <img class="card-img" mat-card-image [src]="deer.profileImage" alt="Photo of deer">
+        <img class="card-img" mat-card-image [lazyLoad]="deer.profileImage"  alt="Loading Deer Image....">
         <mat-divider style="margin-bottom: 5px;" inset></mat-divider>
         <mat-card-content class="card-content">
             <div>NADR: {{deer.nadr}}</div>
@@ -98,5 +95,6 @@
 
   <div *ngIf="!hideGetMoreBtn" style="display: flex; justify-content: center; padding: 10px;">
     <button *ngIf="!loading" mat-raised-button color="accent" (click)="getNextPage()">Load More Deer</button>
+    <mat-spinner *ngIf="loading" color="accent"></mat-spinner>
   </div>
 </div>

@@ -61,6 +61,8 @@ import { ImageDialogComponent } from './components/dialogs/image-dialog/image-di
 import { AddDeerParentComponent } from './components/add-deer-parent/add-deer-parent.component';
 import { AddAgeToImageComponent } from './components/dialogs/add-age-to-image/add-age-to-image.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { LazyLoadDirective } from './utils/directives/lazy-load-img.directive';
+import { LazyLoadImageModule } from 'ng-lazyload-image'; 
 
 
 @NgModule({
@@ -72,6 +74,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     RegisterComponent,
     PhoneMaskDirective,
     DigitOnlyDirective,
+    LazyLoadDirective,
     DecimalPlacesDirective,
     ChangePasswordComponent,
     ConfirmationPageComponent,
@@ -126,6 +129,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     MatPaginatorModule,
     MatSnackBarModule,
     MatStepperModule,
+    LazyLoadImageModule
   ],
   providers: [
     authInterceptorProviders,

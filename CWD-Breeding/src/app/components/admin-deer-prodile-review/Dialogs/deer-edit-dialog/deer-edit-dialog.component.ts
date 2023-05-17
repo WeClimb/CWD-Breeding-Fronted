@@ -24,6 +24,8 @@ export class DeerEditDialogComponent implements OnInit {
     semenCost: new FormControl(0, [Validators.required]),
     ranchId: new FormControl('', [Validators.required]),
     profileImage: new FormControl(''),
+    isPaid: new FormControl(false),
+    paidDate: new FormControl(''),
     videoLink: new FormControl(''),
     denialReason: new FormControl(''),
     createDate: new FormControl(''),
@@ -50,7 +52,8 @@ export class DeerEditDialogComponent implements OnInit {
     this.registrationForm.controls['semenAvailable'].setValue(this.deer.semenAvailable);
     this.registrationForm.controls['semenCost'].setValue(this.deer.semenCost);
     this.registrationForm.controls['ranchId'].setValue(this.deer.ranchId);
-
+    this.registrationForm.controls['isPaid'].setValue(this.deer.isPaid);
+    this.registrationForm.controls['paidDate'].setValue(this.deer.paidDate);
     this.registrationForm.controls['profileImage'].setValue(this.deer.profileImage);
     this.registrationForm.controls['videoLink'].setValue(this.deer.videoLink);
     this.registrationForm.controls['denialReason'].setValue(this.deer.denialReason);

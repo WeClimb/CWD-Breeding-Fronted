@@ -6,15 +6,9 @@ import { forkJoin, Observable, of, switchMap, tap } from 'rxjs';
 import { DeerService } from 'src/app/services/deer.service';
 import { TokenStorageService } from 'src/app/services/token_storage.service';
 import { DeerImage } from 'src/models/deer-image.model';
+import { DeerSubscriptionModel } from 'src/models/deer-subscription.model';
 import { Deer } from 'src/models/deer.model';
 import { CheckoutComponent } from '../checkout/checkout.component';
-
-interface DeerSubscriptionModel {
-    deerId?: string;
-    ranchId?: string;
-    deerName?: string;
-    cost: number;
-  }
 
 @Component({
     selector: 'app-add-deer-parent',
@@ -105,7 +99,7 @@ export class AddDeerParentComponent implements OnInit {
                 deerId: deer.id,
                 ranchId: deer.ranchId,
                 deerName: deer.name,
-                cost: 125
+                cost: 250
               };
               this.deerReceipt.push(deerSubscription);
             }),
