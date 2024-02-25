@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ngx-lazy-load-images": "^2.0.0"
+  }
+}
