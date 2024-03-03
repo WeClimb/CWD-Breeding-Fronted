@@ -1,10 +1,12 @@
 import { PasswordReset } from './../../../models/password-reset.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ChangePasswordService } from 'src/app/services/change-password.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { RanchService } from 'src/app/services/ranch.service';
 import { PASSWORD_REGEX } from 'src/app/utils/regex/password-regex.constant';
+import { AdminRanchCreateModel } from 'src/models/admin-ranch-create.model';
+import { SuccessDialogComponent } from '../dialogs/SuccessDialog/SuccessDialog.component';
 
 @Component({
   selector: 'app-change-password',
@@ -28,9 +30,10 @@ export class ChangePasswordComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private activatedRoute: ActivatedRoute,
-        private changePasswordService: ChangePasswordService,
-        private snackBar: MatSnackBar,
+        private ranchService: RanchService,
+        private dialog: MatDialog,
+        @Inject(MAT_DIALOG_DATA) public data: { adminCreateModel: AdminRanchCreateModel }
+
     ) {}
 
     ngOnInit(): void {
@@ -52,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     onSubmit(): void {
-        const changePasswordId = this.activatedRoute.snapshot.paramMap.get('id');
+        const changePasswordId = this.data.adminCreateModel.changePasswordId;
 
         if (changePasswordId != null) {
             this.saving = true;
@@ -62,18 +65,28 @@ export class ChangePasswordComponent implements OnInit {
                 password: this.changePasswordForm.controls['confirmPassword'].value,
             }
 
-            this.changePasswordService
-                .post([], passwordReset)
+            this.ranchService
+                .post(['Admin-Change-Password'], passwordReset)
                 .subscribe(() => {
-                    this.snackBar.open('An email has been sent with instructions on how to reset your password.', 'Close', {
-                        duration: 5000,
-                    });
-
-                    this.router.navigate(['login']);
+                    this.saving = false;
+                    this.openSuccessDialogAndRoute();
                 });
         } else {
             this.error = 'Invalid change request, try sending another link to your email.';
         }
     }
 
+    openSuccessDialogAndRoute(): void {
+        const dialogRef = this.dialog.open(SuccessDialogComponent, {
+          width: '400px',
+          data: { message: 'Ranch created successfully, routing to profile' }
+        });
+      
+        dialogRef.afterOpened().subscribe(() => {
+          setTimeout(() => {
+            this.dialog.closeAll();
+            this.router.navigate(['ranch-profile', this.data.adminCreateModel.ranchId]);
+          }, 2000);
+        });
+    }
 }

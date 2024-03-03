@@ -37,6 +37,7 @@ export class DeerRequestComponent implements OnInit {
     @Input() loading!: boolean;
     @Input() currentDeerExtraImages!: DeerImage[];
     @Input() currentDeerProfileImage!: DeerImage[];
+    @Input() adminAddRanchId: string = '';
 
     @Output() submitDeerEvent = new EventEmitter();
     @Output() addProfileImageEvent = new EventEmitter<DeerImage>();

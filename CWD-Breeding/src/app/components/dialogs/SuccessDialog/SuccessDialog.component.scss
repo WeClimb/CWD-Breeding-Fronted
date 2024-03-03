@@ -1,0 +1,38 @@
+.mat-dialog-container {
+    width: 400px;
+    padding: 24px;
+  }
+  
+  /* Style the title and content */
+  .mat-dialog-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .mat-dialog-content {
+    font-size: 16px;
+    margin-top: 16px;
+  }
+  
+  /* Style the close button */
+  .mat-dialog-actions button {
+    color: white;
+    background-color: #4caf50;
+    border: 2px solid transparent; /* Add a transparent border */
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    animation: shimmer 2s infinite; /* Apply the shimmer animation */
+  }
+  
+  
+  .mat-dialog-actions button:hover {
+    background-color: #388e3c;
+  }
+  
+  /* Add some margin to the close button */
+  .mat-dialog-actions {
+    margin-top: 16px;
+  }
+  

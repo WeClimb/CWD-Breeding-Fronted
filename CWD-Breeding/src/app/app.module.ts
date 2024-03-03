@@ -63,6 +63,10 @@ import { AddAgeToImageComponent } from './components/dialogs/add-age-to-image/ad
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { LazyLoadDirective } from './utils/directives/lazy-load-img.directive';
 import { LazyLoadImageModule } from 'ng-lazyload-image'; 
+import { RanchProfileComponent } from './components/ranch-profile/ranch-profile.component';
+import { SuccessDialogComponent } from './components/dialogs/SuccessDialog/SuccessDialog.component';
+import { AddRanchDialogComponent } from './components/dialogs/add-ranch-dialog/add-ranch-dialog.component';
+import { DeerEditComponent } from './components/edit-deer/edit-deer.component';
 
 
 @NgModule({
@@ -92,7 +96,11 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     ImageDialogComponent,
     AddDeerParentComponent,
     AddAgeToImageComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    RanchProfileComponent,
+    SuccessDialogComponent,
+    AddRanchDialogComponent,
+    DeerEditComponent
    ],
   imports: [
     AppRoutingModule,
@@ -129,7 +137,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     MatPaginatorModule,
     MatSnackBarModule,
     MatStepperModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
   ],
   providers: [
     authInterceptorProviders,

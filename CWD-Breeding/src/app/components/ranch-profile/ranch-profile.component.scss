@@ -1,0 +1,129 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .card {
+    width: 80%;
+    max-width: 800px;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+  }
+  
+  .profile-image-container {
+    width: 200px;
+    height: 200px; /* Add this line */
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 24px;
+  }
+
+  .profile-details {
+    position: relative;
+  }
+  
+  .profile-details::after {
+    content: "";
+    position: absolute;
+    bottom: 22px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #E27F2B;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  
+  .ranch-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .owner-name {
+    font-size: 18px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .half-width {
+    width: calc(50% - 12px); /* Subtract padding and margin */
+    display: inline-block;
+    margin-right: 24px;
+  }
+  
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .save-btn {
+    width: 100%;
+  }
+
+  .deer-card-container {
+    border: 1px solid #f5f5f5;
+    background-color: #f5f5f5;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    max-height: calc(100vh - 100px); /* Adjust the max height based on your footer's height */
+    flex-wrap: wrap;
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    margin-top: 100px;
+  }
+  
+  .deer-card {
+    flex: 0 0 calc(25% - 20px); /* Adjust the size of the cards */
+    max-width: calc(25% - 20px); /* Adjust the size of the cards */
+    min-width: calc(25% - 20px); /* Adjust the size of the cards */
+    background-color: #f5f5f5;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .example-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .card-img {
+    width: 100%;
+    height: 100px; /* Adjust the height of the image */
+    object-fit: cover;
+  }
+  
+  .card-content {
+    flex-grow: 1;
+  }
+  
+  .card-btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  
+  
+  
+  

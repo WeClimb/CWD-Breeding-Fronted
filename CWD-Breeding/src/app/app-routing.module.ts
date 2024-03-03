@@ -16,6 +16,8 @@ import { DeerSubmissionConfirmationComponent } from './components/deer-submissio
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
 import { AddDeerParentComponent } from './components/add-deer-parent/add-deer-parent.component';
+import { RanchProfileComponent } from './components/ranch-profile/ranch-profile.component';
+import { DeerEditComponent } from './components/edit-deer/edit-deer.component';
 
 const routes: Routes = [
   {
@@ -39,6 +41,11 @@ const routes: Routes = [
   {
     path: 'Deer-Profile-Review/:id',
     component: AdminDeerProdileReviewComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'Edit-Deer/:id',
+    component: DeerEditComponent,
     canActivate: [AuthGuardService],
   },
   {
@@ -76,6 +83,11 @@ const routes: Routes = [
   {
     path: 'admin-home',
     component: AdminHomeComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'ranch-profile/:id',
+    component: RanchProfileComponent,
     canActivate: [AuthGuardService],
   },
   {
