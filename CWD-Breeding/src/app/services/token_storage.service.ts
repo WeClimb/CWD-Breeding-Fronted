@@ -14,6 +14,19 @@ export class TokenStorageService {
         window.sessionStorage.clear();
     }
 
+    public setAdminRanch(ranch: string) {
+        window.sessionStorage.removeItem('adminRanch');
+        window.sessionStorage.setItem('adminRanch', ranch);
+    }
+
+    public clearAdminRanch() {
+        window.sessionStorage.removeItem('adminRanch');
+    }
+
+    public getAdminRanch(): string | null {
+        return window.sessionStorage.getItem('adminRanch');
+    }
+
     public saveToken(token: string): void {
         window.sessionStorage.removeItem(TOKEN_KEY);
         window.sessionStorage.setItem(TOKEN_KEY, token);

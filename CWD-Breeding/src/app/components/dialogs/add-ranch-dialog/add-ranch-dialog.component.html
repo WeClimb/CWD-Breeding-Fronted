@@ -1,11 +1,14 @@
 <div class="container">
   <mat-card class="card">
+    <button mat-icon-button class="close-button" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
     <mat-card-title>Add Ranch</mat-card-title>
     <mat-card-content>
       <form [formGroup]="ranchForm" (submit)="onSubmit()">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Ranch Name</mat-label>
-          <input matInput formControlName="name" placeholder="Ranch Name">
+          <input matInput formControlName="name" placeholder="Ranch Name" autofocus>
         </mat-form-field>
 
         <div class="flex-container">
@@ -19,7 +22,7 @@
           <div class="half-width">
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Owner Last Name</mat-label>
-              <input matInput formControlName="ownerLastName" placeholder="Owner Last Name">
+              <input matInput formControlName="OwnerlastName" placeholder="Owner Last Name">
             </mat-form-field>
           </div>
         </div>

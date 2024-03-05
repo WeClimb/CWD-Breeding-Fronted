@@ -89,8 +89,9 @@ setToTop() {
 getDeer() {
   this.loadingImages = true;
   let map = new Map();
-  this.deerService.get([this.id], map).subscribe(response => {
+  this.deerService.get([this.id], map).subscribe((response: Deer) => {
     this.deer = response;
+    console.log(this.deer);
     this.profileImage = this.deer.profileImage;
     this.imageMap.set(this.profileImage,this.deer.ageOfBuckDisplayed);
     this.getImages();
@@ -177,16 +178,14 @@ getImages(): void {
   });
 }
 
-
-
-
-
-
 approve(): void {
   this.loadingApproval = true;
   this.deer.isApproved = true;
   this.deerService.put(["Approve"], (this.deer)).subscribe(() => {
-    complete: this.router.navigate(['admin-home']);
+    complete: 
+    this.loadingApproval = false;
+    this.getDeer();
+
   });
 }
 
@@ -195,7 +194,10 @@ deny(): void {
   this.deer.isApproved = false;
   this.deer.denialReason = this.denialForm.controls['denialReason'].value;
   this.deerService.put(["Denied"] , (this.deer)).subscribe(() => {
-    complete: this.router.navigate(['admin-home']);
+    complete: 
+    this.loadingDeny = false;
+    this.denying = false;
+    this.getDeer();
   });
 }
 

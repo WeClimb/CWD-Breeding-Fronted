@@ -7,20 +7,15 @@ import {
     ViewChild,
 } from '@angular/core';
 import {
-    FormBuilder,
-    FormControl,
     FormGroup,
-    Validators,
 } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatStepper, StepperOrientation } from '@angular/material/stepper';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
-import { Deer } from 'src/models/deer.model';
 import { DeerService } from 'src/app/services/deer.service';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token_storage.service';
-import { ThisReceiver } from '@angular/compiler';
 import { DeerImage } from 'src/models/deer-image.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddAgeToImageComponent } from '../dialogs/add-age-to-image/add-age-to-image.component';
@@ -37,7 +32,6 @@ export class DeerRequestComponent implements OnInit {
     @Input() loading!: boolean;
     @Input() currentDeerExtraImages!: DeerImage[];
     @Input() currentDeerProfileImage!: DeerImage[];
-    @Input() adminAddRanchId: string = '';
 
     @Output() submitDeerEvent = new EventEmitter();
     @Output() addProfileImageEvent = new EventEmitter<DeerImage>();
@@ -75,9 +69,13 @@ export class DeerRequestComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.registrationForm.controls['ranchId'].setValue(
-            this.tokenStorage.getUser().id
-        );
+        let adminRanch = this.tokenStorage.getAdminRanch();
+
+        if(adminRanch){
+            this.registrationForm.controls['ranchId'].setValue(adminRanch);
+        } else {
+            this.registrationForm.controls['ranchId'].setValue(this.tokenStorage.getUser().id);
+        }
 
         this.registrationForm.controls['gebu'].valueChanges
             .pipe(debounceTime(400), distinctUntilChanged())

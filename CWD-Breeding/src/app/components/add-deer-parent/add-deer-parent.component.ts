@@ -80,6 +80,7 @@ export class AddDeerParentComponent implements OnInit {
     currentDeerProfileImage: DeerImage[] = [];
     currentDeerExtraImages: DeerImage[] = [];
     deerReceipt: DeerSubscriptionModel[] = [];
+    adminAddRanchId: string = '';
 
     constructor(public deerService: DeerService, public router: Router, private tokenStorage: TokenStorageService, public dialog: MatDialog) {}
 

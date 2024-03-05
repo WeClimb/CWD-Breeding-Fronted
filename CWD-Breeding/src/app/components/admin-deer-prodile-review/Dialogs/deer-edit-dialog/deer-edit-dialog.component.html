@@ -51,6 +51,12 @@
       <input matInput formControlName="semenCost" required type="number" [roundingValue]="2" appDecimalPlaces>
       <mat-error *ngIf="registrationForm.controls['semenCost'].hasError('required')">Address is required.</mat-error>
   </mat-form-field>
+
+  <mat-form-field class="flex-1 form-field" appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea rows="8" matInput formControlName="description"></textarea>
+</mat-form-field>
+
 </form>
 
 <button class="admin-btn" mat-raised-button color="accent" (click)="acceptChanges()" >Accept</button>

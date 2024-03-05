@@ -29,6 +29,7 @@ export class DeerEditDialogComponent implements OnInit {
     videoLink: new FormControl(''),
     denialReason: new FormControl(''),
     createDate: new FormControl(''),
+    description: new FormControl(''),
 });
 
   constructor(
@@ -58,7 +59,7 @@ export class DeerEditDialogComponent implements OnInit {
     this.registrationForm.controls['videoLink'].setValue(this.deer.videoLink);
     this.registrationForm.controls['denialReason'].setValue(this.deer.denialReason);
     this.registrationForm.controls['createDate'].setValue(this.deer.createDate);
-
+    this.registrationForm.controls['description'].setValue(this.deer.description);
   }
 
   acceptChanges(): void {

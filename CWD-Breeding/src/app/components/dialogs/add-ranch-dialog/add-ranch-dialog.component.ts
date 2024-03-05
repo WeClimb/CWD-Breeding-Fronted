@@ -36,7 +36,7 @@ export class AddRanchDialogComponent implements OnInit {
 
     this.ranchForm = this.fb.group({
       ownerFirstName: new FormControl('', [Validators.required, Validators.minLength(1)]),
-      ownerlastName: new FormControl('', [Validators.required, Validators.minLength(1)]),
+      OwnerlastName: new FormControl('', [Validators.required, Validators.minLength(1)]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern(EMAIL_REGEX),]),
       city: new FormControl('', [Validators.required, Validators.minLength(1)]),
       state: new FormControl('', [Validators.required]),
@@ -54,6 +54,9 @@ export class AddRanchDialogComponent implements OnInit {
     });
 }
 
+closeDialog(): void {
+    this.dialog.closeAll();
+}
 
   onSubmit() {
     this.loading = true;

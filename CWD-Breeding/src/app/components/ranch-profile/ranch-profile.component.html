@@ -78,7 +78,7 @@
               <mat-label>Phone Number</mat-label>
               <input matInput formControlName="phoneNumber" placeholder="Phone Number" appPhoneMask>
             </mat-form-field>
-          </div>
+          </div>z
         </div>
 
         <button class="save-btn" mat-raised-button color="accent" type="submit" [disabled]="loading || ranchForm.invalid">
@@ -90,8 +90,11 @@
   </mat-card>
 </div>
 
+<div class="add-deer-button">
+  <button mat-raised-button color="accent" (click)="navigateToAddDeer()">Add Deer</button>
+</div>
+
 <div class="deer-card-container">
-  <button mat-raised-button color="accent">Add Deer</button>
 
   <div *ngFor="let deer of deer" class="deer-card">
     <mat-card class="example-card">

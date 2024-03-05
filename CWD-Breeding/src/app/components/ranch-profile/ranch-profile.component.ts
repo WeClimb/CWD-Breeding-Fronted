@@ -48,6 +48,7 @@ export class RanchProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.tokenStorage.clearAdminRanch();
     if(this.tokenStorage.getUser().loginType.toLocaleLowerCase() !== 'admin'){
       this.router.navigate(['home']);
     }
@@ -98,6 +99,11 @@ selectState(e: any): void {
       this.loading = false;
       this.deer = response;
     });
+}
+
+navigateToAddDeer(): void {
+  this.tokenStorage.setAdminRanch(this.selectedRanch!.id);
+  this.router.navigate(['request-deer-listing']);
 }
 
   onSubmit() {
