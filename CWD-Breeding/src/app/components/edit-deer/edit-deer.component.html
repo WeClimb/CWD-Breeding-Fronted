@@ -16,6 +16,8 @@
   
     <button *ngIf="!loadingDeny && deer?.isApproved" class="admin-btn" mat-raised-button color="warn" (click)="openDenialInput()">Deny</button>
     <mat-spinner *ngIf="loadingDeny" mode="indeterminate" color="accent"></mat-spinner>
+
+    <p style="color: red; margin-top: 20px; padding: 2px; border-radius: 10px; box-shadow: rgba(92, 11, 11, 0.87) 0px 0px 0px 2px, rgba(103, 13, 13, 0.963) 0px 4px 6px -1px, rgba(164, 4, 4, 0.536) 0px 1px 0px inset;">Warning: Any changes to status will trigger email to deer owner</p>
   </div>
 
   <form [formGroup]="denialForm" *ngIf="denying" class="admin-btn-container">
