@@ -30,6 +30,7 @@ export class DeerEditDialogComponent implements OnInit {
     denialReason: new FormControl(''),
     createDate: new FormControl(''),
     description: new FormControl(''),
+    status: new FormControl(''),
 });
 
   constructor(
@@ -60,6 +61,7 @@ export class DeerEditDialogComponent implements OnInit {
     this.registrationForm.controls['denialReason'].setValue(this.deer.denialReason);
     this.registrationForm.controls['createDate'].setValue(this.deer.createDate);
     this.registrationForm.controls['description'].setValue(this.deer.description);
+    this.registrationForm.controls['status'].setValue(this.deer.status);
   }
 
   acceptChanges(): void {

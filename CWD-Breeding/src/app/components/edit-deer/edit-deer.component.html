@@ -9,7 +9,7 @@
       <h3 style="margin-top: 20px;" *ngIf="deer?.status == 'DENIED'">Current Status: Denied</h3>
     </div>
   
-    <button *ngIf="!loadingApproval && deer?.status == 'DENIED'" class="admin-btn" mat-raised-button color="accent" (click)="approve()">Approve</button>
+    <button *ngIf="!loadingApproval && (deer?.status == 'DENIED' || (deer.isPaid && !deer.isApproved))" class="admin-btn" mat-raised-button color="accent" (click)="approve()">Approve</button>
     <mat-spinner *ngIf="loadingApproval" mode="indeterminate" color="accent"></mat-spinner>
   
     <button class="admin-btn" mat-raised-button color="primary" (click)="openEditDeerDialog()">Edit</button>

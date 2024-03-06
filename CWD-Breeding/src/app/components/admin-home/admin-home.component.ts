@@ -42,6 +42,8 @@ export class AdminHomeComponent implements OnInit {
       this.router.navigate(['home']);
     }
 
+    this.getRanches('','','');
+
     this.ranchSearchForm.valueChanges.pipe(
       debounceTime(500),
       distinctUntilChanged()
