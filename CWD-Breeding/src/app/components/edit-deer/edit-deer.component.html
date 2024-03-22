@@ -1,4 +1,6 @@
 <div class="background">
+  <button style="margin-left: 10%; margin-top: 20px; margin-bottom: 20px;" mat-raised-button color="accent" (click)="routeToAdminHome()">Admin Home</button>
+ 
   <div id="scrollId"><mat-divider></mat-divider></div>
   <div class="admin-btn-container">
     <div class="status-container">
@@ -9,10 +11,11 @@
       <h3 style="margin-top: 20px;" *ngIf="deer?.status == 'DENIED'">Current Status: Denied</h3>
     </div>
   
-    <button *ngIf="!loadingApproval && (deer?.status == 'DENIED' || (deer.isPaid && !deer.isApproved))" class="admin-btn" mat-raised-button color="accent" (click)="approve()">Approve</button>
+    <button *ngIf="!loadingApproval && (deer?.status == 'DENIED' || (deer?.isPaid && !deer.isApproved))" class="admin-btn" mat-raised-button color="accent" (click)="approve()">Approve</button>
     <mat-spinner *ngIf="loadingApproval" mode="indeterminate" color="accent"></mat-spinner>
   
     <button class="admin-btn" mat-raised-button color="primary" (click)="openEditDeerDialog()">Edit</button>
+    <button class="admin-btn" mat-raised-button color="accent" (click)="openEditImages()">Image Editor</button>
   
     <button *ngIf="!loadingDeny && deer?.isApproved" class="admin-btn" mat-raised-button color="warn" (click)="openDenialInput()">Deny</button>
     <mat-spinner *ngIf="loadingDeny" mode="indeterminate" color="accent"></mat-spinner>
@@ -31,7 +34,6 @@
   </form>
   
   <mat-divider class="btn-divider"></mat-divider>
-  
   
   <div class="background">
     <div id="scrollId"><mat-divider></mat-divider></div>

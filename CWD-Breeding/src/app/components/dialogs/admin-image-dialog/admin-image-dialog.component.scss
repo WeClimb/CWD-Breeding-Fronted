@@ -1,0 +1,74 @@
+.image-editor-dialog {
+    width: 70vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+
+        h2 {
+          margin: 0;
+        }
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    
+    .mat-form-field {
+      max-width: 100px; /* Set the maximum width as needed */
+      max-height: 20px;
+    }
+
+    .example-card {
+        max-width: 400px;
+        margin: 10px;
+        width: 400px;
+        max-height: 500px;
+        height: 500px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      }
+
+      .centered-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card-img {
+        width:400px;
+        height:300px;
+        max-width: 390px;
+        overflow: hidden;
+        object-fit: cover;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        border-radius: 5px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      }
+  
+    .upload-images {
+      width: 100%;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+   
+  }
+  

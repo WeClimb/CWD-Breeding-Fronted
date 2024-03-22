@@ -1,0 +1,42 @@
+<div class="image-editor-dialog">
+  <div class="header">
+    <h2>Image Editor</h2>
+    <div class="image-upload" *ngIf="imageArray.length < 4 && !loading">
+      <label for="file" class="mat-raised-button mat-accent">
+          Add Image
+      </label>
+      <input #fileInput id="file" type="file" accept=".png,.jpg,.jpeg" (change)="openDeerFileAgeDialog($event, 'ProfileImage')" style="display: none;" />
+  </div>
+
+    <div class="image-upload" *ngIf="imageArray.length >= 4">
+      <button  mat-raised-button color="accent" disabled>Add Image</button>
+      <mat-hint style="margin-left: 5px;">Maximum 4 images allowed, remove one image to add new</mat-hint>
+    </div>
+
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="card-container">
+    <mat-card class="example-card" *ngFor="let image of imageArray">
+          Age of Deer Displayed:
+          <mat-form-field appearance="outline">
+            <mat-label>Select Age</mat-label>
+            <input matInput type="number" [(ngModel)]="image.value" min="1" step="1">
+          </mat-form-field>
+          
+          <button style="margin-left: 10px;" mat-raised-button color="primary" (click)="saveImageChange(image)">Save Age Update</button>
+          
+
+      <img class="card-img" mat-card-image [src]="image.key"  alt="Loading Deer Image....">
+      <mat-divider style="margin-bottom: 5px;" inset></mat-divider>
+      <mat-card-actions class="card-btn">
+        <button mat-raised-button *ngIf="image.key != data.profileImage" color="accent" (click)="swapProfileImage(image.key)">Set as Profile Image</button>
+        <button *ngIf="image.key != data.profileImage" (click)="removeImage(image)"  color="warn" mat-raised-button>Remove</button>
+      </mat-card-actions>
+      <p *ngIf="image.key == data.profileImage">Current Profile Image - <br>Cannot remove profile image, set new image as profile photo to remove</p>
+    </mat-card>
+  </div>
+</div>
+

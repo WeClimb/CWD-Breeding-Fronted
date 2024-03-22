@@ -67,6 +67,9 @@ import { RanchProfileComponent } from './components/ranch-profile/ranch-profile.
 import { SuccessDialogComponent } from './components/dialogs/SuccessDialog/SuccessDialog.component';
 import { AddRanchDialogComponent } from './components/dialogs/add-ranch-dialog/add-ranch-dialog.component';
 import { DeerEditComponent } from './components/edit-deer/edit-deer.component';
+import { AdminImageDialogComponent } from './components/dialogs/admin-image-dialog/admin-image-dialog.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ConfirmationDialogComponent } from './components/dialogs/admin-image-dialog/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -100,7 +103,9 @@ import { DeerEditComponent } from './components/edit-deer/edit-deer.component';
     RanchProfileComponent,
     SuccessDialogComponent,
     AddRanchDialogComponent,
-    DeerEditComponent
+    DeerEditComponent,
+    AdminImageDialogComponent,
+    ConfirmationDialogComponent
    ],
   imports: [
     AppRoutingModule,
@@ -138,6 +143,8 @@ import { DeerEditComponent } from './components/edit-deer/edit-deer.component';
     MatSnackBarModule,
     MatStepperModule,
     LazyLoadImageModule,
+    ImageCropperModule,
+    
   ],
   providers: [
     authInterceptorProviders,

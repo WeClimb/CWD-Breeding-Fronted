@@ -7,6 +7,7 @@ import { DeerService } from 'src/app/services/deer.service';
 import { Deer } from 'src/models/deer.model';
 import { ImageDialogComponent } from '../dialogs/image-dialog/image-dialog.component';
 import { DeerEditDialogComponent } from '../admin-deer-prodile-review/Dialogs/deer-edit-dialog/deer-edit-dialog.component';
+import { AdminImageDialogComponent } from '../dialogs/admin-image-dialog/admin-image-dialog.component';
 
 @Component({
   selector: 'app-edit-deer',
@@ -91,7 +92,6 @@ getDeer() {
   let map = new Map();
   this.deerService.get([this.id], map).subscribe((response: Deer) => {
     this.deer = response;
-    console.log(this.deer);
     this.profileImage = this.deer.profileImage;
     this.imageMap.set(this.profileImage,this.deer.ageOfBuckDisplayed);
     this.getImages();
@@ -164,10 +164,10 @@ changeImageBackward(): void {
 
 getImages(): void {
   this.deerService.get([this.id, 'Images'], this.imageMap).subscribe(response => {
-    console.log(response.data);
     if (response.data !== null) {
       for (const key in response.data) {
         if (response.data.hasOwnProperty(key)) {
+          console.log(response.data)
           const element = response.data[key];
           this.maxIndex++;
           this.images.push(key);
@@ -201,6 +201,10 @@ deny(): void {
   });
 }
 
+routeToAdminHome(): void {
+  this.router.navigate(['admin-home']);
+}
+
 openDenialInput(): void {
   this.denying = true;
 }
@@ -215,7 +219,7 @@ openEditDeerDialog(): void {
   });
 
   dialogRef.afterClosed().subscribe(() => {
-    complete: this.getDeer();
+    location.reload();
   });
 }
 
@@ -224,6 +228,22 @@ openImageViewer(): void {
     data: {
       image: this.profileImage,
     },
+  });
+}
+
+openEditImages(): void {
+  this.dialog.open(AdminImageDialogComponent, {
+    disableClose: true,
+    data: {
+      deerId: this.id,
+      imageMap: this.imageMap,
+      profileImage: this.deer.profileImage,
+    },
+  });
+
+  this.dialog.afterAllClosed.subscribe(() => {
+    console.log('Dialog closed');
+    this.getDeer();
   });
 
 }
