@@ -98,6 +98,7 @@ selectState(e: any): void {
     this.deerService.getAll(['All-Filtered'],map).subscribe(response => {
       this.loading = false;
       this.deer = response;
+      console.log(this.deer);
     });
 }
 

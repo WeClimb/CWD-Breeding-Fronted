@@ -1,173 +1,71 @@
 <div class="background">
     <div id="scrollId"><mat-divider></mat-divider></div>
     <div class="container">
-        <div class="profile-img-container">
-            <button
-                *ngIf="imageMap.size > 1"
-                mat-icon-button
-                color="accent"
-                style="width: 15px; margin-right: 5px"
-                (click)="changeImageBackward()"
-            >
-                <mat-icon>arrow_back_ios</mat-icon>
-            </button>
-            <img
-                class="profile-img"
-                *ngIf="!loadingImages"
-               [src]="profileImage"
-                alt="Profile Image"
-                (click)="openImageViewer()"
-            />
-            <div class="profile-img spinner" *ngIf="loadingImages">
-                <mat-spinner
-                    color="accent"
-                    style="margin: 0 auto; margin-top: 25%"
-                    mode="indeterminate"
-                ></mat-spinner>
-            </div>
-            <button
-                *ngIf="imageMap.size > 1"
-                mat-icon-button
-                color="accent"
-                style="width: 15px"
-                (click)="changeImageForward()"
-            >
-                <mat-icon>arrow_forward_ios</mat-icon>
-            </button>
+      <div class="profile-img-container">
+          <button mat-icon-button color="accent" style="width: 15px; margin-right: 5px;" (click)="changeImageBackward()"><mat-icon>arrow_back_ios</mat-icon></button>
+          <img class="profile-img" *ngIf="!loadingImages" [src]="profileImage" alt="Profile Image" (click)="openImageViewer()">
+          <div class="profile-img spinner" *ngIf="loadingImages">  <mat-spinner color="accent" style="margin: 0 auto; margin-top: 25%" mode="indeterminate"></mat-spinner></div>
+          <button mat-icon-button color="accent" style="width: 15px;" (click)="changeImageForward()"><mat-icon>arrow_forward_ios</mat-icon></button>
+      </div>
+  
+      <div class="data white">
+        <h1>Deer Name: {{deer?.name}}</h1>
+        <h1>NADR#: {{deer?.nadr}}</h1>
+        <h1>Age: {{deer?.age}}</h1>
+        <h1>GEBV: {{deer?.gebv?.toString()}}</h1>
+        <h1>Codon: {{deer?.codon}}</h1>
+        <h1 *ngIf="deer?.gender?.toLocaleLowerCase() == 'buck'">Sci Score: {{deer?.sciScore}}</h1>
+        <h1>Gender: {{deer?.gender}}</h1> <!-- New field -->
+  
+        <div *ngIf="deer?.semenAvailable">
+          <h1>Semen Cost: ${{deer?.semenCost}}</h1>
         </div>
-
-        <div class="data white">
-            <h1>Deer Name: <strong>{{ deer?.name }}</strong></h1>
-
-            <h1>NADR#: <strong>{{ deer?.nadr }}</strong></h1>
-
-            <h1>Date of Birth: <strong>{{ deer?.dob | date : "shortDate" }}</strong></h1>
-
-            <h1>Age of Deer Displayed: <strong>{{ deer?.ageOfBuckDisplayed }}</strong></h1>
-
-            <h1>GEBV: <strong>{{ deer?.gebu }}</strong></h1>
-
-            <h1>Codon: <strong>{{ deer?.codon }}</strong></h1>
-
-            <h1>Sci Score: <strong>{{ deer?.sciScore }}</strong></h1>
-
-            <div *ngIf="deer?.semenAvailable">
-                <h1>Semen Cost: <strong>${{ deer?.semenCost }}</strong></h1>
-            </div>
+        <div *ngIf="deer?.embryosAvailable">
+          <h1>Embryos Cost: ${{deer?.embryosCost}}</h1> <!-- New field -->
         </div>
+      </div>
 
-        <div class="ranch white">
-            <h1><strong>Ranch Info</strong>:</h1>
-            <h1>
-                {{ deer?.ranch?.name }}<br/>
-                {{ deer?.ranch?.address }}<br />{{ deer?.ranch?.city }},
-                {{ deer?.ranch?.state }} {{ deer?.ranch?.zipcode }}
-            </h1>
+      <div  *ngIf="deer?.description" class="description white">
+        <h1 style="margin-top: 10px;">{{ deer?.description }}</h1>
+      </div>
+  
+      <div class="ranch white">
+        <h1>Ranch: {{deer?.ranch?.name}}</h1>
+        <h1>{{deer?.ranch?.address}}<br>{{deer?.ranch?.city}}, {{deer?.ranch?.state}} {{deer?.ranch?.zipcode}}</h1>
+      </div>
+  
+      <div class="contact white">
+        <h1>{{deer?.ranch?.ownerFirstName}} {{deer?.ranch?.ownerlastName}}</h1>
+        <h1>{{deer?.ranch?.phoneNumber}}</h1>
+        <h1>{{deer?.ranch?.email}}</h1>
+        <h1>{{deer?.ranch?.website}}</h1>
+      </div>
+  
+      <div class="pedigree-container white">
+        <h1 class="pedigree-title" style="font-size: 20pt;">{{deer?.name}}</h1>
+        <div class="lev-one-sire"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelOneSire}}</p></div>
+        <div class="lev-one-dam"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelOneDam}}</p></div>
+  
+        <div class="lev-two-sireA"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelTwoSireA}}</p></div>
+        <div class="lev-two-damA"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelTwoDamA}}</p></div>
+        <div class="lev-two-sireB"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelTwoSireB}}</p></div>
+        <div class="lev-two-damB"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelTwoDamB}}</p></div>
+  
+        <div class="lev-three-sireA"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireA}}</p></div>
+        <div class="lev-three-damA"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamA}}</p></div>
+        <div class="lev-three-sireB"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireB}}</p></div>
+        <div class="lev-three-damB"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamB}}</p></div>
+        <div class="lev-three-sireC"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireC}}</p></div>
+        <div class="lev-three-damC"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamC}}</p></div>
+        <div class="lev-three-sireD"><legend class="legend">Sire</legend><p class="name">{{deer?.deerFamily?.levelThreeSireD}}</p></div>
+        <div class="lev-three-damD"><legend class="legend">Dam</legend><p class="name">{{deer?.deerFamily?.levelThreeDamD}}</p></div>
+      </div>
+  
+      <div *ngIf="validVideo" class="video-container white">
+        <div class="video">
+          <iframe [src]="videoLink" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
-
-        <div class="contact white">
-            <h1><strong>Owner Info</strong>:</h1>
-
-            <h1>
-                {{ deer?.ranch?.ownerFirstName }}
-                {{ deer?.ranch?.ownerlastName }}
-            </h1>
-
-            <h1>{{ deer?.ranch?.phoneNumber }}</h1>
-
-            <h1>{{ deer?.ranch?.email }}</h1>
-
-            <h1>{{ deer?.ranch?.website }}</h1>
-        </div>
-
-        <div
-            *ngIf="
-                deer.description != '' ||
-                deer.description != null ||
-                deer.description != 'N/A'
-            "
-            class="description white"
-        >
-            <h1><strong>Description of Deer</strong>:</h1>
-            <h1>"{{ deer?.description }}"</h1>
-        </div>
-
-        <div class="pedigree-container white">
-            <h1 class="pedigree-title" style="font-size: 20pt">
-                {{ deer?.name }}
-            </h1>
-            <div class="lev-one-sire">
-                <legend class="legend">Sire</legend>
-                <p class="name">{{ deer?.deerFamily?.levelOneSire }}</p>
-            </div>
-            <div class="lev-one-dam">
-                <legend class="legend">Dam</legend>
-                <p class="name">{{ deer?.deerFamily?.levelOneDam }}</p>
-            </div>
-
-            <div class="lev-two-sireA">
-                <legend class="legend">Sire</legend>
-                <p class="name">{{ deer?.deerFamily?.levelTwoSireA }}</p>
-            </div>
-            <div class="lev-two-damA">
-                <legend class="legend">Dam</legend>
-                <p class="name">{{ deer?.deerFamily?.levelTwoDamA }}</p>
-            </div>
-            <div class="lev-two-sireB">
-                <legend class="legend">Sire</legend>
-                <p class="name">{{ deer?.deerFamily?.levelTwoSireB }}</p>
-            </div>
-            <div class="lev-two-damB">
-                <legend class="legend">Dam</legend>
-                <p class="name">{{ deer?.deerFamily?.levelTwoDamB }}</p>
-            </div>
-
-            <div class="lev-three-sireA">
-                <legend class="legend">Sire</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeSireA }}</p>
-            </div>
-            <div class="lev-three-damA">
-                <legend class="legend">Dam</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeDamA }}</p>
-            </div>
-            <div class="lev-three-sireB">
-                <legend class="legend">Sire</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeSireB }}</p>
-            </div>
-            <div class="lev-three-damB">
-                <legend class="legend">Dam</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeDamB }}</p>
-            </div>
-            <div class="lev-three-sireC">
-                <legend class="legend">Sire</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeSireC }}</p>
-            </div>
-            <div class="lev-three-damC">
-                <legend class="legend">Dam</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeDamC }}</p>
-            </div>
-            <div class="lev-three-sireD">
-                <legend class="legend">Sire</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeSireD }}</p>
-            </div>
-            <div class="lev-three-damD">
-                <legend class="legend">Dam</legend>
-                <p class="name">{{ deer?.deerFamily?.levelThreeDamD }}</p>
-            </div>
-        </div>
-
-        <div *ngIf="validVideo" class="video-container white">
-            <div class="video">
-                <iframe
-                    [src]="videoLink"
-                    width="100%"
-                    height="100%"
-                    frameborder="0"
-                    webkitallowfullscreen
-                    mozallowfullscreenallowfullscreen
-                ></iframe>
-            </div>
-        </div>
+      </div>
     </div>
     <div class="spacer"></div>
-</div>
+  </div>

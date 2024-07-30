@@ -57,7 +57,6 @@ export class DeerRequestComponent implements OnInit {
     constructor(
         breakpointObserver: BreakpointObserver,
         public deerService: DeerService,
-        private router: Router,
         private tokenStorage: TokenStorageService,
         private dialog: MatDialog
     ) {
@@ -77,9 +76,9 @@ export class DeerRequestComponent implements OnInit {
             this.registrationForm.controls['ranchId'].setValue(this.tokenStorage.getUser().id);
         }
 
-        this.registrationForm.controls['gebu'].valueChanges
+        this.registrationForm.controls['gebv'].valueChanges
             .pipe(debounceTime(400), distinctUntilChanged())
-            .subscribe(() => this.checkGebvLength());
+            .subscribe(() => this.checkgebvLength());
 
         this.registrationForm.controls['ageOfBuckDisplayed'].valueChanges
             .pipe(debounceTime(400), distinctUntilChanged())
@@ -87,8 +86,30 @@ export class DeerRequestComponent implements OnInit {
 
         this.registrationForm.controls['codon'].valueChanges
             .pipe(debounceTime(400), distinctUntilChanged())
-            .subscribe(() => this.upperCaseCodon());
+            .subscribe(() => this.upperCaseCodon());   
+            
+        this.registrationForm.controls['gender'].valueChanges.subscribe(value => this.onGenderChange());
     }
+
+    onGenderChange(): void {
+
+        const gender: string = this.registrationForm.controls['gender'].value;
+
+        if (gender === 'Buck') {
+            this.registrationForm.controls['semenAvailable'].enable();
+            this.registrationForm.controls['semenCost'].enable();
+            this.registrationForm.controls['sciScore'].enable();
+            this.registrationForm.controls['embryosAvailable'].disable();
+            this.registrationForm.controls['embryosCost'].disable();
+        } else if (gender === 'Doe') {
+            this.registrationForm.controls['semenAvailable'].disable();
+            this.registrationForm.controls['semenCost'].disable();
+            this.registrationForm.controls['embryosAvailable'].enable();
+            this.registrationForm.controls['embryosCost'].enable();
+            this.registrationForm.controls['sciScore'].disable();
+        }
+    }
+
 
     upperCaseCodon(): void {
         this.registrationForm.get('codon')!.valueChanges.subscribe((value) => {
@@ -100,18 +121,18 @@ export class DeerRequestComponent implements OnInit {
         });
     }
 
-    checkGebvLength(): void {
+    checkgebvLength(): void {
         if (
-            this.registrationForm.controls['gebu'].value != null ||
-            this.registrationForm.controls['gebu'].value != undefined
+            this.registrationForm.controls['gebv'].value != null ||
+            this.registrationForm.controls['gebv'].value != undefined
         ) {
             this.gebvValidLength = false;
             let currentValue: string =
-                this.registrationForm.controls['gebu'].value.toString();
+                this.registrationForm.controls['gebv'].value.toString();
 
             if (currentValue.includes('-')) {
                 if (currentValue.length > 9) {
-                    this.registrationForm.controls['gebu'].setValue(
+                    this.registrationForm.controls['gebv'].setValue(
                         Number(currentValue.substring(0, 9))
                     );
                     this.gebvValidLength = true;
@@ -122,7 +143,7 @@ export class DeerRequestComponent implements OnInit {
                 }
             } else {
                 if (currentValue.length > 8) {
-                    this.registrationForm.controls['gebu'].setValue(
+                    this.registrationForm.controls['gebv'].setValue(
                         Number(currentValue.substring(0, 8))
                     );
                     this.gebvValidLength = true;

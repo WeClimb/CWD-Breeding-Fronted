@@ -17,8 +17,11 @@ export class DeerEditDialogComponent implements OnInit {
     name: new FormControl('', Validators.required),
     nadr: new FormControl('', Validators.required),
     dob: new FormControl('', Validators.required),
-    gebu: new FormControl('', [Validators.required,]),
+    gebv: new FormControl('', [Validators.required,]),
     codon: new FormControl('', [Validators.required]),
+    embryosAvailable: new FormControl(false, Validators.required), // New field
+    embryosCost: new FormControl({ value: 0, disabled: true }, [Validators.required]), // New field
+    gender: new FormControl('', Validators.required), // New field
     sciScore: new FormControl('', [Validators.required]),
     semenAvailable: new FormControl(true, Validators.required),
     semenCost: new FormControl(0, [Validators.required]),
@@ -26,9 +29,10 @@ export class DeerEditDialogComponent implements OnInit {
     profileImage: new FormControl(''),
     isPaid: new FormControl(false),
     paidDate: new FormControl(''),
+    createDate: new FormControl(''),
+    updateDate: new FormControl(''),
     videoLink: new FormControl(''),
     denialReason: new FormControl(''),
-    createDate: new FormControl(''),
     description: new FormControl(''),
     status: new FormControl(''),
 });
@@ -48,20 +52,26 @@ export class DeerEditDialogComponent implements OnInit {
     this.registrationForm.controls['name'].setValue(this.deer.name);
     this.registrationForm.controls['nadr'].setValue(this.deer.nadr);
     this.registrationForm.controls['dob'].setValue(this.deer.dob);
-    this.registrationForm.controls['gebu'].setValue(this.deer.gebu);
+    this.registrationForm.controls['gebv'].setValue(this.deer.gebv);
     this.registrationForm.controls['codon'].setValue(this.deer.codon);
     this.registrationForm.controls['sciScore'].setValue(this.deer.sciScore);
+    this.registrationForm.controls['gender'].setValue(this.deer.gender); // New field
     this.registrationForm.controls['semenAvailable'].setValue(this.deer.semenAvailable);
     this.registrationForm.controls['semenCost'].setValue(this.deer.semenCost);
+    this.registrationForm.controls['embryosAvailable'].setValue(this.deer.embryosAvailable); // New field
+    this.registrationForm.controls['embryosCost'].setValue(this.deer.embryosCost); // New field
     this.registrationForm.controls['ranchId'].setValue(this.deer.ranchId);
-    this.registrationForm.controls['isPaid'].setValue(this.deer.isPaid);
-    this.registrationForm.controls['paidDate'].setValue(this.deer.paidDate);
     this.registrationForm.controls['profileImage'].setValue(this.deer.profileImage);
     this.registrationForm.controls['videoLink'].setValue(this.deer.videoLink);
     this.registrationForm.controls['denialReason'].setValue(this.deer.denialReason);
-    this.registrationForm.controls['createDate'].setValue(this.deer.createDate);
     this.registrationForm.controls['description'].setValue(this.deer.description);
-    this.registrationForm.controls['status'].setValue(this.deer.status);
+    this.registrationForm.controls['status'].setValue(this.deer.status); // Added this field
+    this.registrationForm.controls['isPaid'].setValue(this.deer.isPaid);
+    this.registrationForm.controls['paidDate'].setValue(this.deer.paidDate);
+    this.registrationForm.controls['createDate'].setValue(this.deer.createDate);
+    this.registrationForm.controls['updateDate'].setValue(this.deer.updateDate);
+    this.registrationForm.controls['gender'].valueChanges.subscribe(() => this.onGenderChange());
+    this.onGenderChange(); // Update field state based on gender
   }
 
   acceptChanges(): void {
@@ -74,6 +84,23 @@ export class DeerEditDialogComponent implements OnInit {
       complete: this.dialog.close()
                 this.loading = false;
     });
+  }
+
+  onGenderChange() {
+    const gender = this.registrationForm.controls['gender'].value;
+    if (gender === 'Buck') {
+      this.registrationForm.controls['semenAvailable'].enable();
+      this.registrationForm.controls['semenCost'].enable();
+      this.registrationForm.controls['sciScore'].enable();
+      this.registrationForm.controls['embryosAvailable'].disable();
+      this.registrationForm.controls['embryosCost'].disable();
+    } else if (gender === 'Doe') {
+      this.registrationForm.controls['semenAvailable'].disable();
+      this.registrationForm.controls['semenCost'].disable();
+      this.registrationForm.controls['embryosAvailable'].enable();
+      this.registrationForm.controls['embryosCost'].enable();
+      this.registrationForm.controls['sciScore'].disable();
+    }
   }
 
 

@@ -20,7 +20,7 @@
         </mat-form-field>
 
         <mat-form-field class="form-field " appearance="outline">
-          <mat-label>GEBV</mat-label>
+          <mat-label>gebv</mat-label>
           <input [roundingValue]="3" appDecimalPlaces type="text"  matInput formControlName="gebv"  >
         </mat-form-field>
 
@@ -59,8 +59,9 @@
     </div>
 
     <div class="add-deer">
-      <h1 style="margin-top: 20px;">Add a Deer Listing</h1>
-      <h3>50% off listings available with promo via State or National association</h3>
+      <h1>NEW DEER LISTING FEATURES</h1>
+      <h3>$50 per yearly Listing</h3>
+      <h3>Create Profiles for Males & Females</h3>
 
       <button style="margin-bottom: 20px;" mat-raised-button color="accent" type="submit" (click)="navigateToAddDeer()">
         Create Deer Listing
@@ -83,7 +84,7 @@
         <mat-divider style="margin-bottom: 5px;" inset></mat-divider>
         <mat-card-content class="card-content">
             <div>NADR: {{deer.nadr}}</div>
-            <div>GEBV: {{deer.gebu}}</div>
+            <div>GEBV: {{deer.gebv}}</div>
             <div>Codon: {{deer.codon}}</div>
         </mat-card-content>
         <mat-card-actions class="card-btn">

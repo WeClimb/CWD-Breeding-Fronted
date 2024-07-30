@@ -59,8 +59,9 @@ export class DeerProfileComponent implements OnInit {
   getDeer() {
     this.loadingImages = true;
     let map = new Map();
-    this.deerService.get([this.id], map).subscribe(response => {
+    this.deerService.get([this.id], map).subscribe((response) => {
         complete: this.deer = response;
+                  this.deer.gebv = response.gebv;
                   this.profileImage = this.deer.profileImage;
                   this.imageMap.set(this.profileImage,this.deer.ageOfBuckDisplayed);
                   this.getImages();

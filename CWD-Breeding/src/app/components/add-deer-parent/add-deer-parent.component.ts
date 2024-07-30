@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
-import { forkJoin, Observable, of, switchMap, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, forkJoin, Observable, of, switchMap, tap } from 'rxjs';
 import { DeerService } from 'src/app/services/deer.service';
 import { TokenStorageService } from 'src/app/services/token_storage.service';
 import { DeerImage } from 'src/models/deer-image.model';
@@ -26,7 +26,8 @@ export class AddDeerParentComponent implements OnInit {
             Validators.minLength(1),
         ]),
         dob: new FormControl('', Validators.required),
-        gebu: new FormControl('', [Validators.required]),
+        gebv: new FormControl('', [Validators.required]),
+        gender: new FormControl('Buck', Validators.required),
         codon: new FormControl('', [
             Validators.required,
             Validators.minLength(1),
@@ -38,6 +39,8 @@ export class AddDeerParentComponent implements OnInit {
         ]),
         semenAvailable: new FormControl(true, Validators.required),
         semenCost: new FormControl(0, [Validators.required]),
+        embryosAvailable: new FormControl(false, Validators.required),
+        embryosCost: new FormControl(0, [Validators.required]),
         ranchId: new FormControl('', [Validators.required]),
         videoLink: new FormControl(''),
         description: new FormControl(''),
@@ -92,6 +95,11 @@ export class AddDeerParentComponent implements OnInit {
       
         this.addDeerList.forEach((deer: Deer) => {
           deer.semenCost = deer.semenCost.toString();
+          deer.embryosCost = deer.embryosCost.toString();
+
+          if(!deer.sciScore) {
+            deer.sciScore = 0;
+          }
       
           const deerObservable = this.deerService.post(['Request-Listing'], deer).pipe(
             tap(response => {
@@ -100,7 +108,7 @@ export class AddDeerParentComponent implements OnInit {
                 deerId: deer.id,
                 ranchId: deer.ranchId,
                 deerName: deer.name,
-                cost: 250
+                cost: 50
               };
               this.deerReceipt.push(deerSubscription);
             }),

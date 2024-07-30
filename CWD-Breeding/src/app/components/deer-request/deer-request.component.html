@@ -1,4 +1,4 @@
-  <div class="background">
+<div class="background">
     <div class="spacer"></div>
       <mat-stepper
         class="example-stepper"
@@ -12,8 +12,14 @@
                 <input type="text" matInput formControlName="name" required >
                 <mat-error *ngIf="registrationForm.controls['name'].hasError('required')">Deer name is required.</mat-error>
             </mat-form-field>
-            
-            <mat-form-field class="form-field flex-1"  appearance="outline">
+
+            <mat-radio-group  formControlName="gender" class="form-field flex-1" (change)="onGenderChange()">
+                <mat-radio-button value="Buck">Buck</mat-radio-button>
+                <mat-radio-button style="margin-left: 10px;" value="Doe">Doe</mat-radio-button>
+              </mat-radio-group>
+              <mat-error class="form-field flex-1" *ngIf="registrationForm.controls['gender'].hasError('required')">Gender is required.</mat-error>
+
+              <mat-form-field class="form-field flex-1"  appearance="outline">
                 <mat-label>Description of Deer</mat-label>
                 <textarea matInput
                         cdkTextareaAutosize
@@ -50,32 +56,40 @@
             </mat-form-field>
 
             <mat-form-field class="flex-1 form-field" appearance="outline">
-                <mat-label>GEBV</mat-label>
-                <input type="number" [min]="-.999999" [max]=".999999" matInput formControlName="gebu" required>
-                <mat-error *ngIf="registrationForm.controls['gebu'].hasError('required')">GEBV is required.</mat-error>
-                <mat-error *ngIf="registrationForm.controls['gebu'].hasError('max')">GEBV must be between -.999999 and .999999.</mat-error>
+                <mat-label>gebv</mat-label>
+                <input type="number" [min]="-.999999" [max]=".999999" matInput formControlName="gebv" required>
+                <mat-error *ngIf="registrationForm.controls['gebv'].hasError('required')">gebv is required.</mat-error>
+                <mat-error *ngIf="registrationForm.controls['gebv'].hasError('max')">gebv must be between -.999999 and .999999.</mat-error>
             </mat-form-field>
 
-            <p class="error" *ngIf="!gebvValidLength">GEBV must have 6 decimal places</p>
+            <p class="error" *ngIf="!gebvValidLength">gebv must have 6 decimal places</p>
             <mat-form-field class="flex-1 form-field" appearance="outline">
-                <mat-label>Buck Video</mat-label>
+                <mat-label>Deer Video</mat-label>
                 <mat-hint>YouTube Link Only</mat-hint>
                 <input type="text" matInput formControlName="videoLink">
             </mat-form-field>
-
-            <mat-form-field class="form-field flex-1" appearance="outline">
+            <mat-form-field *ngIf="registrationForm.controls['gender'].value === 'Buck'" class="form-field flex-1" appearance="outline">
                 <mat-label>SCI Score</mat-label>
                 <input matInput formControlName="sciScore" required type="number" [roundingValue]="0" appDecimalPlaces>
                 <mat-error *ngIf="registrationForm.controls['sciScore'].hasError('required')">SCI Score is required.</mat-error>
             </mat-form-field>
 
-            <mat-checkbox class="form-field" formControlName="semenAvailable">Semen Available?</mat-checkbox>
-
-            <mat-form-field *ngIf="registrationForm.controls['semenAvailable'].value" class="flex-1 form-field" appearance="outline">
-                <mat-label>Semen Cost</mat-label>
-                <input matInput formControlName="semenCost" required type="number" [roundingValue]="2" appDecimalPlaces>
-                <mat-error *ngIf="registrationForm.controls['semenCost'].hasError('required')">Semen Cost is required.</mat-error>
+            <mat-checkbox *ngIf="registrationForm.controls['gender'].value === 'Buck'" class="form-field" formControlName="semenAvailable">Semen Available?</mat-checkbox>
+            <mat-form-field *ngIf="registrationForm.controls['gender'].value === 'Buck' && registrationForm.controls['semenAvailable'].value" class="flex-1 form-field" appearance="outline">
+              <mat-label>Semen Cost</mat-label>
+              <input matInput formControlName="semenCost" required type="number" [roundingValue]="2" appDecimalPlaces>
+              <mat-error *ngIf="registrationForm.controls['semenCost'].hasError('required')">Semen cost is required.</mat-error>
             </mat-form-field>
+  
+            <mat-checkbox *ngIf="registrationForm.controls['gender'].value === 'Doe'" class="form-field" formControlName="embryosAvailable">Embryos Available?</mat-checkbox>
+            <mat-form-field *ngIf="registrationForm.controls['gender'].value === 'Doe' && registrationForm.controls['embryosAvailable'].value" class="flex-1 form-field" appearance="outline">
+              <mat-label>Embryos Cost</mat-label>
+              <input matInput formControlName="embryosCost" required type="number" [roundingValue]="2" appDecimalPlaces>
+              <mat-error *ngIf="registrationForm.controls['embryosCost'].hasError('required')">Embryos cost is required.</mat-error>
+            </mat-form-field>
+
+
+
           </form>
 
           <div class="next-button">
