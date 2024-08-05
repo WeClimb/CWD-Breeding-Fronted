@@ -110,7 +110,7 @@ export class DeerProfileComponent implements OnInit {
   
   getImages(): void {
     this.deerService.get([this.id, 'Images'], this.imageMap).subscribe(response => {
-      console.log(response.data);
+      console.log("images", response.data);
       if (response.data !== null) {
         for (const key in response.data) {
           if (response.data.hasOwnProperty(key)) {
@@ -118,6 +118,7 @@ export class DeerProfileComponent implements OnInit {
             this.maxIndex++;
             this.images.push(key);
             this.imageMap.set(key, element === undefined ? 0 : element);
+            console.log(this.imageMap);
           }
         }
       } 

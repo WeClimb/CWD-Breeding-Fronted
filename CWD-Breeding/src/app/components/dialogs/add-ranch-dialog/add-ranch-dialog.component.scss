@@ -1,11 +1,5 @@
-.container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .card {
-    width: 80%;
-    max-width: 600px;
+.card {
+    height: 90vh;
   }
   
   .mat-form-field {
@@ -29,6 +23,7 @@
   .save-btn {
     width: 100%;
     margin-top: 16px;
+    margin-bottom: 20px;
   }
   
   .profile-header {
