@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth_guard_service.service';
 import { RegisterComponent } from './components/register/register.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { AdminChangePasswordComponent } from './components/admin-change-password/admin-change-password.component';
 import { DeerProfileComponent } from './components/deer-profile/deer-profile.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
@@ -18,6 +18,7 @@ import { ForgotPasswordConfirmComponent } from './components/forgot-password-con
 import { AddDeerParentComponent } from './components/add-deer-parent/add-deer-parent.component';
 import { RanchProfileComponent } from './components/ranch-profile/ranch-profile.component';
 import { DeerEditComponent } from './components/edit-deer/edit-deer.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,10 @@ const routes: Routes = [
   {
     path: 'change-password/:id',
     component: ChangePasswordComponent,
+  },
+  {
+    path: 'admin-change-password/:id',
+    component: AdminChangePasswordComponent,
   },
   {
     path: 'deer-profile/:id',

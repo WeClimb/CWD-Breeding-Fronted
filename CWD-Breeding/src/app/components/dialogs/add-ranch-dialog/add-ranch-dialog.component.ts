@@ -4,11 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RanchService } from 'src/app/services/ranch.service';
 import { SuccessDialogComponent } from '../SuccessDialog/SuccessDialog.component';
-import { ChangePasswordComponent } from '../../change-password/change-password.component';
 import { AdminRanchCreateModel } from 'src/models/admin-ranch-create.model';
 import { EMAIL_REGEX } from 'src/app/utils/regex/email-regex.constant';
 import { STATES } from 'src/app/utils/constants/states.constants';
 import { TokenStorageService } from 'src/app/services/token_storage.service';
+import { AdminChangePasswordComponent } from '../../admin-change-password/admin-change-password.component';
 
 @Component({
   selector: 'app-add-ranch-dialog',
@@ -67,7 +67,7 @@ closeDialog(): void {
         this.loading = false;
 
         if(adminCreateModel.ranchId && adminCreateModel.changePasswordId) {
-          this.dialog.open(ChangePasswordComponent, {
+          this.dialog.open(AdminChangePasswordComponent, {
             width: '400px',
             disableClose: true,
             data: { adminCreateModel: adminCreateModel }

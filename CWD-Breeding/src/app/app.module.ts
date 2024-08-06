@@ -44,7 +44,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { DigitOnlyDirective } from './utils/directives/digit-only.directive';
 import { PhoneMaskDirective } from './utils/directives/phone-mask.directive';
 import { DecimalPlacesDirective } from './utils/directives/decimal-places.directive';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { AdminChangePasswordComponent } from './components/admin-change-password/admin-change-password.component';
 import { ConfirmationPageComponent } from './components/confirmation-page/confirmation-page.component';
 import { DeerRequestComponent } from './components/deer-request/deer-request.component';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -70,6 +70,7 @@ import { DeerEditComponent } from './components/edit-deer/edit-deer.component';
 import { AdminImageDialogComponent } from './components/dialogs/admin-image-dialog/admin-image-dialog.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ConfirmationDialogComponent } from './components/dialogs/admin-image-dialog/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { ConfirmationDialogComponent } from './components/dialogs/admin-image-di
     LazyLoadDirective,
     DecimalPlacesDirective,
     ChangePasswordComponent,
+    AdminChangePasswordComponent,
     ConfirmationPageComponent,
     DeerRequestComponent,
     AdminLoginComponent,

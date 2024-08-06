@@ -9,11 +9,11 @@ import { AdminRanchCreateModel } from 'src/models/admin-ranch-create.model';
 import { SuccessDialogComponent } from '../dialogs/SuccessDialog/SuccessDialog.component';
 
 @Component({
-  selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss']
+  selector: 'app-admin-change-password',
+  templateUrl: './admin-change-password.component.html',
+  styleUrls: ['./admin-change-password.component.scss']
 })
-export class ChangePasswordComponent implements OnInit {
+export class AdminChangePasswordComponent implements OnInit {
 
     changePasswordForm = new FormGroup({
         password: new FormControl('', [Validators.required, Validators.pattern(PASSWORD_REGEX)]),
@@ -32,6 +32,8 @@ export class ChangePasswordComponent implements OnInit {
         private router: Router,
         private ranchService: RanchService,
         private dialog: MatDialog,
+        @Inject(MAT_DIALOG_DATA) public data: { adminCreateModel: AdminRanchCreateModel }
+
     ) {}
 
     ngOnInit(): void {
@@ -53,7 +55,7 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     onSubmit(): void {
-        const changePasswordId = this.extractGuidFromUrl(this.router.url);
+        const changePasswordId = this.data.adminCreateModel.changePasswordId;
 
         if (changePasswordId != null) {
             this.saving = true;
@@ -64,7 +66,7 @@ export class ChangePasswordComponent implements OnInit {
             }
 
             this.ranchService
-                .post(['ChangePassword'], passwordReset)
+                .post(['Admin-Change-Password'], passwordReset)
                 .subscribe(() => {
                     this.saving = false;
                     this.openSuccessDialogAndRoute();
@@ -77,20 +79,14 @@ export class ChangePasswordComponent implements OnInit {
     openSuccessDialogAndRoute(): void {
         const dialogRef = this.dialog.open(SuccessDialogComponent, {
           width: '400px',
-          data: { message: 'Password Changed, routing to login' }
+          data: { message: 'Ranch created successfully, routing to profile' }
         });
       
         dialogRef.afterOpened().subscribe(() => {
           setTimeout(() => {
             this.dialog.closeAll();
-            this.router.navigate(['login']);
+            this.router.navigate(['ranch-profile', this.data.adminCreateModel.ranchId]);
           }, 2000);
         });
-    }
-
-    extractGuidFromUrl(url: string): string | null {
-        const regex = /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/;
-        const match = url.match(regex);
-        return match ? match[0] : null;
     }
 }
