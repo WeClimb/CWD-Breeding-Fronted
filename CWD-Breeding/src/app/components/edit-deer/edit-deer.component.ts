@@ -8,6 +8,8 @@ import { Deer } from 'src/models/deer.model';
 import { ImageDialogComponent } from '../dialogs/image-dialog/image-dialog.component';
 import { DeerEditDialogComponent } from '../admin-deer-prodile-review/Dialogs/deer-edit-dialog/deer-edit-dialog.component';
 import { AdminImageDialogComponent } from '../dialogs/admin-image-dialog/admin-image-dialog.component';
+import { CheckoutComponent } from '../checkout/checkout.component';
+import { DeerSubscriptionModel } from 'src/models/deer-subscription.model';
 
 @Component({
   selector: 'app-edit-deer',
@@ -18,6 +20,9 @@ export class DeerEditComponent implements OnInit {
   id!: string;
   deer!: Deer;
   form: FormGroup;
+  recept: DeerSubscriptionModel[] = []
+
+  isAdmin: boolean = true;
 
   currentImageIndex: number = 0;
   maxIndex: number = 0;
@@ -77,6 +82,32 @@ constructor(
     this.getDeer();
 }
 
+createDeerReceipt():void {
+  const y: DeerSubscriptionModel = {
+    deerId: this.deer.id,
+    ranchId: this.deer.ranchId,
+    cost: 50,
+    deerName: this.deer.name
+  }
+
+  this.recept.push(y);
+}
+
+openCheckoutDialog(deerReceipt: DeerSubscriptionModel[]): void {
+  console.log(deerReceipt);
+  let total = 0;
+  deerReceipt.forEach((item: DeerSubscriptionModel) => {
+      total = total + item.cost;
+  });
+
+  console.log(deerReceipt);
+  const dialogRef = this.dialog.open(CheckoutComponent, {
+    width: '400px',
+    data: {deerReceipt, total, isAdmin: this.isAdmin},
+    disableClose: true,
+  });
+}
+
 setToTop() {
   window.onload = function() {
     document.getElementById("scrollId")!.focus();
@@ -92,6 +123,7 @@ getDeer() {
   let map = new Map();
   this.deerService.get([this.id], map).subscribe((response: Deer) => {
     this.deer = response;
+    this.createDeerReceipt();
     this.profileImage = this.deer.profileImage;
     this.imageMap.set(this.profileImage,this.deer.ageOfBuckDisplayed);
     this.getImages();
@@ -121,6 +153,7 @@ getDeer() {
       levelThreeDamD: this.deer.deerFamily.levelThreeDamD,
     });
   });
+
 }
 
 savePedigree() {

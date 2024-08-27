@@ -29,12 +29,20 @@ export class CheckoutComponent {
  
   checkout() {
     // Send the receipt array to the backend and get the Stripe session URL
+    if(this.data.isAdmin == undefined || this.data.isAdmin == null) {
+      this.data.isAdmin = false;
+    }
+    
     this.loading = true;
-    this.stripeService.post(['create-checkout-session'],this.data.deerReceipt).subscribe((seession: StripeSession) => {
-      window.location.href = seession.stripeURl;
-    });
-
-    // Open the Stripe session URL in a new window/tab
+    if(this.data.isAdmin) {
+      this.stripeService.post(['admin-create-checkout-session'],this.data.deerReceipt).subscribe((seession: StripeSession) => {
+        window.location.href = seession.stripeURl;
+      });
+    } else {
+      this.stripeService.post(['create-checkout-session'],this.data.deerReceipt).subscribe((seession: StripeSession) => {
+        window.location.href = seession.stripeURl;
+      });
+    }
   }
 
   applyPromo() {

@@ -16,6 +16,8 @@
   
     <button class="admin-btn" mat-raised-button color="primary" (click)="openEditDeerDialog()">Edit</button>
     <button class="admin-btn" mat-raised-button color="accent" (click)="openEditImages()">Image Editor</button>
+    <button class="admin-btn" *ngIf="!deer?.isPaid" (click)="openCheckoutDialog(recept)" mat-raised-button>Pay Now</button>
+
   
     <button *ngIf="!loadingDeny && deer?.isApproved" class="admin-btn" mat-raised-button color="warn" (click)="openDenialInput()">Deny</button>
     <mat-spinner *ngIf="loadingDeny" mode="indeterminate" color="accent"></mat-spinner>

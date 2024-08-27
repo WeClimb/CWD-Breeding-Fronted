@@ -86,6 +86,32 @@ export class DeerEditDialogComponent implements OnInit {
     });
   }
 
+  deleteDeer(): void {
+    this.loading = true;
+    let deer: Deer = this.registrationForm.getRawValue();
+    deer.semenCost = deer.semenCost.toString();
+    deer.deerFamily = this.deer.deerFamily;
+    deer.status = 'DELETED';
+
+    this.deerService.put([this.deer.id], deer).subscribe(() => {
+      complete: this.dialog.close()
+                this.loading = false;
+    });
+  }
+
+  cancelDelete(): void {
+    this.loading = true;
+    let deer: Deer = this.registrationForm.getRawValue();
+    deer.semenCost = deer.semenCost.toString();
+    deer.deerFamily = this.deer.deerFamily;
+    deer.status = 'ACTIVE';
+
+    this.deerService.put([this.deer.id], deer).subscribe(() => {
+      complete: this.dialog.close()
+                this.loading = false;
+    });
+  }
+
   onGenderChange() {
     const gender = this.registrationForm.controls['gender'].value;
     if (gender === 'Buck') {

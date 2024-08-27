@@ -6,6 +6,7 @@
       <button class="admin-btn" mat-raised-button color="primary" (click)="openEditDeerDialog()">Edit</button>
       <button *ngIf="!loadingDeny" class="admin-btn" mat-raised-button color="warn" (click)="openDenialInput()">Deny</button>
       <mat-spinner *ngIf="loadingDeny" mode="indeterminate" color="accent"></mat-spinner>
+      <button *ngIf="!deer?.isPaid" class="admin-btn" mat-raised-button color="secondary" (click)="openCheckoutDialog(recept)">Pay Now</button>
     </div>
   
     <form [formGroup]="denialForm" *ngIf="denying" class="admin-btn-container">
