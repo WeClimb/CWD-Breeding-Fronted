@@ -70,7 +70,16 @@
 
 </form>
 
-<button class="admin-btn" mat-raised-button color="accent" (click)="acceptChanges()" >Accept</button>
+<div style="display: flex; justify-content:space-between">
+  <button class="admin-btn" mat-raised-button color="accent" (click)="acceptChanges()" >Save Changes</button>
+  <button *ngIf="deer?.status?.toLocaleLowerCase() != 'deleted'" class="admin-btn" mat-raised-button color="warn" (click)="deleteDeer()" >Delete</button>
+  <button *ngIf="deer?.status?.toLocaleLowerCase() == 'deleted'" class="admin-btn" mat-raised-button color="warn" (click)="cancelDelete()" >Cancel Delete</button>
+</div>
+
+<p style="margin-top: 20px; color: red;">
+  Note: Once a deer is deleted, you can still undo the deletion while you're viewing the deer profile. However, once you leave the deer profile, the deletion will be permanent, and the deer will be removed from the entire site.
+</p>
+
 
 <mat-progress-bar *ngIf="loading" color="accent" style="margin-top: 20px;" mode="indeterminate"></mat-progress-bar>
 

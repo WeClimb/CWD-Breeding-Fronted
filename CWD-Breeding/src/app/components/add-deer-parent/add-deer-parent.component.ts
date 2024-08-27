@@ -16,7 +16,9 @@ import { CheckoutComponent } from '../checkout/checkout.component';
     styleUrls: ['./add-deer-parent.component.scss'],
 })
 export class AddDeerParentComponent implements OnInit {
-    registrationForm = new FormGroup({
+  isAdmin: boolean = false;  
+  
+  registrationForm = new FormGroup({
         name: new FormControl('', [
             Validators.required,
             Validators.minLength(1),
@@ -135,9 +137,11 @@ export class AddDeerParentComponent implements OnInit {
         deerReceipt.forEach((item: DeerSubscriptionModel) => {
             total = total + item.cost;
         });
+
+        console.log(deerReceipt);
         const dialogRef = this.dialog.open(CheckoutComponent, {
           width: '400px',
-          data: {deerReceipt, total},
+          data: {deerReceipt, total, isAdmin: this.isAdmin},
           disableClose: true,
         });
       }

@@ -7,6 +7,8 @@ import { DeerService } from 'src/app/services/deer.service';
 import { Deer } from 'src/models/deer.model';
 import { ImageDialogComponent } from '../dialogs/image-dialog/image-dialog.component';
 import { DeerEditDialogComponent } from './Dialogs/deer-edit-dialog/deer-edit-dialog.component';
+import { DeerSubscriptionModel } from 'src/models/deer-subscription.model';
+import { CheckoutComponent } from '../checkout/checkout.component';
 
 @Component({
   selector: 'app-admin-deer-prodile-review',
@@ -16,6 +18,10 @@ import { DeerEditDialogComponent } from './Dialogs/deer-edit-dialog/deer-edit-di
 export class AdminDeerProdileReviewComponent implements OnInit {
   id!: string;
   deer!: Deer;
+
+  recept: DeerSubscriptionModel[] = []
+
+  isAdmin: boolean = true;
 
   currentImageIndex: number = 0;
   maxIndex: number = 0;
@@ -66,12 +72,24 @@ setToTop() {
   }
 }
 
+createDeerReceipt():void {
+  const y: DeerSubscriptionModel = {
+    deerId: this.deer.id,
+    ranchId: this.deer.ranchId,
+    cost: 50,
+    deerName: this.deer.name
+  }
+
+  this.recept.push(y);
+}
+
 getDeer() {
     this.loadingImages = true;
     let map = new Map();
     this.deerService.get([this.id], map).subscribe(response => {
         complete: this.deer = response;
                   this.deer.gebv = response.gebv;
+                  this.createDeerReceipt();
                   this.profileImage = this.deer.profileImage;
                   this.imageMap.set(this.profileImage,this.deer.ageOfBuckDisplayed);
                   this.getImages();
@@ -134,11 +152,6 @@ getImages(): void {
   });
 }
 
-
-
-
-
-
 approve(): void {
   this.loadingApproval = true;
   this.deer.isApproved = true;
@@ -153,6 +166,21 @@ deny(): void {
   this.deer.denialReason = this.denialForm.controls['denialReason'].value;
   this.deerService.put(["Denied"] , (this.deer)).subscribe(() => {
     complete: this.router.navigate(['admin-home']);
+  });
+}
+
+openCheckoutDialog(deerReceipt: DeerSubscriptionModel[]): void {
+  console.log(deerReceipt);
+  let total = 0;
+  deerReceipt.forEach((item: DeerSubscriptionModel) => {
+      total = total + item.cost;
+  });
+
+  console.log(deerReceipt);
+  const dialogRef = this.dialog.open(CheckoutComponent, {
+    width: '400px',
+    data: {deerReceipt, total, isAdmin: this.isAdmin},
+    disableClose: true,
   });
 }
 
@@ -180,7 +208,9 @@ openImageViewer(): void {
       image: this.profileImage,
     },
   });
-
 }
+
+
+
 
 }

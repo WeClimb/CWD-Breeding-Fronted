@@ -82,7 +82,7 @@ selectState(e: any): void {
             phoneNumber: this.selectedRanch.phoneNumber
           });
 
-          this.getRanchDeer(id);
+          this.getRanchDeer(this.selectedRanch.id);
         }
       });
     } else {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'PreKno-Service-Provider';
+  title = 'CWD-Breeding';
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const sidenavContent = document.querySelector('mat-sidenav-content');
+        if (sidenavContent) {
+          sidenavContent.scrollTo(0, 0); // Instantly scroll to the top
+        }
+      }
+    });
+  }
 }
